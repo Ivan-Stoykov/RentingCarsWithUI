@@ -1,4 +1,5 @@
 import RentTable from "./components/RentTable";
+import AddCarPage from "./pages/AddCarPage";
 
 const rents = [
   {
@@ -18,6 +19,7 @@ function App() {
       Menu?      
     </div>
       <RentTable rents={rents}/>
+      <AddCarPage/>
     </div>
   );
 }
