@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.kolipodnaem.entities;
+package bg.tu_varna.sit.kolipodnaem.entities.Cvqt;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

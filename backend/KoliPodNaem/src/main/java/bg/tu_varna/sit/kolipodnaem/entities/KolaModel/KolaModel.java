@@ -1,8 +1,11 @@
 package bg.tu_varna.sit.kolipodnaem.entities.KolaModel;
 
 import bg.tu_varna.sit.kolipodnaem.entities.Marka.Marka;
+import bg.tu_varna.sit.kolipodnaem.entities.Specifications.Specification;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -17,4 +20,7 @@ public class KolaModel {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "marka_id")
     private Marka marka;
+
+    @OneToMany(mappedBy = "kolamodel")
+    private List<Specification> specifications;
 }

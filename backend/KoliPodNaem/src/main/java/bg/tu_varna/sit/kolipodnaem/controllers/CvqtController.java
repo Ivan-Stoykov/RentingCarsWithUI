@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.kolipodnaem.controllers;
 
-import bg.tu_varna.sit.kolipodnaem.entities.Cvqt;
+import bg.tu_varna.sit.kolipodnaem.entities.Cvqt.Cvqt;
 import bg.tu_varna.sit.kolipodnaem.repositories.CvqtRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
