@@ -5,12 +5,13 @@ import bg.tu_varna.sit.kolipodnaem.entities.Specifications.SpecificationDTO;
 import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemanePodNaemDTO;
 import bg.tu_varna.sit.kolipodnaem.repositories.ZaemiRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 @RequestMapping("/zaemi")
