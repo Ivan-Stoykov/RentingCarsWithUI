@@ -21,6 +21,7 @@ public class SpecificationController {
         return specificationRepository.findAll().stream()
                 .map(spec -> new SpecificationDTO(
                         spec.getSpec_ID(),
+                        spec.getKolamodel().getMarka().getMarka(),
                         spec.getKolamodel().getKolamodel(),
                         spec.getVid().getVid(),
                         spec.getEkstri().getImeExtra(),

@@ -8,6 +8,7 @@ import lombok.Getter;
 @Getter
 public class SpecificationDTO {
     private int spec_ID;
+    private String marka;
     private String modelName;
     private String vid;
     private String ekstri;

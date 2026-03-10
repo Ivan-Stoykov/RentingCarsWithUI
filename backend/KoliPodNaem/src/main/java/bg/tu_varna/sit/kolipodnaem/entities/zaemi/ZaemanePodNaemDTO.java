@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.kolipodnaem.entities.zaemi;
 
+import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,9 +12,8 @@ public class ZaemanePodNaemDTO {
     private int Id;
     private String klientName;
     private String slujitelName;
-    private String avtomobilMarka;
-    private String avtomobilModel;
     private LocalDateTime dataZaemane;
     private LocalDateTime dataVrushtane;
     private int broiDni;
+    private AvtomobilDTO avtomobil;
 }
