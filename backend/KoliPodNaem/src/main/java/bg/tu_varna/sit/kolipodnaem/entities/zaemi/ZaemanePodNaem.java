@@ -4,11 +4,15 @@ import bg.tu_varna.sit.kolipodnaem.entities.Slujiteli.Slujitel;
 import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.Avtomobil;
 import bg.tu_varna.sit.kolipodnaem.entities.Klienti.Klient;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Table(name = "zaemanepodnaem")
 public class ZaemanePodNaem {
