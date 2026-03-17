@@ -102,19 +102,19 @@ public class ZaemiController {
     }
 
     @PatchMapping("/{id}")
-    public void UpdateZaem(@PathVariable int id, @RequestBody ZaemanePodNaemPostDTO zaemDTO)
-    {
-        Slujitel slujitel = slujitelRepository.findById(zaemDTO.getSlujitel_id()).orElse(null);
-        Klient klient = klientRepository.findById(zaemDTO.getKlient_id()).orElse(null);
-        Avtomobil avtomobil = avtomobilRepository.findById(zaemDTO.getAvtomobil_id()).orElse(null);
-
-        zaemiRepository.(
-                new ZaemanePodNaem(zaemDTO.getId(),
-                        zaemDTO.getDataZaemane(),
-                        zaemDTO.getDataVrushtane(),
-                        zaemDTO.getBroiDni(),
-                        avtomobil, klient, slujitel));
-    }
+//    public void UpdateZaem(@PathVariable int id, @RequestBody ZaemanePodNaemPostDTO zaemDTO)
+//    {
+//        Slujitel slujitel = slujitelRepository.findById(zaemDTO.getSlujitel_id()).orElse(null);
+//        Klient klient = klientRepository.findById(zaemDTO.getKlient_id()).orElse(null);
+//        Avtomobil avtomobil = avtomobilRepository.findById(zaemDTO.getAvtomobil_id()).orElse(null);
+//
+//        zaemiRepository.(
+//                new ZaemanePodNaem(zaemDTO.getId(),
+//                        zaemDTO.getDataZaemane(),
+//                        zaemDTO.getDataVrushtane(),
+//                        zaemDTO.getBroiDni(),
+//                        avtomobil, klient, slujitel));
+//    }
 
     @DeleteMapping("/{id}")
     public void DeleteZaem(@PathVariable int id)
