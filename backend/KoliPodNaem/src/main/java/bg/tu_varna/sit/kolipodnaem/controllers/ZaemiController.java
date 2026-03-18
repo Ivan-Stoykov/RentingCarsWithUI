@@ -54,6 +54,7 @@ public class ZaemiController {
                         )
                 )).toList();
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ZaemanePodNaemDTO> getById(@PathVariable int id)
     {
