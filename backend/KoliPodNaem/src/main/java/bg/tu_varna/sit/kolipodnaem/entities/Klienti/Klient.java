@@ -3,12 +3,16 @@ package bg.tu_varna.sit.kolipodnaem.entities.Klienti;
 import bg.tu_varna.sit.kolipodnaem.entities.Gradove.Gradove;
 import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemanePodNaem;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "klient")
 public class Klient {
     @Id

@@ -1,6 +1,30 @@
 import { httpResource } from '@angular/common/http';
 import { Component } from '@angular/core';
 
+interface Zaem
+{
+  id:number,
+  klientName:string,
+  slujitelName:string,
+  dataZaemane:Date,
+  dataVrushtane:Date,
+  broiDni:number,
+  avtomobil:{
+    id:number,
+    cvqt:string,
+    izminatiKilometri:number,
+    specs:{
+      spec_ID:number,
+      marka:string,
+      modelName:string,
+      vid:string,
+      ekstri:string,
+      godina:number,
+      cenaZaDen:number
+    }
+  }
+}
+
 @Component({
   selector: 'rentsTable',
   template: `<table>
