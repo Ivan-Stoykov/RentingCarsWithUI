@@ -1,8 +1,8 @@
 import { httpResource } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Rents } from "./components/rentsTable";
-import { AddRent } from "./components/addRent";
+import { Rents } from "./components/rents/rentsTable/rentsTable";
+import { AddRent } from "./components/rents/AddRentForm/addRent";
 
 @Component({
   selector: 'app-root',

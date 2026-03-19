@@ -1,0 +1,29 @@
+<table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Klient</th>
+            <th>Kola</th>
+            <th>Slujitel</th>
+            <th>DataZaemane</th>
+            <th>DataVrushtane</th>
+            <th>broidni</th>
+            <th colSpan=2>Operations</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (rent of rents(); track rent){
+           <tr>
+            <td>{{rent.Id}}</td>
+            <td>{{rent.klientName}}</td>
+            <td>{{rent.avtomobil.specs.marka + " " + rent.avtomobil.specs.modelName + " " + rent.avtomobil.specs.godina}}</td>
+            <td>{{rent.slujitelName}}</td>
+            <td>{{rent.dataZaemane | date:"longDate"}}</td>
+            <td>{{rent.dataVrushtane | date:"longDate"}}</td>
+            <td>{{rent.broiDni}}</td>
+            <td>Edit</td>
+            <td><button (click)="onDelete(rent.Id)">Delete</button></td>
+            </tr>}
+          
+        </tbody>
+      </table>

@@ -94,12 +94,14 @@ public class ZaemiController {
         Klient klient = klientRepository.findById(zaemDTO.getKlient_id()).orElse(null);
         Avtomobil avtomobil = avtomobilRepository.findById(zaemDTO.getAvtomobil_id()).orElse(null);
 
-        zaemiRepository.save(
-                new ZaemanePodNaem(zaemDTO.getId(),
-                        zaemDTO.getDataZaemane(),
-                        zaemDTO.getDataVrushtane(),
-                        zaemDTO.getBroiDni(),
-                        avtomobil, klient, slujitel));
+        ZaemanePodNaem zaem = new ZaemanePodNaem();
+        zaem.setDatazaemane(zaemDTO.getDataZaemane());
+        zaem.setDatavrushtane(zaemDTO.getDataVrushtane());
+        zaem.setAvtomobil(avtomobil);
+        zaem.setKlient(klient);
+        zaem.setSlujitel(slujitel);
+        zaem.setBroidni(zaemDTO.getBroiDni());
+        zaemiRepository.save(zaem);
     }
 
     @PatchMapping("/{id}")

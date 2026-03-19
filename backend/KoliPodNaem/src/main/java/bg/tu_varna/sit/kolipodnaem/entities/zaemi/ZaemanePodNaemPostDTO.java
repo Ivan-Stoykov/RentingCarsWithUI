@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 public class ZaemanePodNaemPostDTO {
-    private int id;
     private int slujitel_id;
     private int klient_id;
     private int avtomobil_id;
