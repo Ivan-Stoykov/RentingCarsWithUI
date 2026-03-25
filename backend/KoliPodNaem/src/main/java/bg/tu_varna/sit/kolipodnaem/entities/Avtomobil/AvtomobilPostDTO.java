@@ -6,9 +6,14 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class AvtomobilDTO {
+public class AvtomobilPostDTO {
     private int id;
-    private String cvqt;
+    private int marka;
+    private int model;
+    private int vid;
+    private int godina;
+    private int cvqt;
+    private String ekstri;
+    private double cenaZaDen;
     private int izminatiKilometri;
-    private SpecificationDTO specs;
 }

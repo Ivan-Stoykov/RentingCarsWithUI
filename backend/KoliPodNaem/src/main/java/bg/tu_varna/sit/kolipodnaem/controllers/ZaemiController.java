@@ -1,127 +1,48 @@
 package bg.tu_varna.sit.kolipodnaem.controllers;
 
-import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.Avtomobil;
-import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilDTO;
-import bg.tu_varna.sit.kolipodnaem.entities.Klienti.Klient;
-import bg.tu_varna.sit.kolipodnaem.entities.Slujiteli.Slujitel;
-import bg.tu_varna.sit.kolipodnaem.entities.Specifications.SpecificationDTO;
-import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemanePodNaem;
-import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemanePodNaemDTO;
 import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemanePodNaemPostDTO;
-import bg.tu_varna.sit.kolipodnaem.repositories.AvtomobilRepository;
-import bg.tu_varna.sit.kolipodnaem.repositories.KlientRepository;
-import bg.tu_varna.sit.kolipodnaem.repositories.SlujitelRepository;
-import bg.tu_varna.sit.kolipodnaem.repositories.ZaemiRepository;
+import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemiView;
+import bg.tu_varna.sit.kolipodnaem.repositories.*;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin
+
+@CrossOrigin(origins = "*")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/zaemi")
 public class ZaemiController {
-    private ZaemiRepository zaemiRepository;
-    private KlientRepository klientRepository;
-    private SlujitelRepository slujitelRepository;
-    private AvtomobilRepository avtomobilRepository;
+    private final ZaemiViewRepository zaemiViewRepository;
+
 
     @GetMapping
-    public List<ZaemanePodNaemDTO> findAll()
-    {
-        return zaemiRepository.findAll().stream()
-                .map(zaem -> new ZaemanePodNaemDTO(
-                        zaem.getZaem_ID(),
-                        zaem.getKlient().getIme(),
-                        zaem.getSlujitel().getIme(),
-                        zaem.getDatazaemane(),
-                        zaem.getDatavrushtane(),
-                        zaem.getBroidni(),
-                        new AvtomobilDTO(
-                                zaem.getAvtomobil().getAvtomobilID(),
-                                zaem.getAvtomobil().getCvqt().getCvqt(),
-                                zaem.getAvtomobil().getIzminatiKilometri(),
-                                new SpecificationDTO(
-                                       zaem.getAvtomobil().getSpecification().getSpec_ID(),
-                                        zaem.getAvtomobil().getSpecification().getKolamodel().getMarka().getMarka(),
-                                        zaem.getAvtomobil().getSpecification().getKolamodel().getKolamodel(),
-                                        zaem.getAvtomobil().getSpecification().getVid().getVid(),
-                                        zaem.getAvtomobil().getSpecification().getEkstri().getImeExtra(),
-                                        zaem.getAvtomobil().getSpecification().getGodina(),
-                                        zaem.getAvtomobil().getSpecification().getCenaZaDen()
-                                )
-                        )
-                )).toList();
+    public List<ZaemiView> findAll() {
+        return zaemiViewRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ZaemanePodNaemDTO> getById(@PathVariable int id)
-    {
-        var zaem = zaemiRepository.findById(id).orElse(null);
+    public ResponseEntity<ZaemiView> getById(@PathVariable int id) {
+        ZaemiView zaem = zaemiViewRepository.findById(id).orElse(null);
 
-        if(zaem == null) return ResponseEntity.notFound().build();
-
-        ZaemanePodNaemDTO zaemDTO = new ZaemanePodNaemDTO(zaem.getZaem_ID(),
-                zaem.getKlient().getIme(),
-                zaem.getSlujitel().getIme(),
-                zaem.getDatazaemane(),
-                zaem.getDatavrushtane(),
-                zaem.getBroidni(),
-                new AvtomobilDTO(
-                        zaem.getAvtomobil().getAvtomobilID(),
-                        zaem.getAvtomobil().getCvqt().getCvqt(),
-                        zaem.getAvtomobil().getIzminatiKilometri(),
-                        new SpecificationDTO(
-                                zaem.getAvtomobil().getSpecification().getSpec_ID(),
-                                zaem.getAvtomobil().getSpecification().getKolamodel().getMarka().getMarka(),
-                                zaem.getAvtomobil().getSpecification().getKolamodel().getKolamodel(),
-                                zaem.getAvtomobil().getSpecification().getVid().getVid(),
-                                zaem.getAvtomobil().getSpecification().getEkstri().getImeExtra(),
-                                zaem.getAvtomobil().getSpecification().getGodina(),
-                                zaem.getAvtomobil().getSpecification().getCenaZaDen()
-                        )
-                )
-        );
-
-        return ResponseEntity.ok(zaemDTO);
+        return ResponseEntity.ok(zaem);
     }
 
+    @Transactional
     @PostMapping
-    public void PostZaem(@RequestBody ZaemanePodNaemPostDTO zaemDTO)
-    {
-        Slujitel slujitel = slujitelRepository.findById(zaemDTO.getSlujitel_id()).orElse(null);
-        Klient klient = klientRepository.findById(zaemDTO.getKlient_id()).orElse(null);
-        Avtomobil avtomobil = avtomobilRepository.findById(zaemDTO.getAvtomobil_id()).orElse(null);
-
-        ZaemanePodNaem zaem = new ZaemanePodNaem();
-        zaem.setDatazaemane(zaemDTO.getDataZaemane());
-        zaem.setDatavrushtane(zaemDTO.getDataVrushtane());
-        zaem.setAvtomobil(avtomobil);
-        zaem.setKlient(klient);
-        zaem.setSlujitel(slujitel);
-        zaem.setBroidni(zaemDTO.getBroiDni());
-        zaemiRepository.save(zaem);
+    public void PostZaem(@RequestBody ZaemanePodNaemPostDTO zaemDTO) {
+        zaemiViewRepository.ZAEMANE_INS(null, zaemDTO.getKlient_id(), zaemDTO.getAvtomobil_id(), zaemDTO.getSlujitel_id(), zaemDTO.getZaemane(), zaemDTO.getBroiDni(), zaemDTO.getVrushtane());
     }
 
     @PatchMapping("/{id}")
-//    public void UpdateZaem(@PathVariable int id, @RequestBody ZaemanePodNaemPostDTO zaemDTO)
-//    {
-//        Slujitel slujitel = slujitelRepository.findById(zaemDTO.getSlujitel_id()).orElse(null);
-//        Klient klient = klientRepository.findById(zaemDTO.getKlient_id()).orElse(null);
-//        Avtomobil avtomobil = avtomobilRepository.findById(zaemDTO.getAvtomobil_id()).orElse(null);
-//
-//        zaemiRepository.(
-//                new ZaemanePodNaem(zaemDTO.getId(),
-//                        zaemDTO.getDataZaemane(),
-//                        zaemDTO.getDataVrushtane(),
-//                        zaemDTO.getBroiDni(),
-//                        avtomobil, klient, slujitel));
-//    }
+    public void UpdateZaem(@PathVariable int id, @RequestBody ZaemanePodNaemPostDTO zaemDTO) {
+        zaemiViewRepository.ZAEMANEPODNAEM_UPD(id, zaemDTO.getKlient_id(), zaemDTO.getAvtomobil_id(), zaemDTO.getSlujitel_id(), zaemDTO.getZaemane(), zaemDTO.getBroiDni(), zaemDTO.getVrushtane());
+    }
 
     @DeleteMapping("/{id}")
-    public void DeleteZaem(@PathVariable int id)
-    {
-        zaemiRepository.deleteById(id);
+    public void DeleteZaem(@PathVariable int id) {
+        zaemiViewRepository.ZAEMANEPODNAEM_DEL(id);
     }
 }

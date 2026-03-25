@@ -14,15 +14,15 @@
         <tbody>
           @for (rent of rents(); track rent){
            <tr>
-            <td>{{rent.Id}}</td>
-            <td>{{rent.klientName}}</td>
-            <td>{{rent.avtomobil.specs.marka + " " + rent.avtomobil.specs.modelName + " " + rent.avtomobil.specs.godina}}</td>
-            <td>{{rent.slujitelName}}</td>
-            <td>{{rent.dataZaemane | date:"longDate"}}</td>
-            <td>{{rent.dataVrushtane | date:"longDate"}}</td>
-            <td>{{rent.broiDni}}</td>
+            <td>{{rent.zaem_id}}</td>
+            <td>{{rent.klient}}</td>
+            <td>{{rent.marka_name + " " + rent.kolamodel + " " + rent.godina}}</td>
+            <td>{{rent.slujitel}}</td>
+            <td>{{rent.datazaemane | date:"longDate"}}</td>
+            <td>{{rent.datavrushtane | date:"longDate"}}</td>
+            <td>{{rent.broidni}}</td>
             <td>Edit</td>
-            <td><button (click)="onDelete(rent.Id)">Delete</button></td>
+            <td><button type="button" (click)="onDelete(rent.zaem_id)">Delete</button></td>
             </tr>}
           
         </tbody>

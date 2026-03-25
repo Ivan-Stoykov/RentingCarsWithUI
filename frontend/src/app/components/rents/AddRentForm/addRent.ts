@@ -7,8 +7,8 @@ interface RentFormModel {
   slujitel_id: number;
   klient_id: number;
   avtomobil_id: number;
-  dataZaemane: Date | null;
-  dataVrushtane: Date | null;
+  zaemane: Date | null;
+  vrushtane: Date | null;
   broiDni: number;
 }
 
@@ -22,8 +22,8 @@ export class AddRent {
   slujitel_id = 0;
   klient_id = 0;
   avtomobil_id = 0;
-  dataZaemane = '';
-  dataVrushtane= '';
+  zaemane = '';
+  vrushtane= '';
   broiDni = 0;
 
   onSubmit()
@@ -32,8 +32,8 @@ export class AddRent {
     slujitel_id:this.slujitel_id,
     klient_id:this.klient_id,
     avtomobil_id:this.avtomobil_id,
-    dataZaemane:new Date(this.dataZaemane),
-    dataVrushtane:new Date(this.dataVrushtane),
+    zaemane:new Date(this.zaemane),
+    vrushtane:new Date(this.vrushtane),
     broiDni:this.broiDni
     }).subscribe({
       next:(response)=>{

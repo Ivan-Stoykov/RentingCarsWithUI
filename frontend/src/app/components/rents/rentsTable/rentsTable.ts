@@ -4,26 +4,19 @@ import { DatePipe } from '@angular/common';
 
 interface Zaem
 {
-  Id:number,
-  klientName:string,
-  slujitelName:string,
-  dataZaemane:string,
-  dataVrushtane:string,
-  broiDni:number,
-  avtomobil:{
-    id:number,
-    cvqt:string,
-    izminatiKilometri:number,
-    specs:{
-      spec_ID:number,
-      marka:string,
-      modelName:string,
-      vid:string,
-      ekstri:string,
-      godina:number,
-      cenaZaDen:number
-    }
-  }
+  zaem_id:number,
+  klient:string,
+  slujitel:string,
+  datazaemane:string,
+  datavrushtane:string,
+  broidni:number,
+  marka_name:string,
+  cena_za_den:number,
+  cvqt:string,
+  godina:number,
+  ime_extra:string,
+  kolamodel:string,
+  vid:string
 }
 
 @Component({

@@ -11,7 +11,7 @@ public class ZaemanePodNaemPostDTO {
     private int slujitel_id;
     private int klient_id;
     private int avtomobil_id;
-    private LocalDateTime dataZaemane;
-    private LocalDateTime dataVrushtane;
+    private LocalDateTime zaemane;
+    private LocalDateTime vrushtane;
     private int broiDni;
 }

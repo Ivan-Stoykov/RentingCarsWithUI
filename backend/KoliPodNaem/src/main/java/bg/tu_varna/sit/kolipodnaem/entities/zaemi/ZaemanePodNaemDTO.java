@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.kolipodnaem.entities.zaemi;
 
-import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilDTO;
+import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilPostDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -15,5 +15,5 @@ public class ZaemanePodNaemDTO {
     private LocalDateTime dataZaemane;
     private LocalDateTime dataVrushtane;
     private int broiDni;
-    private AvtomobilDTO avtomobil;
+    private AvtomobilPostDTO avtomobil;
 }
