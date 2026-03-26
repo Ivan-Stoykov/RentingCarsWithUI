@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.kolipodnaem.controllers;
 
 import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilPostDTO;
+import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilUpdateDTO;
 import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilView;
 import bg.tu_varna.sit.kolipodnaem.repositories.AvtomobilViewRepository;
 import jakarta.transaction.Transactional;
@@ -34,12 +35,12 @@ public class AvtomobilController {
     @PostMapping
     public void PostZaem(@RequestBody AvtomobilPostDTO avtomobilDto) {
 
-        avtomobilRepository.AVTOMOBIL_INS(avtomobilDto.getId(), avtomobilDto.getIzminatiKilometri(), avtomobilDto.getCvqt(), 0);
+        avtomobilRepository.AddNewAvtomobil(avtomobilDto.getId(), avtomobilDto.getMarka(), avtomobilDto.getModel(), avtomobilDto.getVid(), avtomobilDto.getGodina(), avtomobilDto.getIzminatiKilometri(), avtomobilDto.getCvqt(), avtomobilDto.getCenaZaDen(), avtomobilDto.getEkstri());
     }
 
     @PatchMapping("/{id}")
-    public void UpdateZaem(@PathVariable int id, @RequestBody AvtomobilPostDTO avtomobilDto) {
-        avtomobilRepository.AVTOMOBIL_UPD(avtomobilDto.getId(), avtomobilDto.getIzminatiKilometri(), avtomobilDto.getCvqt(), 0);
+    public void UpdateZaem(@PathVariable int id, @RequestBody AvtomobilUpdateDTO avtomobilDto) {
+        avtomobilRepository.AVTOMOBIL_UPD(avtomobilDto.getId(), avtomobilDto.getIzminatiKilometri(), avtomobilDto.getCvqt(), avtomobilDto.getSpec());
     }
 
     @DeleteMapping("/{id}")

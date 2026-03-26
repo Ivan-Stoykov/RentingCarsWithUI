@@ -1,0 +1,193 @@
+.home-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero {
+  position: relative;
+  height: 60vh;
+  min-height: 500px;
+  background-image: url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1920');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+
+  .hero-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 900px;
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.search-box {
+  display: flex;
+  flex-wrap: wrap;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  gap: 15px;
+  align-items: flex-end;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 150px;
+    text-align: left;
+
+    label {
+      color: #333;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      outline: none;
+      color:#555;
+      
+      &:focus {
+        border-color: #0056b3;
+      }
+    }
+  }
+
+  .btn-primary {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    height: 42px;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: #004494;
+    }
+  }
+}
+
+/* --- Секция Популярни автомобили --- */
+.featured-section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 40px;
+  }
+}
+
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.car-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .img-container {
+    height: 200px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .car-info {
+    padding: 20px;
+
+    h3 {
+      margin: 0 0 10px 0;
+      color: #222;
+    }
+
+    .price {
+      color: #666;
+      margin-bottom: 20px;
+
+      span {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #0056b3;
+      }
+    }
+
+    .btn-secondary {
+      width: 100%;
+      background-color: white;
+      color: #0056b3;
+      border: 2px solid #0056b3;
+      padding: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: #0056b3;
+        color: white;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .hero .hero-content h1 {
+    font-size: 2rem;
+  }
+  .search-box {
+    flex-direction: column;
+    .input-group{
+      width: 100%;
+    }
+    .btn-primary {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+}

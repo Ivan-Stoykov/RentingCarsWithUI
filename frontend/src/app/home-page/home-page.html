@@ -1,0 +1,38 @@
+<div class="home-container">
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Наеми своя мечтан автомобил</h1>
+      <p>Бързо, лесно и сигурно. Открий най-добрите оферти за пътуването си.</p>
+      
+      <div class="search-box">
+        <div class="input-group">
+          <label for="pickup">Взимане</label>
+          <input type="date" id="pickup">
+        </div>
+        <div class="input-group">
+          <label for="dropoff">Връщане</label>
+          <input type="date" id="dropoff">
+        </div>
+        <button class="btn-primary">Търси автомобили</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-section">
+    <h2>Последни предложения</h2>
+    <div class="cars-grid">
+        @for(car of featuredCars; track car.id){
+      <div class="car-card">
+        <div class="img-container">
+          <img [src]="car.imageUrl" [alt]="car.brand + ' ' + car.model">
+        </div>
+        <div class="car-info">
+          <h3>{{ car.brand }} {{ car.model }}</h3>
+          <p class="price"><span>{{ car.pricePerDay }} лв.</span> / ден</p>
+          <button class="btn-secondary">Резервирай</button>
+        </div>
+      </div>}
+    </div>
+  </section>
+</div>
