@@ -5,10 +5,12 @@ import bg.tu_varna.sit.kolipodnaem.entities.KolaModel.KolaModel;
 import bg.tu_varna.sit.kolipodnaem.entities.KolaModel.KolaModelDTO;
 import bg.tu_varna.sit.kolipodnaem.repositories.KolaModelRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "*")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/model")
@@ -17,6 +19,6 @@ public class KolaModelController {
 
     @GetMapping
     public Iterable<KolaModelDTO> findAll() {
-        return modelRepository.findAll().stream().map(kolaModel -> new KolaModelDTO(kolaModel.getId(), kolaModel.getKolamodel(), kolaModel.getMarka().getMarka())).toList();
+        return modelRepository.findAll().stream().map(kolaModel -> new KolaModelDTO(kolaModel.getKolamodel(), kolaModel.getMarka().getMarka())).toList();
     }
 }

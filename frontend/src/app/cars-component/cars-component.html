@@ -1,0 +1,101 @@
+<div class="page-container">
+  <aside class="sidebar">
+    <h3>Филтри</h3>
+    <form [formGroup]="filterForm" (ngSubmit)="onFind()">
+      <div class="form-group">
+        <label>Марка</label>
+        <select formControlName="marka_name">
+          <option value="">Всички марки</option>
+          @for (brand of allBrands; track brand) {
+            <option>{{ brand }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Модел</label>
+        
+        <select formControlName="kolamodel">
+          <option value="">Всички видове</option>
+           @for (model of allModels; track model) {
+            <option>{{model}}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Вид автомобил</label>
+        <select formControlName="vid">
+          <option value="">Всички видове</option>
+          @for (type of allTypes; track type) {
+            <option>{{ type }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Цвят</label>
+        <select formControlName="cvqt">
+          <option value="">Всички цветове</option>
+          @for (color of allColors; track color) {
+            <option>{{ color }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Максимална цена (на ден): {{ filterForm.get('cena_za_den')?.value }} лв.</label>
+        <input type="range" formControlName="cena_za_den" min="30" max="300" step="10" />
+      </div>
+
+      <div class="form-group">
+        <label>Година (от)</label>
+        <input
+          type="number"
+          formControlName="godina"
+          placeholder="Напр. 2019"
+          min="2000"
+          max="2024"
+        />
+      </div>
+
+      <button type="submit" class="btn-find">Find / Търси</button>
+    </form>
+  </aside>
+
+  <main class="catalog">
+    <div class="results-header">
+      <h2>Намерени автомобили ({{ filteredCars()!.length }})</h2>
+    </div>
+
+    @if (filteredCars()!.length > 0) {
+      <div class="cars-grid">
+        @for (car of filteredCars(); track car.avtomobil_id) {
+          <div class="car-card">
+            <div class="img-container">
+              <img [src]="car.imageUrl" [alt]="car.marka_name + ' ' + car.kolamodel" />
+            </div>
+            <div class="car-info">
+              <h3>{{ car.marka_name }} {{ car.kolamodel }}</h3>
+              <ul class="details">
+                <li><strong>Година:</strong> {{ car.godina }}</li>
+                <li><strong>Тип:</strong> {{ car.vid }}</li>
+                <li><strong>Цвят:</strong> {{ car.cvqt }}</li>
+              </ul>
+              <div class="price-row">
+                <p class="price">
+                  <span>{{ car.cena_za_den }} лв.</span> / ден
+                </p>
+                <button class="btn-book">Резервирай</button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+        <div class="no-results">
+          <p>Няма намерени автомобили по тези критерии.</p>
+        </div>
+    }
+  </main>
+</div>
