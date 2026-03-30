@@ -54,7 +54,7 @@
           type="number"
           formControlName="godina"
           placeholder="Напр. 2019"
-          min="2000"
+          min="1980"
           max="2024"
         />
       </div>
@@ -65,15 +65,15 @@
 
   <main class="catalog">
     <div class="results-header">
-      <h2>Намерени автомобили ({{ filteredCars()!.length }})</h2>
+      <h2>Намерени автомобили ({{ cars()!.length }})</h2>
     </div>
 
-    @if (filteredCars()!.length > 0) {
+    @if (cars()!.length > 0) {
       <div class="cars-grid">
-        @for (car of filteredCars(); track car.avtomobil_id) {
+        @for (car of cars(); track car.avtomobil_id) {
           <div class="car-card">
             <div class="img-container">
-              <img [src]="car.imageUrl" [alt]="car.marka_name + ' ' + car.kolamodel" />
+              <img [src]="car.img_url" [alt]="car.marka_name + ' ' + car.kolamodel" />
             </div>
             <div class="car-info">
               <h3>{{ car.marka_name }} {{ car.kolamodel }}</h3>

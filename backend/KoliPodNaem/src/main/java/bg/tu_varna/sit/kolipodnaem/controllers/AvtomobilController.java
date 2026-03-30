@@ -20,8 +20,15 @@ public class AvtomobilController {
 
 
     @GetMapping
-    public List<AvtomobilView> findAll() {
-        return avtomobilRepository.findAll();
+    @Transactional
+    public List<AvtomobilView> findAll(
+            @RequestParam(required = false) String marka,
+            @RequestParam(required = false) String model,
+            @RequestParam(required = false) String vid,
+            @RequestParam(required = false) String cvqt,
+            @RequestParam(required = false) Double cena,
+            @RequestParam(required = false) Integer godina) {
+        return avtomobilRepository.filteredAutomobiles(marka, model, vid, cvqt, cena, godina);
     }
 
     @GetMapping("/{id}")

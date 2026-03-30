@@ -10,7 +10,7 @@ export interface Car {
   cvqt: string;
   godina: number;
   cena_za_den: number;
-  imageUrl: string;
+  img_url: string;
 }
 
 export interface CarModel{
@@ -25,8 +25,19 @@ export class CarService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCars(): Observable<Car[]> {
-    return this.http.get<Car[]>("http://localhost:8081/avtomobil");
+  getAllCars(marka: string | null, model:string | null, vid:string | null, cvqt:string | null, cena:number, godina:number): Observable<Car[]> {
+    console.log(model)
+    let url = "http://localhost:8081/avtomobil?";
+    if(marka && marka != null && marka != "") url = url + "&marka=" + marka;
+    if(model && model != null && model != "") url = url + "&model=" + model;
+    if(vid && vid != null && vid != "") url = url + "&vid=" + vid;
+    if(cvqt && cvqt != null && cvqt != "") url = url + "&cvqt=" + cvqt;
+    if(cena > 0) url = url + "&cena=" + cena;
+    if(godina > 0) url = url + "&godina=" + godina;
+    console.log(url)
+
+
+    return this.http.get<Car[]>(url);
   }
 
   getBrands() : Observable<string[]>{

@@ -47,6 +47,9 @@
       &:focus {
         border-color: #0056b3;
       }
+      &:disabled{
+        background-color: #e6e6e6;
+      }
     }
 
     input[type="range"] {
