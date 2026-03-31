@@ -22,14 +22,14 @@
   <section class="featured-section">
     <h2>Последни предложения</h2>
     <div class="cars-grid">
-        @for(car of featuredCars; track car.id){
+        @for(car of latestCars(); track car.avtomobil_id){
       <div class="car-card">
         <div class="img-container">
-          <img [src]="car.imageUrl" [alt]="car.brand + ' ' + car.model">
+          <img [src]="car.img_url" [alt]="car.marka_name + ' ' + car.kolamodel">
         </div>
         <div class="car-info">
-          <h3>{{ car.brand }} {{ car.model }}</h3>
-          <p class="price"><span>{{ car.pricePerDay }} лв.</span> / ден</p>
+          <h3>{{ car.marka_name }} {{ car.kolamodel }}</h3>
+          <p class="price"><span>{{ car.cena_za_den }} лв.</span> / ден</p>
           <button class="btn-secondary">Резервирай</button>
         </div>
       </div>}

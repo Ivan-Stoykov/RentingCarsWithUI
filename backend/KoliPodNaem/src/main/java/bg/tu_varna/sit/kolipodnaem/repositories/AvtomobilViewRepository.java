@@ -40,4 +40,7 @@ public interface AvtomobilViewRepository extends JpaRepository<AvtomobilView, In
             @Param("p_cena") Double cena,
             @Param("p_godina") Integer godina
     );
+
+    @Procedure(procedureName = "latestSixAutomobiles")
+    public List<AvtomobilView> latestSixAutomobiles();
 }

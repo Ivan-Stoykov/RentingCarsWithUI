@@ -37,21 +37,26 @@ public class AvtomobilController {
 
         return ResponseEntity.ok(avtomobil);
     }
+    @Transactional
+    @GetMapping("/latest")
+    public List<AvtomobilView> findAll() {
+        return avtomobilRepository.latestSixAutomobiles();
+    }
 
     @Transactional
     @PostMapping
-    public void PostZaem(@RequestBody AvtomobilPostDTO avtomobilDto) {
+    public void PostAvtomobil(@RequestBody AvtomobilPostDTO avtomobilDto) {
 
         avtomobilRepository.AddNewAvtomobil(avtomobilDto.getId(), avtomobilDto.getMarka(), avtomobilDto.getModel(), avtomobilDto.getVid(), avtomobilDto.getGodina(), avtomobilDto.getIzminatiKilometri(), avtomobilDto.getCvqt(), avtomobilDto.getCenaZaDen(), avtomobilDto.getEkstri());
     }
 
     @PatchMapping("/{id}")
-    public void UpdateZaem(@PathVariable int id, @RequestBody AvtomobilUpdateDTO avtomobilDto) {
+    public void UpdateAvtomobil(@PathVariable int id, @RequestBody AvtomobilUpdateDTO avtomobilDto) {
         avtomobilRepository.AVTOMOBIL_UPD(avtomobilDto.getId(), avtomobilDto.getIzminatiKilometri(), avtomobilDto.getCvqt(), avtomobilDto.getSpec());
     }
 
     @DeleteMapping("/{id}")
-    public void DeleteZaem(@PathVariable int id) {
+    public void DeleteAvtomobil(@PathVariable int id) {
         avtomobilRepository.AVTOMOBIL_DEL(id);
     }
 }
