@@ -1,0 +1,63 @@
+<div class="register-wrapper">
+  <div class="register-card">
+    <div class="register-header">
+      <h2>Създаване на профил</h2>
+      <p>Регистрирайте се, за да наемате автомобили бързо и лесно.</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      
+      <h3 class="section-title">Лични данни</h3>
+      
+      <div class="form-row">
+        <div class="form-group half-width">
+          <label for="name">Име и Фамилия</label>
+          <input type="text" id="ime" formControlName="ime" placeholder="Напр. Иван Иванов">
+        </div>
+
+        <div class="form-group half-width">
+          <label for="phone">Телефон</label>
+          <input type="tel" id="telefon" formControlName="telefon" placeholder="Напр. 0888 123 456">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Имейл адрес</label>
+        <input type="email" id="email" formControlName="email" placeholder="name@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Парола</label>
+        <input type="password" id="password" formControlName="password" placeholder="Минимум 6 символа">
+      </div>
+
+      <h3 class="section-title">Адрес за кореспонденция</h3>
+      <div formGroupName="address">
+        
+        <div class="form-group">
+          <label for="street">Улица и номер</label>
+          <input type="text" id="street" formControlName="street" placeholder="Напр. ул. Независимост 5">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label for="city">Град</label>
+            <input type="text" id="city" formControlName="city" placeholder="Напр. София">
+          </div>
+
+          <div class="form-group half-width">
+            <label for="country">Държава</label>
+            <input type="text" id="country" formControlName="country" placeholder="Напр. България">
+          </div>
+        </div>
+
+      </div>
+
+      <button type="submit" class="btn-submit">Регистрирай се</button>
+    </form>
+
+    <div class="login-prompt">
+      Вече имате профил? <a href="/login">Влезте тук</a>
+    </div>
+  </div>
+</div>

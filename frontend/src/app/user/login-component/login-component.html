@@ -1,0 +1,37 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>Вход в системата</h2>
+      <p>Добре дошли отново! Моля, въведете своите данни, за да продължите.</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      
+      <div class="form-group">
+        <label for="email">Имейл адрес</label>
+        <input 
+          type="email" 
+          id="email" 
+          formControlName="email" 
+          placeholder="name@example.com"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password">Парола</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          placeholder="Парола"
+        >
+      </div>
+
+      <button type="submit" class="btn-submit">Влезте във вашия профил</button>
+    </form>
+
+    <div class="register-prompt">
+      Нямате акаунт? <a routerLink="/register">Регистрирайте се тук</a>
+    </div>
+  </div>
+</div>

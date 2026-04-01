@@ -22,6 +22,12 @@ public class Klient {
     @Column(name = "IME")
     private String ime;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "TELEFON")
     private String telefon;
 
