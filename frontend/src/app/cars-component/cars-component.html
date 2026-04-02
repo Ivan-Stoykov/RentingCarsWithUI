@@ -3,10 +3,20 @@
     <h3>Филтри</h3>
     <form [formGroup]="filterForm" (ngSubmit)="onFind()">
       <div class="form-group">
+        <label>Дата заемане</label>
+        <input type="date" formControlName="dataZaemane"/>
+      </div>
+
+      <div class="form-group">
+        <label>Дата връщане</label>
+        <input type="date" formControlName="dataVrushtane"/>
+      </div>
+
+      <div class="form-group">
         <label>Марка</label>
         <select formControlName="marka_name">
           <option value="">Всички марки</option>
-          @for (brand of allBrands; track brand) {
+          @for (brand of allBrands(); track brand) {
             <option>{{ brand }}</option>
           }
         </select>
@@ -27,7 +37,7 @@
         <label>Вид автомобил</label>
         <select formControlName="vid">
           <option value="">Всички видове</option>
-          @for (type of allTypes; track type) {
+          @for (type of allTypes(); track type) {
             <option>{{ type }}</option>
           }
         </select>
@@ -37,7 +47,7 @@
         <label>Цвят</label>
         <select formControlName="cvqt">
           <option value="">Всички цветове</option>
-          @for (color of allColors; track color) {
+          @for (color of allColors(); track color) {
             <option>{{ color }}</option>
           }
         </select>

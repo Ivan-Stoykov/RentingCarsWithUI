@@ -5,17 +5,17 @@
       <h1>Наеми своя мечтан автомобил</h1>
       <p>Бързо, лесно и сигурно. Открий най-добрите оферти за пътуването си.</p>
       
-      <div class="search-box">
+      <form [formGroup]="form" (ngSubmit)="onFind()" class="search-box">
         <div class="input-group">
           <label for="pickup">Взимане</label>
-          <input type="date" id="pickup">
+          <input type="date" id="pickup" formControlName="dataZaemane">
         </div>
         <div class="input-group">
           <label for="dropoff">Връщане</label>
-          <input type="date" id="dropoff">
+          <input type="date" id="dropoff" formControlName="dataVrushtane">
         </div>
         <button class="btn-primary">Търси автомобили</button>
-      </div>
+      </form>
     </div>
   </section>
 

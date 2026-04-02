@@ -27,8 +27,10 @@ public class AvtomobilController {
             @RequestParam(required = false) String vid,
             @RequestParam(required = false) String cvqt,
             @RequestParam(required = false) Double cena,
-            @RequestParam(required = false) Integer godina) {
-        return avtomobilRepository.filteredAutomobiles(marka, model, vid, cvqt, cena, godina);
+            @RequestParam(required = false) Integer godina,
+            @RequestParam(required = false) String dataZaemane,
+            @RequestParam(required = false) String dataVrushtane) {
+        return avtomobilRepository.filteredAutomobiles(marka, model, vid, cvqt, cena, godina, dataZaemane, dataVrushtane);
     }
 
     @GetMapping("/{id}")

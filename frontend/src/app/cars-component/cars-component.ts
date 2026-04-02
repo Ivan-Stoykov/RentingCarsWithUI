@@ -1,8 +1,7 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, Signal, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Car, CarModel, CarService } from './cars-service';
-import { forkJoin } from 'rxjs';
+import { CarService } from './cars-service';
 
 @Component({
   selector: 'app-cars',
@@ -13,23 +12,22 @@ import { forkJoin } from 'rxjs';
 })
 export class CarsComponent implements OnInit {
   filterForm: FormGroup;
+  private carService = inject(CarService);
 
-  allBrands: string[] = [];
-  allColors: string[] = [];
-  allTypes: string[] = [];
-  allModels: string[] = [];
-  carModels: CarModel[] = [];
-
-  cars = signal<Car[]>([]);
-
-  isLoading: boolean = false;
-  errorMessage: string = '';
-
+  allBrands = this.carService.getBrands();
+  allColors = this.carService.getColors();
+  allTypes = this.carService.getTypes();
+  carModels = this.carService.getModels();
+  allModels = this.carModels().map(m => m.model);
+  
+  cars = this.carService.getCars;
+  
   constructor(
     private fb: FormBuilder,
-    private carService: CarService,
   ) {
     this.filterForm = this.fb.group({
+      dataZaemane: [this.carService.getDataZaemane()],
+      dataVrushtane:[this.carService.getDataVrushtane()],
       marka_name: [''],
       kolamodel: [{ value: '', disabled: true }],
       cena_za_den: [300],
@@ -38,41 +36,12 @@ export class CarsComponent implements OnInit {
       godina: [''],
     });
   }
-
+  
   ngOnInit(): void {
-    this.loadInitialData();
     this.setupBrandListener();
   }
-
-  private loadInitialData(): void {
-    this.isLoading = true;
-
-    forkJoin({
-      cars: this.carService.getAllCars(null, null, null, null, 0, 0),
-      brands: this.carService.getBrands(),
-      colors: this.carService.getColors(),
-      types: this.carService.getTypes(),
-      models: this.carService.getModels(),
-    }).subscribe({
-      next: (result) => {
-        this.cars.set(result.cars);
-        console.log(this.cars());
-
-        this.allBrands = result.brands;
-        this.allColors = result.colors;
-        this.allTypes = result.types;
-        this.carModels = result.models;
-        this.allModels = this.carModels.map((m) => m.model);
-
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Грешка при зареждане на данните:', error);
-        this.errorMessage = 'Възникна грешка при връзката със сървъра.';
-        this.isLoading = false;
-      },
-    });
-  }
+  
+  
 
   private setupBrandListener(): void {
     this.filterForm.get('marka_name')?.valueChanges.subscribe((selectedBrand) => {
@@ -81,19 +50,18 @@ export class CarsComponent implements OnInit {
 
       if (selectedBrand) {
         modelControl?.enable();
-        this.allModels = this.carModels
+        this.allModels = this.carModels()
           .filter((m) => m.marka === selectedBrand)
           .map((m) => m.model);
       } else {
         modelControl?.disable();
-        this.allModels = this.carModels.map((m) => m.model);
+        this.allModels = this.carModels().map((m) => m.model);
       }
     });
   }
 
   onFind(): void {
     const filters = this.filterForm.getRawValue();
-    this.isLoading = true;
     this.carService.getAllCars(
       filters.marka_name,
       filters.kolamodel,
@@ -101,16 +69,8 @@ export class CarsComponent implements OnInit {
       filters.cvqt,
       filters.cena_za_den,
       filters.godina,
-    ).subscribe({
-      next: (resData)=>{
-        this.cars.set(resData);
-        console.log(this.cars());
-      },
-      error: (error) => {
-        console.error('Грешка при зареждане на данните:', error);
-        this.errorMessage = 'Възникна грешка при връзката със сървъра.';
-        this.isLoading = false;
-      },
-    });
+      filters.dataZaemane,
+      filters.dataVrushtane
+    )
   }
 }

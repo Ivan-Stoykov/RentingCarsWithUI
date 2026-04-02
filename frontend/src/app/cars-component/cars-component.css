@@ -37,7 +37,7 @@
       color: #444;
     }
 
-    select, input[type="number"] {
+    select, input[type="number"], input[type="date"] {
       padding: 10px;
       border: 1px solid #ddd;
       border-radius: 4px;

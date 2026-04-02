@@ -38,7 +38,9 @@ public interface AvtomobilViewRepository extends JpaRepository<AvtomobilView, In
             @Param("p_vid") String vid,
             @Param("p_cvqt") String cvqt,
             @Param("p_cena") Double cena,
-            @Param("p_godina") Integer godina
+            @Param("p_godina") Integer godina,
+            @Param("p_dataZaemane") String dataZaemane,
+            @Param("p_dataVrushtane") String dataVrushtane
     );
 
     @Procedure(procedureName = "latestSixAutomobiles")
