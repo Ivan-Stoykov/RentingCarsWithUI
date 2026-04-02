@@ -34,11 +34,7 @@ export class RegisterComponent {
 
     const registerData = this.registerForm.value;
     console.log('Данни за регистрация:', registerData);
-    this.userService.registerUser(registerData).subscribe({
-      next: (resData)=>{
-        console.log(resData);
-      }
-    });
+    this.userService.registerUser(registerData);
     this.registerForm.reset();
     
   }

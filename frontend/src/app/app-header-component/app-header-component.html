@@ -13,8 +13,13 @@
   </div>
 
   <div class="header-right">
-    <a routerLink="/login" class="btn login-btn">Log In</a>
-    <a routerLink="/register" class="btn register-btn">Register</a>
+    @if(user().id != 0) {
+      <a [routerLink]="`/user/${user().id}`" class="btn login-btn">{{user().ime + " - " + user().email}}</a>
+      <a class="btn register-btn"><button (click)="LogOut()">Logout</button></a>
+    } @else {
+      <a routerLink="/login" class="btn login-btn">Log In</a>
+      <a routerLink="/register" class="btn register-btn">Register</a>
+    }
   </div>
 </header>
 <main><ng-content /></main>

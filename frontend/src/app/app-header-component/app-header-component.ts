@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { UserService } from '../user/user-service';
 
 @Component({
   selector: 'app-app-header-component',
@@ -7,4 +8,12 @@ import { RouterLink } from "@angular/router";
   templateUrl: './app-header-component.html',
   styleUrl: './app-header-component.css',
 })
-export class AppHeaderComponent {}
+export class AppHeaderComponent {
+  private userService = inject(UserService);
+  user = this.userService.getUser();
+
+  LogOut()
+  {
+    this.userService.LogOut();
+  }
+}

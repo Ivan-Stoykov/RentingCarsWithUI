@@ -29,10 +29,6 @@ export class LoginComponent {
     const loginData = this.loginForm.value;
     console.log('Данни за вход:', loginData);
 
-    this.userService.getUser(loginData.email, loginData.password).subscribe({
-      next:(resData)=>{
-        console.log(resData);
-      }
-    })
+    this.userService.loginUser(loginData.email, loginData.password);
   }
 }

@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.kolipodnaem.controllers;
 
+import jakarta.persistence.NoResultException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,8 +21,14 @@ public class GlobalExceptionHandler {
         }
     }
     @ExceptionHandler(SQLException.class)
-    public ResponseEntity<ErrorMessage> handleResourceNotFound(SQLException ex) {
+    public ResponseEntity<ErrorMessage> handleSqlError(SQLException ex) {
         return ResponseEntity.status(409).body(new ErrorMessage(ex.getMessage()));
     }
+
+    @ExceptionHandler(NoResultException.class)
+    public ResponseEntity<ErrorMessage> handleResourceNotFound(NoResultException ex) {
+        return ResponseEntity.status(404).body(new ErrorMessage("No results found"));
+    }
+
 
 }
