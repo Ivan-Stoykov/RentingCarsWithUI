@@ -3,7 +3,7 @@ import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 export interface User {
-  id: number;
+  klient_ID: number;
   ime: string;
   email: string;
   telefon: string;
@@ -35,7 +35,7 @@ export class UserService {
   private router = inject(Router);
 
   private startUser = {
-    id: 0,
+    klient_ID: 0,
     ime: '',
     email: '',
     telefon: '',

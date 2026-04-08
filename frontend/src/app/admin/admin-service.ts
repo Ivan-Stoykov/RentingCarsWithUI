@@ -31,6 +31,15 @@ export class AdminService {
     return this.cars.asReadonly();
   }
 
+  deleteCar(id: number) {
+    this.http.delete(`http://localhost:8081/avtomobil/${id}`).subscribe({
+      next: (resData) => {
+        console.log(resData);
+        this.getAllCars('');
+      },
+    });
+  }
+
   getAllUsers(ime: string) {
     console.log(ime);
     let url = 'http://localhost:8081/klient?';
@@ -46,6 +55,15 @@ export class AdminService {
 
   get getUsers() {
     return this.users.asReadonly();
+  }
+
+  deleteUser(id: number) {
+    this.http.delete(`http://localhost:8081/klient/${id}`).subscribe({
+      next: (resData) => {
+        console.log(resData);
+        this.getAllUsers('');
+      },
+    });
   }
 
 }

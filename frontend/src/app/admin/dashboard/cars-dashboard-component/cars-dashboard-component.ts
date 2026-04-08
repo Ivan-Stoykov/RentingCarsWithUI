@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AdminService } from '../../admin-service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cars-dashboard-component',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './cars-dashboard-component.html',
   styleUrl: './cars-dashboard-component.css',
 })
@@ -19,5 +20,9 @@ export class CarsDashboardComponent implements OnInit {
   filter(): void{
     this.adminService.getAllCars(this.marka.value)
     console.log(this.marka.value)
+  }
+
+  deleteCar(id: number): void {
+    this.adminService.deleteCar(id);
   }
 }

@@ -21,16 +21,6 @@ public interface AvtomobilViewRepository extends JpaRepository<AvtomobilView, In
             @Param("p_izminatiKilometri") int kilometri,
             @Param("p_img_url")  String img_url);
 
-    @Procedure(procedureName = "AVTOMOBIL_UPD")
-    public void AVTOMOBIL_UPD(
-            @Param("V_ID") Integer id,
-            @Param("V_Kilometri") int kilometri,
-            @Param("V_cvqt") int cvqt,
-            @Param("V_spec") int spec);
-
-    @Procedure(procedureName = "AVTOMOBIL_DEL")
-    public void AVTOMOBIL_DEL(@Param("V_ID") Integer id);
-
     @Procedure(procedureName = "filteredAutomobiles")
     public List<AvtomobilView> filteredAutomobiles(
             @Param("p_marka") String marka,
@@ -45,4 +35,7 @@ public interface AvtomobilViewRepository extends JpaRepository<AvtomobilView, In
 
     @Procedure(procedureName = "latestSixAutomobiles")
     public List<AvtomobilView> latestSixAutomobiles();
+
+    @Procedure(procedureName = "deleteCar")
+    public void deleteCar(@Param("p_id") Integer id);
 }

@@ -19,6 +19,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo:"cars", pathMatch:'full' },
       { path: 'cars', component:CarsDashboardComponent},
+      { path: 'cars/add', component:AddCarComponent},
       { path: 'clients', component:UsersDashboardComponent}
     ],
   },

@@ -63,11 +63,12 @@ public class AvtomobilController {
 
     @PatchMapping("/{id}")
     public void UpdateAvtomobil(@PathVariable int id, @RequestBody AvtomobilUpdateDTO avtomobilDto) {
-        avtomobilRepository.AVTOMOBIL_UPD(avtomobilDto.getId(), avtomobilDto.getIzminatiKilometri(), avtomobilDto.getCvqt(), avtomobilDto.getSpec());
+
     }
 
     @DeleteMapping("/{id}")
-    public void DeleteAvtomobil(@PathVariable int id) {
-        avtomobilRepository.AVTOMOBIL_DEL(id);
+    public ResponseEntity DeleteAvtomobil(@PathVariable int id) {
+        avtomobilRepository.deleteCar(id);
+        return ResponseEntity.ok().build();
     }
 }

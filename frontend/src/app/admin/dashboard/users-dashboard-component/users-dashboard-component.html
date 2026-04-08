@@ -20,16 +20,16 @@
               </tr>
             </thead>
             <tbody>
-              @for(user of users(); track user.id){
+              @for(user of users(); track user.klient_ID){
               <tr>
-                <td>{{user.id}}</td>
+                <td>{{user.klient_ID}}</td>
                 <td>{{user.ime}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.telefon}}</td>
                 <td>{{user.rolq}}</td>
                 <td class="actions">
-                  <button class="btn-edit">Редакция</button>
-                  <button class="btn-delete">Изтрий</button>
+                  <button class="btn-edit" >Редакция</button>
+                  <button class="btn-delete" (click)="deleteUser(user.klient_ID)">Изтрий</button>
                 </td>
               </tr>}
             </tbody>

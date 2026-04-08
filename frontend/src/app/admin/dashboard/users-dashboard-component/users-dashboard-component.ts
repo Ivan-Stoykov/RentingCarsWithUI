@@ -13,11 +13,13 @@ export class UsersDashboardComponent {
   users = this.adminService.getUsers;
   ime = new FormControl();
 
-  ngOnInit(): void {
-  }
-
   filter(): void{
     this.adminService.getAllCars(this.ime.value)
     console.log(this.ime.value)
+    console.log(this.users())
+  }
+
+  deleteUser(id: number): void {
+    this.adminService.deleteUser(id);
   }
 }
