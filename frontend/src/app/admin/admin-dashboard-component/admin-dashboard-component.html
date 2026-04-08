@@ -1,0 +1,20 @@
+  <div class="admin-container">
+    <h1 class="page-title">Админ панел</h1>
+
+    <div class="dashboard-grid">
+      
+      <aside class="sidebar-card">
+        <h3>Управление</h3>
+        <nav class="side-nav">
+          <a routerLink="/admin/cars" class="active">Автомобили</a>
+          <a routerLink="/admin/clients">Клиенти</a>
+          <a routerLink="/admin/rentals">Наеми (Заеми)</a>
+        </nav>
+      </aside>
+
+      <main class="content-card">
+        
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>

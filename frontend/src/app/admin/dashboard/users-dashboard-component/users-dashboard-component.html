@@ -1,0 +1,37 @@
+<div class="content-header">
+          <h2>Управление: <span>Потребители</span></h2>
+          
+          <div class="search-box">
+            <input type="text" placeholder="Име (Напр. Иван Иванов)" [formControl]="ime">
+            <button type="button" class="btn-search" (click)="filter()">Търси</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>ИМЕНА</th>
+                <th>ИМЕЙЛ</th>
+                <th>ТЕЛЕФОН</th>
+                <th>РОЛЯ</th>
+                <th>ДЕЙСТВИЯ</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(user of users(); track user.id){
+              <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.ime}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.telefon}}</td>
+                <td>{{user.rolq}}</td>
+                <td class="actions">
+                  <button class="btn-edit">Редакция</button>
+                  <button class="btn-delete">Изтрий</button>
+                </td>
+              </tr>}
+            </tbody>
+          </table>
+        </div>

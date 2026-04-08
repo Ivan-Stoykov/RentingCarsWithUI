@@ -22,22 +22,10 @@ public class KlientController {
     private GradoveRepository gradoveRepository;
 
     @GetMapping
-    public List<KlientDTO> getKlients(){
+    public List<KlientDTO> getKlients(@RequestParam(required = false) String name){
         return klientRepository.findAll().stream().map(klient -> new KlientDTO(
                 klient.getKlient_Id(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad().getGrad(), klient.getGrad().getDurjavi().getDurjava()), klient.getRolq()
         )).toList();
-    }
-
-    @PostMapping
-    public ResponseEntity createKlient(@RequestBody KlientPostDTO klient){
-        Gradove gradove = gradoveRepository.findById(klient.getGradId()).orElse(null);
-        Klient kl = new Klient();
-        kl.setIme(klient.getIme());
-        kl.setTelefon(klient.getTelefon());
-        kl.setUlica(klient.getUlica());
-        kl.setGrad(gradove);
-        klientRepository.save(kl);
-        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")

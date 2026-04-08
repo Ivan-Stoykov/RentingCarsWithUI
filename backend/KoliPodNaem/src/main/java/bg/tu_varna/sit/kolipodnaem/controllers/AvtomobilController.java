@@ -41,7 +41,7 @@ public class AvtomobilController {
     }
     @Transactional
     @GetMapping("/latest")
-    public List<AvtomobilView> findAll() {
+    public List<AvtomobilView> findLatest() {
         return avtomobilRepository.latestSixAutomobiles();
     }
 
