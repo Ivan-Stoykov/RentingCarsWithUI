@@ -49,7 +49,16 @@ public class AvtomobilController {
     @PostMapping
     public void PostAvtomobil(@RequestBody AvtomobilPostDTO avtomobilDto) {
 
-        avtomobilRepository.AddNewAvtomobil(avtomobilDto.getId(), avtomobilDto.getMarka(), avtomobilDto.getModel(), avtomobilDto.getVid(), avtomobilDto.getGodina(), avtomobilDto.getIzminatiKilometri(), avtomobilDto.getCvqt(), avtomobilDto.getCenaZaDen(), avtomobilDto.getEkstri());
+        avtomobilRepository.AddNewAvtomobil(
+                avtomobilDto.getMarka(),
+                avtomobilDto.getModel(),
+                avtomobilDto.getVid(),
+                avtomobilDto.getGodina(),
+                avtomobilDto.getCvqt(),
+                avtomobilDto.getEkstri(),
+                avtomobilDto.getCenaZaDen(),
+                avtomobilDto.getIzminatiKilometri(),
+                avtomobilDto.getImg_url());
     }
 
     @PatchMapping("/{id}")

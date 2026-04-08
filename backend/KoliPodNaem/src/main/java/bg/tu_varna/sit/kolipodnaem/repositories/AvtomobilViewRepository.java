@@ -11,15 +11,15 @@ import java.util.List;
 public interface AvtomobilViewRepository extends JpaRepository<AvtomobilView, Integer> {
     @Procedure(procedureName = "AddNewAvtomobil")
     public void AddNewAvtomobil(
-            @Param("p_avtomobil_id") Integer id,
-            @Param("p_marka_id") int marka,
-            @Param("p_model_id") int model,
-            @Param("p_vid_id") int vid,
+            @Param("p_marka") String marka,
+            @Param("p_model") String model,
+            @Param("p_vid") String vid,
             @Param("p_godina") int godina,
-            @Param("p_izminatiKilometri") int kilometri,
-            @Param("p_cvqt_id") int cvqt,
+            @Param("p_cvqt") String cvqt,
+            @Param("p_ekstri") String ekstri,
             @Param("p_cenaZaDen") double cenaZaDen,
-            @Param("p_ekstri") String ekstri);
+            @Param("p_izminatiKilometri") int kilometri,
+            @Param("p_img_url")  String img_url);
 
     @Procedure(procedureName = "AVTOMOBIL_UPD")
     public void AVTOMOBIL_UPD(

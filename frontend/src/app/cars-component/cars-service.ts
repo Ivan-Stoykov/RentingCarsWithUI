@@ -13,6 +13,18 @@ export interface Car {
   img_url: string;
 }
 
+export interface PostCar {
+  marka: string;
+  model: string;
+  vid: string;
+  img_url: string;
+  godina: number;
+  cvqt: string;
+  ekstri: string;
+  cenaZaDen: number;
+  izminatiKilometri: number;
+}
+
 export interface CarModel {
   model: string;
   marka: string;
@@ -41,8 +53,8 @@ export class CarService {
     cvqt: string,
     cena: number,
     godina: number,
-    dataZaemane:string,
-    dataVrushtane:string
+    dataZaemane: string,
+    dataVrushtane: string,
   ) {
     console.log(model);
     let url = 'http://localhost:8081/avtomobil?';
@@ -57,62 +69,71 @@ export class CarService {
     console.log(url);
 
     this.http.get<Car[]>(url).subscribe({
-      next:(cars)=>{
+      next: (cars) => {
         this.cars.set(cars);
         this.dataZaemane.set(dataZaemane);
         this.dataVrushtane.set(dataVrushtane);
-      }
+      },
     });
   }
 
-   get getCars(){
+  get getCars() {
     return this.cars.asReadonly();
   }
 
-  get getDataVrushtane(){
+  get getDataVrushtane() {
     return this.dataVrushtane.asReadonly();
   }
-  get getDataZaemane(){
+  get getDataZaemane() {
     return this.dataZaemane.asReadonly();
   }
 
   getBrands() {
     this.http.get<string[]>('http://localhost:8081/marka/list').subscribe({
-      next:(brands)=>{
+      next: (brands) => {
         this.allBrands.set(brands);
-      }
+      },
     });
     return this.allBrands.asReadonly();
   }
 
   getColors() {
     this.http.get<string[]>('http://localhost:8081/cvqt/list').subscribe({
-      next:(colors)=>{
+      next: (colors) => {
         this.allColors.set(colors);
-      }
+      },
     });
     return this.allColors.asReadonly();
   }
 
   getTypes() {
     this.http.get<string[]>('http://localhost:8081/vid/list').subscribe({
-      next:(types)=>{
+      next: (types) => {
         this.allTypes.set(types);
-      }
+      },
     });
     return this.allTypes.asReadonly();
   }
 
   getModels() {
     this.http.get<CarModel[]>('http://localhost:8081/model').subscribe({
-      next:(models)=>{
+      next: (models) => {
         this.allModels.set(models);
-      }
+      },
     });
     return this.allModels.asReadonly();
   }
 
   getLatestCars(): Observable<Car[]> {
     return this.http.get<Car[]>('http://localhost:8081/avtomobil/latest');
+  }
+
+  addCar(car: PostCar) {
+    console.log(car);
+    this.http.post('http://localhost:8081/avtomobil', car).subscribe({
+      next: (resData) => {
+        console.log(resData);
+      },
+    });
   }
 }

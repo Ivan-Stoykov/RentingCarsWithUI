@@ -34,6 +34,9 @@ public class Klient {
     @Column(name = "ULICA")
     private String ulica;
 
+    @Column(name = "rolq")
+    private String rolq;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "grad_id")
     private Gradove grad;

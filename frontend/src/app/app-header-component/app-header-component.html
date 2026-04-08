@@ -14,6 +14,9 @@
 
   <div class="header-right">
     @if(user().id != 0) {
+      @if(user().rolq === "admin"){
+        <a routerLink="/admin" class="btn login-btn">Dashboard</a>
+      }
       <a [routerLink]="`/user/${user().id}`" class="btn login-btn">{{user().ime + " - " + user().email}}</a>
       <a class="btn register-btn"><button (click)="LogOut()">Logout</button></a>
     } @else {

@@ -11,4 +11,5 @@ public class KlientDTO {
     private String telefon;
     private String email;
     private AddressDTO adress;
+    private String rolq;
 }

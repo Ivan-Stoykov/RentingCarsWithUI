@@ -1,0 +1,57 @@
+<div class="add-car-container">
+  <h2>Добавяне на нов автомобил</h2>
+
+  <form [formGroup]="addCar" class="add-car-form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Марка</label>
+      <input type="text" formControlName="marka" placeholder="Напр. Toyota" />
+    </div>
+
+    <div class="form-group">
+      <label>Модел</label>
+      <input type="text" formControlName="model" placeholder="Напр. Corolla" />
+    </div>
+
+    <div class="form-group">
+      <label>Снимка</label>
+      <input type="text" formControlName="img_url" placeholder="http://....." />
+    </div>
+
+    <div class="form-group">
+      <label>Година</label>
+      <input type="number" formControlName="godina" placeholder="Напр. 2021" />
+    </div>
+    
+    <div class="form-group">
+      <label>Вид</label>
+      <input type="text" formControlName="vid" placeholder="Напр. Седан" />
+    </div>
+
+    <div class="form-group">
+      <label>Цвят</label>
+      <input type="text" formControlName="cvqt" placeholder="Напр. Черен" />
+    </div>
+
+    <div class="form-group">
+      <label>Цена за ден (лв.)</label>
+      <input type="number" formControlName="cenaZaDen" placeholder="Напр. 60" />
+    </div>
+
+    <div class="form-group">
+      <label>Изминати километри</label>
+      <input type="number" formControlName="izminatiKilometri" placeholder="Напр. 150000" />
+    </div>
+
+    <div class="form-group full-width">
+      <label>Екстри</label>
+      <textarea
+        formControlName="ekstri"
+        placeholder="Напр. Климатроник, Навигация, Автоматик..."
+      ></textarea>
+    </div>
+
+    <div class="submit-btn-wrapper">
+      <button type="submit" class="btn-submit">Запази автомобила</button>
+    </div>
+  </form>
+</div>

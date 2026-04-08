@@ -24,7 +24,7 @@ public class KlientController {
     @GetMapping
     public List<KlientDTO> getKlients(){
         return klientRepository.findAll().stream().map(klient -> new KlientDTO(
-                klient.getKlient_Id(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad().getGrad(), klient.getGrad().getDurjavi().getDurjava())
+                klient.getKlient_Id(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad().getGrad(), klient.getGrad().getDurjavi().getDurjava()), klient.getRolq()
         )).toList();
     }
 
@@ -45,7 +45,7 @@ public class KlientController {
         Klient klient = klientRepository.findById(id).orElse(null);
         if(klient == null) return ResponseEntity.notFound().build();
         KlientDTO dto = new KlientDTO(
-                klient.getKlient_Id(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad().getGrad(), klient.getGrad().getDurjavi().getDurjava())
+                klient.getKlient_Id(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad().getGrad(), klient.getGrad().getDurjavi().getDurjava()), klient.getRolq()
         );
         return ResponseEntity.ok(dto);
     }
@@ -56,7 +56,7 @@ public class KlientController {
         Klient klient = klientRepository.login(loginDTO.getEmail(), loginDTO.getPassword());
         if(klient == null) return ResponseEntity.notFound().build();
         KlientDTO dto = new KlientDTO(
-                klient.getKlient_Id(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad().getGrad(), klient.getGrad().getDurjavi().getDurjava())
+                klient.getKlient_Id(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad().getGrad(), klient.getGrad().getDurjavi().getDurjava()), klient.getRolq()
         );
         return ResponseEntity.ok(dto);
     }
@@ -69,7 +69,7 @@ public class KlientController {
             Klient klient = klientRepository.register(registerDTO.getIme(), registerDTO.getEmail(), registerDTO.getPassword(), registerDTO.getTelefon(),registerDTO.getAdress().getStreet(), registerDTO.getAdress().getCity(), registerDTO.getAdress().getCountry() );
             if(klient == null) return ResponseEntity.notFound().build();
             KlientDTO dto = new KlientDTO(
-                    klient.getKlient_Id(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad().getGrad(), klient.getGrad().getDurjavi().getDurjava())
+                    klient.getKlient_Id(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad().getGrad(), klient.getGrad().getDurjavi().getDurjava()), klient.getRolq()
             );
             return ResponseEntity.ok(dto);
         }

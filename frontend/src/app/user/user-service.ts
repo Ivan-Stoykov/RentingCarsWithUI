@@ -7,6 +7,7 @@ export interface User {
   ime: string;
   email: string;
   telefon: string;
+  rolq: string,
   address: {
     street: string;
     city: string;
@@ -38,6 +39,7 @@ export class UserService {
     ime: '',
     email: '',
     telefon: '',
+    rolq: "user",
     address: {
       street: '',
       city: '',
@@ -56,6 +58,7 @@ export class UserService {
         this.router.navigate(['/', 'cars']);
       },
     });
+    
   }
 
   public registerUser(user: registerUser) {
