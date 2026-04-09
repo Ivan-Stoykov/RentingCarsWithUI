@@ -7,6 +7,7 @@ import { AddCarComponent } from './admin/add-car-component/add-car-component';
 import { AdminDashboardComponent } from './admin/admin-dashboard-component/admin-dashboard-component';
 import { UsersDashboardComponent } from './admin/dashboard/users-dashboard-component/users-dashboard-component';
 import { CarsDashboardComponent } from './admin/dashboard/cars-dashboard-component/cars-dashboard-component';
+import { EditUserComponent } from './admin/edit-user-component/edit-user-component';
 
 export const routes: Routes = [
   { path: '', component: HomePage },
@@ -20,7 +21,8 @@ export const routes: Routes = [
       { path: '', redirectTo:"cars", pathMatch:'full' },
       { path: 'cars', component:CarsDashboardComponent},
       { path: 'cars/add', component:AddCarComponent},
-      { path: 'clients', component:UsersDashboardComponent}
+      { path: 'clients', component:UsersDashboardComponent},
+      { path: 'clients/:userId', component:EditUserComponent}
     ],
   },
 ];

@@ -28,7 +28,7 @@
                 <td>{{user.telefon}}</td>
                 <td>{{user.rolq}}</td>
                 <td class="actions">
-                  <button class="btn-edit" >Редакция</button>
+                  <button class="btn-edit" [routerLink]="`/admin/clients/${user.klient_ID}`" >Редакция</button>
                   <button class="btn-delete" (click)="deleteUser(user.klient_ID)">Изтрий</button>
                 </td>
               </tr>}

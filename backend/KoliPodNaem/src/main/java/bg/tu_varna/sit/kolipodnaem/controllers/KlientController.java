@@ -27,9 +27,10 @@ public class KlientController {
         return klientRepository.getClients(name);
     }
 
+    @Transactional
     @GetMapping("/{id}")
     public ResponseEntity<KlientDTO> getKlientById(@PathVariable int id){
-        KlientView klient = klientRepository.findById(id).orElse(null);
+        KlientView klient = klientRepository.fetchClient(id);
         if(klient == null) return ResponseEntity.notFound().build();
         KlientDTO dto = new KlientDTO(
                 klient.getKlient_ID(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad(), klient.getDurjava()), klient.getRolq()

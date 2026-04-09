@@ -30,7 +30,7 @@
                 <td>{{car.cvqt}}</td>
                 <td>{{car.cena_za_den}}</td>
                 <td class="actions">
-                  <button class="btn-edit">Редакция</button>
+                  <button class="btn-edit" [routerLink]="``">Редакция</button>
                   <button class="btn-delete" (click)="deleteCar(car.avtomobil_id)">Изтрий</button>
                 </td>
               </tr>}

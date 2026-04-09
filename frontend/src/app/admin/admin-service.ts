@@ -14,6 +14,18 @@ export class AdminService {
   private http = inject(HttpClient);
   private cars = signal<Car[]>([]);
   private users = signal<User[]>([]);
+  private user = signal<User>({
+    klient_ID: 0,
+    ime: '',
+    email: '',
+    telefon: '',
+    rolq: 'user',
+    address: {
+      street: '',
+      city: '',
+      country: '',
+    },
+  });
   getAllCars(model: string) {
     console.log(model);
     let url = 'http://localhost:8081/avtomobil?';
@@ -57,6 +69,20 @@ export class AdminService {
     return this.users.asReadonly();
   }
 
+  get getUser() {
+    return this.user.asReadonly();
+  }
+
+  fetchUser(id: number) {
+    this.http.get<User>(`http://localhost:8081/klient/${id}`).subscribe({
+      next: (resData) => {
+        console.log(resData);
+        this.user.set(resData)
+        
+      },
+    });
+  }
+
   deleteUser(id: number) {
     this.http.delete(`http://localhost:8081/klient/${id}`).subscribe({
       next: (resData) => {
@@ -65,5 +91,4 @@ export class AdminService {
       },
     });
   }
-
 }

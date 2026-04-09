@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { AdminService } from '../../admin-service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-users-dashboard-component',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './users-dashboard-component.html',
   styleUrl: './users-dashboard-component.css',
 })
