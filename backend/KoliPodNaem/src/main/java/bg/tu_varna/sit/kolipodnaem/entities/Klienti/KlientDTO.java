@@ -10,6 +10,6 @@ public class KlientDTO {
     private String ime;
     private String telefon;
     private String email;
-    private AddressDTO adress;
+    private AddressDTO address;
     private String rolq;
 }

@@ -67,6 +67,13 @@ public class KlientController {
     }
 
     @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity updateKlientById(@PathVariable int id, @RequestBody KlientDTO klientDTO){
+        klientRepository.updateClient(id, klientDTO.getIme(), klientDTO.getEmail(), klientDTO.getTelefon(), klientDTO.getAddress().getStreet(), klientDTO.getAddress().getCity(), klientDTO.getAddress().getCountry());
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity deleteKlientById(@PathVariable int id){
         klientRepository.deleteClient(id);

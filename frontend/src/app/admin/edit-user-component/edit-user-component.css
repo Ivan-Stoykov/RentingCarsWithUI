@@ -24,6 +24,11 @@
   gap: 20px;
 }
 
+.address{
+  display:grid;
+  gap: 20px;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -35,7 +40,7 @@
     margin-bottom: 8px;
   }
 
-  input, textarea {
+  input, select, textarea {
     padding: 12px 15px;
     border: 1px solid #ddd;
     border-radius: 6px;

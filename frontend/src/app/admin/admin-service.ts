@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Car } from '../cars-component/cars-service';
 import { User } from '../user/user-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -73,14 +74,19 @@ export class AdminService {
     return this.user.asReadonly();
   }
 
-  fetchUser(id: number) {
-    this.http.get<User>(`http://localhost:8081/klient/${id}`).subscribe({
+  fetchUser(id: number): Observable<User> {
+    return this.http.get<User>(`http://localhost:8081/klient/${id}`);
+  }
+
+  updateUser(userData: User)
+  {
+    this.http.put(`http://localhost:8081/klient/${userData.klient_ID}`, userData).subscribe({
       next: (resData) => {
         console.log(resData);
-        this.user.set(resData)
-        
-      },
+        this.getAllUsers('');
+      }
     });
+
   }
 
   deleteUser(id: number) {

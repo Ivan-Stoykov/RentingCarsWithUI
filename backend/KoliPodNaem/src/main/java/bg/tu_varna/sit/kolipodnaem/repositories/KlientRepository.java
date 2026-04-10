@@ -29,6 +29,17 @@ public interface KlientRepository extends JpaRepository<KlientView, Integer> {
     @Procedure(procedureName = "deleteClient")
     public void deleteClient(@Param("p_id") Integer id);
 
+    @Procedure(procedureName = "updateClient")
+    public void updateClient(
+            @Param("p_id") Integer id,
+            @Param("p_ime") String ime,
+            @Param("p_email") String email,
+            @Param("p_telefon") String telefon,
+            @Param("p_ulica") String ulica,
+            @Param("p_grad") String grad,
+            @Param("p_durjava") String durjava
+    );
+
     @Procedure(procedureName = "fetchClient")
     public KlientView fetchClient(@Param("p_id") Integer id);
 
