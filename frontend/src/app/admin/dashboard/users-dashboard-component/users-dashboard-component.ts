@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { AdminService } from '../../admin-service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from "@angular/router";
+import { UserService } from '../../../adminServices/user-service';
 
 @Component({
   selector: 'app-users-dashboard-component',
@@ -10,17 +10,17 @@ import { RouterLink } from "@angular/router";
   styleUrl: './users-dashboard-component.css',
 })
 export class UsersDashboardComponent {
-  private adminService = inject(AdminService);
-  users = this.adminService.getUsers;
+  private userService = inject(UserService);
+  users = this.userService.getUsers;
   ime = new FormControl();
 
   filter(): void{
-    this.adminService.getAllCars(this.ime.value)
+    this.userService.getAllUsers(this.ime.value)
     console.log(this.ime.value)
     console.log(this.users())
   }
 
   deleteUser(id: number): void {
-    this.adminService.deleteUser(id);
+    this.userService.deleteUser(id);
   }
 }

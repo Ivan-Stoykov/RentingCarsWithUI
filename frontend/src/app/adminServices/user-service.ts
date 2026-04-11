@@ -1,57 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Car } from '../cars-component/cars-service';
 import { User } from '../user/user-service';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminService {
+export class UserService {
   constructor() {
-    this.getAllCars('');
     this.getAllUsers('');
   }
   private http = inject(HttpClient);
-  private cars = signal<Car[]>([]);
   private users = signal<User[]>([]);
-  private user = signal<User>({
-    klient_ID: 0,
-    ime: '',
-    email: '',
-    telefon: '',
-    rolq: 'user',
-    address: {
-      street: '',
-      city: '',
-      country: '',
-    },
-  });
-  getAllCars(model: string) {
-    console.log(model);
-    let url = 'http://localhost:8081/avtomobil?';
-    if (model != '') url = url + '&model=' + model;
-    console.log(url);
-
-    this.http.get<Car[]>(url).subscribe({
-      next: (cars) => {
-        this.cars.set(cars);
-      },
-    });
-  }
-
-  get getCars() {
-    return this.cars.asReadonly();
-  }
-
-  deleteCar(id: number) {
-    this.http.delete(`http://localhost:8081/avtomobil/${id}`).subscribe({
-      next: (resData) => {
-        console.log(resData);
-        this.getAllCars('');
-      },
-    });
-  }
+  
 
   getAllUsers(ime: string) {
     console.log(ime);
@@ -70,14 +31,12 @@ export class AdminService {
     return this.users.asReadonly();
   }
 
-  get getUser() {
-    return this.user.asReadonly();
-  }
 
   fetchUser(id: number): Observable<User> {
     return this.http.get<User>(`http://localhost:8081/klient/${id}`);
   }
 
+  
   updateUser(userData: User)
   {
     this.http.put(`http://localhost:8081/klient/${userData.klient_ID}`, userData).subscribe({

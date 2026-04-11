@@ -8,6 +8,8 @@ import { AdminDashboardComponent } from './admin/admin-dashboard-component/admin
 import { UsersDashboardComponent } from './admin/dashboard/users-dashboard-component/users-dashboard-component';
 import { CarsDashboardComponent } from './admin/dashboard/cars-dashboard-component/cars-dashboard-component';
 import { EditUserComponent } from './admin/edit-user-component/edit-user-component';
+import { EditCarComponent } from './admin/edit-car-component/edit-car-component';
+import { RentsDashboardComponent } from './admin/dashboard/rents-dashboard-component/rents-dashboard-component';
 
 export const routes: Routes = [
   { path: '', component: HomePage },
@@ -21,8 +23,10 @@ export const routes: Routes = [
       { path: '', redirectTo:"cars", pathMatch:'full' },
       { path: 'cars', component:CarsDashboardComponent},
       { path: 'cars/add', component:AddCarComponent},
+      { path: 'cars/:carId', component:EditCarComponent},
       { path: 'clients', component:UsersDashboardComponent},
-      { path: 'clients/:userId', component:EditUserComponent}
+      { path: 'clients/:userId', component:EditUserComponent},
+      { path: 'rents', component:RentsDashboardComponent}
     ],
   },
 ];

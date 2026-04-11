@@ -1,7 +1,6 @@
 package bg.tu_varna.sit.kolipodnaem.controllers;
 
 import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilPostDTO;
-import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilUpdateDTO;
 import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilView;
 import bg.tu_varna.sit.kolipodnaem.repositories.AvtomobilViewRepository;
 import jakarta.transaction.Transactional;
@@ -32,10 +31,10 @@ public class AvtomobilController {
             @RequestParam(required = false) String dataVrushtane) {
         return avtomobilRepository.filteredAutomobiles(marka, model, vid, cvqt, cena, godina, dataZaemane, dataVrushtane);
     }
-
+    @Transactional
     @GetMapping("/{id}")
     public ResponseEntity<AvtomobilView> getById(@PathVariable int id) {
-        AvtomobilView avtomobil = avtomobilRepository.findById(id).orElse(null);
+        AvtomobilView avtomobil = avtomobilRepository.fetchCar(id);
 
         return ResponseEntity.ok(avtomobil);
     }
@@ -61,8 +60,20 @@ public class AvtomobilController {
                 avtomobilDto.getImg_url());
     }
 
-    @PatchMapping("/{id}")
-    public void UpdateAvtomobil(@PathVariable int id, @RequestBody AvtomobilUpdateDTO avtomobilDto) {
+    @Transactional
+    @PutMapping("/{id}")
+    public void UpdateAvtomobil(@PathVariable int id, @RequestBody AvtomobilPostDTO avtomobilDto) {
+        avtomobilRepository.updateCar(
+                id,
+                avtomobilDto.getMarka(),
+                avtomobilDto.getModel(),
+                avtomobilDto.getVid(),
+                avtomobilDto.getGodina(),
+                avtomobilDto.getCvqt(),
+                avtomobilDto.getEkstri(),
+                avtomobilDto.getCenaZaDen(),
+                avtomobilDto.getIzminatiKilometri(),
+                avtomobilDto.getImg_url());
 
     }
 

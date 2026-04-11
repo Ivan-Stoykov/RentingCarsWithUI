@@ -36,7 +36,7 @@ public class AvtomobilView {
     @Column(name = "cena_za_den")
     private double cena_za_den;
     @Column(name = "IZMINATIKILOMETRI")
-    private int izminatitikilometri;
+    private int izminatikilometri;
     @Column(name = "img_url")
     private String img_url;
 }

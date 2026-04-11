@@ -1,7 +1,7 @@
-import { Component, inject, input, OnInit } from '@angular/core';
-import { AdminService } from '../admin-service';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../adminServices/user-service';
 
 @Component({
   selector: 'app-edit-user-component',
@@ -13,7 +13,7 @@ export class EditUserComponent {
   editUser: FormGroup;
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private adminService = inject(AdminService);
+  private userService = inject(UserService);
   constructor(private fb: FormBuilder) {
     this.editUser = this.fb.group({
       ime: [''],
@@ -28,7 +28,7 @@ export class EditUserComponent {
     const userId = this.route.snapshot.paramMap.get('userId');
 
     if (userId) {
-      this.adminService.fetchUser(Number(userId)).subscribe({
+      this.userService.fetchUser(Number(userId)).subscribe({
         next: (userData) => {
           console.log(userData);
           this.editUser.patchValue({
@@ -56,7 +56,7 @@ export class EditUserComponent {
       const updatedData = this.editUser.value;
       const userId = this.route.snapshot.paramMap.get('userId');
 
-      this.adminService.updateUser({ ...updatedData, klient_ID: Number(userId) });
+      this.userService.updateUser({ ...updatedData, klient_ID: Number(userId) });
       console.log('Потребителят е успешно обновен!');
       this.router.navigate(['/admin/clients']);
     }

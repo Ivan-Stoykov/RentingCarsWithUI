@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.kolipodnaem.controllers;
 
+import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilViewDTO;
+import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemanePodNaemDTO;
 import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemanePodNaemPostDTO;
 import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemiView;
 import bg.tu_varna.sit.kolipodnaem.repositories.*;
@@ -19,8 +21,26 @@ public class ZaemiController {
 
 
     @GetMapping
-    public List<ZaemiView> findAll() {
-        return zaemiViewRepository.findAll();
+    public List<ZaemanePodNaemDTO> findAll() {
+        return zaemiViewRepository.findAll().stream().map(zaem -> new ZaemanePodNaemDTO(
+                zaem.getZaem_id(),
+                zaem.getKlient(),
+                zaem.getDatazaemane(),
+                zaem.getDatavrushtane(),
+                zaem.getBroidni(),
+                new AvtomobilViewDTO(
+                        zaem.getMarka_name(),
+                        zaem.getKolamodel(),
+                        zaem.getVid(),
+                        zaem.getGodina(),
+                        zaem.getCvqt(),
+                        zaem.getIme_extra(),
+                        zaem.getCena_za_den(),
+                        zaem.getIzminatikilometri(),
+                        zaem.getImg_url()
+                )
+        )).toList();
+
     }
 
     @GetMapping("/{id}")

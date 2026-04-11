@@ -1,0 +1,39 @@
+<div class="content-header">
+          <h2>Управление: <span>Потребители</span></h2>
+          
+          <!-- <div class="search-box">
+            <input type="text" placeholder="Име (Напр. Иван Иванов)">
+            <button type="button" class="btn-search" (click)="filter()">Търси</button>
+          </div> -->
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>ИМЕНА</th>
+                <th>КОЛА</th>
+                <th>ДАТА ЗАЕМАНЕ</th>
+                <th>ДАТА ВРЪЩАНЕ</th>
+                <th>БРОЙ ДНИ</th>
+                <th>ДЕЙСТВИЯ</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(rent of rents(); track rent.Id){
+              <tr>
+                <td>{{rent.Id}}</td>
+                <td>{{rent.klient}}</td>
+                <td>{{rent.car.marka_name + " " + rent.car.kolamodel + " (" + rent.car.godina + ")"}}</td>
+                <td>{{rent.dataZaemane | date:'longDate'}}</td>
+                <td>{{rent.dataVrushtane | date:'longDate'}}</td>
+                <td>{{rent.broiDni}}</td>
+                <td class="actions">
+                  <button class="btn-edit" [routerLink]="`/admin/rents/${rent.Id}`" >Редакция</button>
+                  <button class="btn-delete" (click)="deleteRent(rent.Id)">Изтрий</button>
+                </td>
+              </tr>}
+            </tbody>
+          </table>
+        </div>

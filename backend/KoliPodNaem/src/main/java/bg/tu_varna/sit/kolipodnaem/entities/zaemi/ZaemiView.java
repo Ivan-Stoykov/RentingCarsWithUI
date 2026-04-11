@@ -44,4 +44,8 @@ public class ZaemiView {
     private String klient;
     @Column(name = "slujitel")
     private String slujitel;
+    @Column(name = "izminatikilometri")
+    private int izminatikilometri;
+    @Column(name = "img_url")
+    private String img_url;
 }

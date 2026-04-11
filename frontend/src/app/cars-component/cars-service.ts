@@ -11,6 +11,8 @@ export interface Car {
   godina: number;
   cena_za_den: number;
   img_url: string;
+  ime_extra: string;
+  izminatikilometri: number;
 }
 
 export interface PostCar {
