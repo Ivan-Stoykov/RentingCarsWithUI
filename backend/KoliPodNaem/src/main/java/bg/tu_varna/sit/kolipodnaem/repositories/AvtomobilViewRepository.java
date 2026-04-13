@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface AvtomobilViewRepository extends JpaRepository<AvtomobilView, Integer> {
@@ -39,8 +39,7 @@ public interface AvtomobilViewRepository extends JpaRepository<AvtomobilView, In
 
     @Procedure(procedureName = "filteredAutomobiles")
     public List<AvtomobilView> filteredAutomobiles(
-            @Param("p_marka") String marka,
-            @Param("p_model") String model,
+            @Param("p_avtomobil") String avtomobil,
             @Param("p_vid") String vid,
             @Param("p_cvqt") String cvqt,
             @Param("p_cena") Double cena,
@@ -54,4 +53,11 @@ public interface AvtomobilViewRepository extends JpaRepository<AvtomobilView, In
 
     @Procedure(procedureName = "deleteCar")
     public void deleteCar(@Param("p_id") Integer id);
+
+    @Procedure(procedureName = "checkAvailability")
+    public boolean checkAvailability(
+            @Param("p_id") Integer id,
+            @Param("p_data_zaemane") LocalDate dataZaemane,
+            @Param("p_data_vrushtane") LocalDate dataVrushtane
+    );
 }

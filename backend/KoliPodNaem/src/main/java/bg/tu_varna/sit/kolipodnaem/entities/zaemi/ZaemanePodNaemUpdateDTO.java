@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class ZaemanePodNaemPostDTO {
-    private int klient_id;
+public class ZaemanePodNaemUpdateDTO {
+    private int Id;
     private int avtomobil_id;
-    private LocalDate zaemane;
-    private LocalDate vrushtane;
+    private int klient_ID;
+    private LocalDate dataZaemane;
+    private LocalDate dataVrushtane;
     private int broiDni;
 }

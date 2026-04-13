@@ -1,6 +1,5 @@
 package bg.tu_varna.sit.kolipodnaem.entities.zaemi;
 
-import bg.tu_varna.sit.kolipodnaem.entities.Slujiteli.Slujitel;
 import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.Avtomobil;
 import bg.tu_varna.sit.kolipodnaem.entities.Klienti.Klient;
 import jakarta.persistence.*;
@@ -36,10 +35,6 @@ public class ZaemanePodNaem {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "klient_id")
     private Klient klient;
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "slujitel_id")
-    private Slujitel slujitel;
 
 
 }

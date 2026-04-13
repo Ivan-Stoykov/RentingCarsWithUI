@@ -10,7 +10,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ZaemanePodNaemDTO {
     private int Id;
+    private int klient_ID;
     private String klient;
+    private String email;
     private LocalDateTime dataZaemane;
     private LocalDateTime dataVrushtane;
     private int broiDni;

@@ -1,11 +1,12 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Car, CarService } from '../cars-component/cars-service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink, CurrencyPipe],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })
@@ -27,7 +28,7 @@ export class HomePage implements OnInit {
 
   onFind(){
     console.log(this.form)
-    this.carService.getAllCars('', '', '', '', 0, 0, this.form.value.dataZaemane, this.form.value.dataVrushtane);
+    this.carService.getAllCars('', '', '', 0, 0, this.form.value.dataZaemane, this.form.value.dataVrushtane);
     this.router.navigate(["/", "cars"]);
   }
 }

@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { RentsService } from '../../../adminServices/rents-service';
 import { FormControl } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-rents-dashboard-component',
-  imports: [RouterLink, DatePipe],
+  imports: [RouterLink, DatePipe, CurrencyPipe],
   templateUrl: './rents-dashboard-component.html',
   styleUrl: './rents-dashboard-component.css',
 })

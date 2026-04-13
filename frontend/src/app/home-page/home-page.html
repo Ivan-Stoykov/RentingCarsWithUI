@@ -29,8 +29,8 @@
         </div>
         <div class="car-info">
           <h3>{{ car.marka_name }} {{ car.kolamodel }}</h3>
-          <p class="price"><span>{{ car.cena_za_den }} лв.</span> / ден</p>
-          <button class="btn-secondary">Резервирай</button>
+          <p class="price"><span>{{ car.cena_za_den | currency:'EUR' }}</span> / ден</p>
+          <button class="btn-secondary" [routerLink]="['/cars', car.avtomobil_id]">Виж повече</button>
         </div>
       </div>}
     </div>

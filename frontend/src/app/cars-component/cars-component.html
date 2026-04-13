@@ -94,9 +94,9 @@
               </ul>
               <div class="price-row">
                 <p class="price">
-                  <span>{{ car.cena_za_den }} лв.</span> / ден
+                  <span>{{ car.cena_za_den | currency:'EUR' }}</span> / ден
                 </p>
-                <button class="btn-book">Резервирай</button>
+                <button class="btn-book" [routerLink]="['/cars', car.avtomobil_id]">Виж повече</button>
               </div>
             </div>
           </div>

@@ -15,17 +15,6 @@ export interface Car {
   izminatikilometri: number;
 }
 
-export interface PostCar {
-  marka: string;
-  model: string;
-  vid: string;
-  img_url: string;
-  godina: number;
-  cvqt: string;
-  ekstri: string;
-  cenaZaDen: number;
-  izminatiKilometri: number;
-}
 
 export interface CarModel {
   model: string;
@@ -37,7 +26,7 @@ export interface CarModel {
 })
 export class CarService {
   constructor(private http: HttpClient) {
-    this.getAllCars('', '', '', '', 0, 0, '', '');
+    this.getAllCars('', '', '', 0, 0, '', '');
   }
 
   private cars = signal<Car[]>([]);
@@ -49,8 +38,7 @@ export class CarService {
   private dataVrushtane = signal<string>('');
 
   getAllCars(
-    marka: string,
-    model: string,
+    avtomobil: string,
     vid: string,
     cvqt: string,
     cena: number,
@@ -58,10 +46,9 @@ export class CarService {
     dataZaemane: string,
     dataVrushtane: string,
   ) {
-    console.log(model);
+    console.log(avtomobil);
     let url = 'http://localhost:8081/avtomobil?';
-    if (marka != '') url = url + '&marka=' + marka;
-    if (model != '') url = url + '&model=' + model;
+    if (avtomobil != '') url = url + '&avtomobil=' + avtomobil;
     if (vid != '') url = url + '&vid=' + vid;
     if (cvqt != '') url = url + '&cvqt=' + cvqt;
     if (cena > 0) url = url + '&cena=' + cena;
@@ -130,12 +117,17 @@ export class CarService {
     return this.http.get<Car[]>('http://localhost:8081/avtomobil/latest');
   }
 
-  addCar(car: PostCar) {
-    console.log(car);
-    this.http.post('http://localhost:8081/avtomobil', car).subscribe({
-      next: (resData) => {
-        console.log(resData);
-      },
-    });
+  fetchCar(id: number): Observable<Car> {
+        return this.http.get<Car>(`http://localhost:8081/avtomobil/${id}`);
+      }
+
+  checkAvailability(carId: number, start: string, end: string): Observable<boolean> {
+    // Връща true (свободен) или false (зает)
+    return this.http.get<boolean>(`http://localhost:8081/avtomobil/${carId}/availability?start=${start}&end=${end}`);
+  }
+
+  rentCar(avtomobil_id: number, klient_id: number, zaemane: string, vrushtane: string, broiDni: number): Observable<any> {
+    // Праща заявка за наемане
+    return this.http.post(`http://localhost:8081/zaemi`, { avtomobil_id, klient_id, zaemane, vrushtane, broiDni });
   }
 }

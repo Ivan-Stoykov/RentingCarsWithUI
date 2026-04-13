@@ -17,7 +17,7 @@ export class UserService {
   getAllUsers(ime: string) {
     console.log(ime);
     let url = 'http://localhost:8081/klient?';
-    if (ime != '') url = url + '&model=' + ime;
+    if (ime != '') url = url + '&name=' + ime;
     console.log(url);
 
     this.http.get<User[]>(url).subscribe({

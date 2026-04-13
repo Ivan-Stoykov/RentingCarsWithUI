@@ -2,6 +2,7 @@ package bg.tu_varna.sit.kolipodnaem.controllers;
 
 import bg.tu_varna.sit.kolipodnaem.entities.Gradove.Gradove;
 import bg.tu_varna.sit.kolipodnaem.entities.Klienti.*;
+import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemiView;
 import bg.tu_varna.sit.kolipodnaem.repositories.GradoveRepository;
 import bg.tu_varna.sit.kolipodnaem.repositories.KlientRepository;
 import jakarta.transaction.Transactional;
@@ -23,8 +24,12 @@ public class KlientController {
 
     @Transactional
     @GetMapping
-    public List<KlientView> getKlients(@RequestParam(required = false) String name){
-        return klientRepository.getClients(name);
+    public List<KlientDTO> getKlients(@RequestParam(required = false) String name){
+        return klientRepository.getClients(name).stream().map(
+                klient -> new KlientDTO(
+                        klient.getKlient_ID(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad(), klient.getDurjava()), klient.getRolq()
+                )
+        ).toList();
     }
 
     @Transactional
@@ -69,7 +74,7 @@ public class KlientController {
     @Transactional
     @PutMapping("/{id}")
     public ResponseEntity updateKlientById(@PathVariable int id, @RequestBody KlientDTO klientDTO){
-        klientRepository.updateClient(id, klientDTO.getIme(), klientDTO.getEmail(), klientDTO.getTelefon(), klientDTO.getAddress().getStreet(), klientDTO.getAddress().getCity(), klientDTO.getAddress().getCountry());
+        klientRepository.updateClient(id, klientDTO.getIme(), klientDTO.getEmail(), klientDTO.getTelefon(), klientDTO.getAddress().getStreet(), klientDTO.getAddress().getCity(), klientDTO.getAddress().getCountry(), klientDTO.getRolq());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

@@ -1,0 +1,79 @@
+@if (car()){
+<div class="car-details-page">
+  <div class="container">
+    <div class="main-grid">
+      
+      <div class="car-info-section">
+        <div class="image-wrapper">
+          <img [src]="car()!.img_url" [alt]="car()!.marka_name + ' ' + car()!.kolamodel">
+        </div>
+
+        <div class="details-card">
+          <h1>{{ car()!.marka_name }} {{ car()!.kolamodel }} <span class="year">({{ car()!.godina }})</span></h1>
+          <p class="car-type">{{ car()!.vid }}</p>
+
+          <div class="specs-grid">
+            <div class="spec-item">
+              <span class="label">Цвят</span>
+              <span class="value">{{ car()!.cvqt }}</span>
+            </div>
+            <div class="spec-item">
+              <span class="label">Пробег</span>
+              <span class="value">{{ car()!.izminatikilometri }} км</span>
+            </div>
+            <div class="spec-item">
+              <span class="label">Цена на ден</span>
+              <span class="value highlight">{{ car()!.cena_za_den | currency:'EUR' }}</span>
+            </div>
+          </div>
+
+          <div class="extras">
+            <h3>Екстри и оборудване</h3>
+            <p>{{ car()!.ime_extra }}</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="rental-sidebar">
+        <div class="rental-card">
+          <h2>Наеми този автомобил</h2>
+          <form [formGroup]="rentalForm" (ngSubmit)="onRent()">
+            
+            <div class="form-group">
+              <label>Дата на заемане</label>
+              <input type="date" formControlName="startDate">
+            </div>
+
+            <div class="form-group">
+              <label>Дата на връщане</label>
+              <input type="date" formControlName="endDate">
+            </div>
+
+            <div class="price-summary">
+              <div class="price-row">
+                <span>Дневна тарифа</span>
+                <span>{{ car()!.cena_za_den | currency:'EUR' }}</span>
+              </div>
+              <div class="divider"></div>
+              <div class="price-row">
+                <span>Обща сума</span>
+                <span>{{ totalPrice() | currency:'EUR' }}</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-rent" [disabled]="!isAvailable() || user().klient_ID == 0">
+              Наеми
+            </button>
+            @if (user().klient_ID == 0) {
+                <p class="warning">Моля, влезте в профила си, за да наемете този автомобил.</p>
+            }
+            @if (message().type === 'success') {
+                <p [class]="message().type == 'success' ? 'success' : 'warning'">{{ message().text }}</p>
+            }
+          </form>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</div>}

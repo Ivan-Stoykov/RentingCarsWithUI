@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -21,15 +23,14 @@ public class AvtomobilController {
     @GetMapping
     @Transactional
     public List<AvtomobilView> findAll(
-            @RequestParam(required = false) String marka,
-            @RequestParam(required = false) String model,
+            @RequestParam(required = false) String avtomobil,
             @RequestParam(required = false) String vid,
             @RequestParam(required = false) String cvqt,
             @RequestParam(required = false) Double cena,
             @RequestParam(required = false) Integer godina,
             @RequestParam(required = false) String dataZaemane,
             @RequestParam(required = false) String dataVrushtane) {
-        return avtomobilRepository.filteredAutomobiles(marka, model, vid, cvqt, cena, godina, dataZaemane, dataVrushtane);
+        return avtomobilRepository.filteredAutomobiles(avtomobil, vid, cvqt, cena, godina, dataZaemane, dataVrushtane);
     }
     @Transactional
     @GetMapping("/{id}")
@@ -38,6 +39,13 @@ public class AvtomobilController {
 
         return ResponseEntity.ok(avtomobil);
     }
+
+    @Transactional
+    @GetMapping("/{id}/availability")
+    public boolean availability(@PathVariable int id, @RequestParam LocalDate start, @RequestParam LocalDate end) {
+        return avtomobilRepository.checkAvailability(id, start, end);
+    }
+
     @Transactional
     @GetMapping("/latest")
     public List<AvtomobilView> findLatest() {

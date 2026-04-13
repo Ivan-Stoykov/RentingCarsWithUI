@@ -1,7 +1,5 @@
 package bg.tu_varna.sit.kolipodnaem.repositories;
 
-import bg.tu_varna.sit.kolipodnaem.entities.Klienti.Klient;
-import bg.tu_varna.sit.kolipodnaem.entities.Klienti.KlientDTO;
 import bg.tu_varna.sit.kolipodnaem.entities.Klienti.KlientView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -37,7 +35,8 @@ public interface KlientRepository extends JpaRepository<KlientView, Integer> {
             @Param("p_telefon") String telefon,
             @Param("p_ulica") String ulica,
             @Param("p_grad") String grad,
-            @Param("p_durjava") String durjava
+            @Param("p_durjava") String durjava,
+            @Param("p_rolq") String rolq
     );
 
     @Procedure(procedureName = "fetchClient")

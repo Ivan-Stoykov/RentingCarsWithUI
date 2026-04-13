@@ -6,7 +6,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.Immutable;
-import org.springframework.data.jpa.repository.query.Procedure;
 
 import java.time.LocalDateTime;
 
@@ -42,10 +41,14 @@ public class ZaemiView {
     private LocalDateTime datavrushtane;
     @Column(name = "klient")
     private String klient;
-    @Column(name = "slujitel")
-    private String slujitel;
     @Column(name = "izminatikilometri")
     private int izminatikilometri;
     @Column(name = "img_url")
     private String img_url;
+    @Column(name = "klient_ID")
+    private int klient_ID;
+    @Column(name = "avtomobil_id")
+    private int avtomobil_id;
+    @Column(name = "email")
+    private String email;
 }

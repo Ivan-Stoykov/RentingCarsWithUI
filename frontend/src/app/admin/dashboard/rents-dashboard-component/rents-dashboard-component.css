@@ -18,8 +18,8 @@
 
   .search-box {
     display: flex;
-    
-    input[type="text"] {
+
+    input[type='text'] {
       padding: 10px 15px;
       border: 1px solid #ddd;
       border-radius: 6px 0 0 6px;
@@ -56,9 +56,10 @@
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
+  text-align: center;
 
-  th, td {
+  th,
+  td {
     padding: 15px 10px;
     border-bottom: 1px solid #f0f0f0;
   }
@@ -80,8 +81,10 @@
   .actions {
     display: flex;
     gap: 10px;
+    justify-content: center;
 
     button {
+      margin: 9px 0;
       padding: 6px 15px;
       border-radius: 20px;
       font-size: 0.85rem;
@@ -106,4 +109,3 @@
     }
   }
 }
-

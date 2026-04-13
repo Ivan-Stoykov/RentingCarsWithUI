@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 export interface User {
   klient_ID: number;
@@ -83,5 +84,10 @@ export class UserService {
     localStorage.removeItem('User');
     this.user.set(this.startUser);
     this.router.navigate(['/', 'login']);
+  }
+
+  public fetchRents(klient_ID: number) : Observable<any>
+  {
+    return this.http.get(`http://localhost:8081/zaemi/${klient_ID}/rents`);
   }
 }

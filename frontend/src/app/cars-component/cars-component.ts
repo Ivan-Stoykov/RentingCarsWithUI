@@ -2,11 +2,12 @@ import { Component, inject, OnInit, Signal, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CarService } from './cars-service';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-cars',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './cars-component.html',
   styleUrls: ['./cars-component.css'],
 })
@@ -63,8 +64,7 @@ export class CarsComponent implements OnInit {
   onFind(): void {
     const filters = this.filterForm.getRawValue();
     this.carService.getAllCars(
-      filters.marka_name,
-      filters.kolamodel,
+      filters.marka_name + ' ' + filters.kolamodel,
       filters.vid,
       filters.cvqt,
       filters.cena_za_den,

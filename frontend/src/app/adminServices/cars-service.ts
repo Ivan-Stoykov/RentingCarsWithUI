@@ -3,6 +3,19 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Car } from '../cars-component/cars-service';
 import { Observable } from 'rxjs';
 
+
+export interface PostCar {
+  marka: string;
+  model: string;
+  vid: string;
+  img_url: string;
+  godina: number;
+  cvqt: string;
+  ekstri: string;
+  cenaZaDen: number;
+  izminatiKilometri: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,10 +27,10 @@ export class CarsService {
   private http = inject(HttpClient);
   private cars = signal<Car[]>([]);
 
-  getAllCars(model: string) {
-      console.log(model);
+  getAllCars(avtomobil: string) {
+      console.log(avtomobil);
       let url = 'http://localhost:8081/avtomobil?';
-      if (model != '') url = url + '&model=' + model;
+      if (avtomobil != '') url = url + '&avtomobil=' + avtomobil;
       console.log(url);
   
       this.http.get<Car[]>(url).subscribe({
@@ -30,6 +43,15 @@ export class CarsService {
     get getCars() {
       return this.cars.asReadonly();
     }
+
+      addCar(car: PostCar) {
+    console.log(car);
+    this.http.post('http://localhost:8081/avtomobil', car).subscribe({
+      next: (resData) => {
+        console.log(resData);
+      },
+    });
+  }
   
     deleteCar(id: number) {
       this.http.delete(`http://localhost:8081/avtomobil/${id}`).subscribe({

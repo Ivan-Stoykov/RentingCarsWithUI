@@ -5,11 +5,13 @@ import { Car } from '../cars-component/cars-service';
 
 export interface Rent {
   Id: number;
+  klient_ID: number;
   klient: string;
+  email: string;
   dataZaemane: string;
   broiDni: number;
   dataVrushtane: string;
-  car:Car;
+  car: Car;
 }
 
 @Injectable({
@@ -24,42 +26,50 @@ export class RentsService {
   private rents = signal<Rent[]>([]);
 
   getAllRents() {
-      let url = 'http://localhost:8081/zaemi';
-      console.log(url);
-  
-      this.http.get<Rent[]>(url).subscribe({
-        next: (rents) => {
-          this.rents.set(rents);
-          console.log(rents);
-        },
-      });
-    }
-  
-    get getRents() {
-      return this.rents.asReadonly();
-    }
-  
-    deleteRent(id: number) {
-      this.http.delete(`http://localhost:8081/zaemi/${id}`).subscribe({
+    let url = 'http://localhost:8081/zaemi';
+    console.log(url);
+
+    this.http.get<Rent[]>(url).subscribe({
+      next: (rents) => {
+        this.rents.set(rents);
+        console.log(rents);
+      },
+    });
+  }
+
+  get getRents() {
+    return this.rents.asReadonly();
+  }
+
+  deleteRent(id: number) {
+    this.http.delete(`http://localhost:8081/zaemi/${id}`).subscribe({
+      next: (resData) => {
+        console.log(resData);
+        this.getAllRents();
+      },
+    });
+  }
+
+  fetchRent(id: number): Observable<Rent> {
+    return this.http.get<Rent>(`http://localhost:8081/zaemi/${id}`);
+  }
+
+  updateRent(rentData: {
+    Id: number;
+    avtomobil_id: number;
+    klient_ID: number;
+    dataZaemane: string;
+    dataVrushtane: string;
+    broiDni: number;
+  }) {
+    {
+      console.log('Изпращане на данни за обновяване:', rentData);
+      this.http.put(`http://localhost:8081/zaemi/${rentData.Id}`, rentData).subscribe({
         next: (resData) => {
           console.log(resData);
           this.getAllRents();
         },
       });
     }
-
-    fetchRent(id: number): Observable<Rent> {
-        return this.http.get<Rent>(`http://localhost:8081/zaemi/${id}`);
-      }
-    
-      updateRent(rentData: Rent)
-      {
-        this.http.put(`http://localhost:8081/zaemi/${rentData.Id}`, rentData).subscribe({
-          next: (resData) => {
-            console.log(resData);
-            this.getAllRents();
-          }
-        });
-    
-      }
+  }
 }

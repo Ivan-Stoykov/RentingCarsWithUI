@@ -15,6 +15,7 @@
                 <th>ИМЕНА</th>
                 <th>ИМЕЙЛ</th>
                 <th>ТЕЛЕФОН</th>
+                <th>МЕСТОЖИВЕЕНЕ</th>
                 <th>РОЛЯ</th>
                 <th>ДЕЙСТВИЯ</th>
               </tr>
@@ -26,6 +27,7 @@
                 <td>{{user.ime}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.telefon}}</td>
+                <td>{{user.address.city + ", " + user.address.country}}</td>
                 <td>{{user.rolq == "admin" ? "Администратор" : "Потребител"}}</td>
                 <td class="actions">
                   <button class="btn-edit" [routerLink]="`/admin/clients/${user.klient_ID}`" >Редакция</button>

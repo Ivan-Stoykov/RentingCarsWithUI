@@ -18,8 +18,8 @@
 
   .search-box {
     display: flex;
-    
-    input[type="text"] {
+
+    input[type='text'] {
       padding: 10px 15px;
       border: 1px solid #ddd;
       border-radius: 6px 0 0 6px;
@@ -49,7 +49,6 @@
   }
 }
 
-/* --- ТАБЛИЦА --- */
 .table-responsive {
   overflow-x: auto;
 }
@@ -57,9 +56,10 @@
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
+  text-align: center;
 
-  th, td {
+  th,
+  td {
     padding: 15px 10px;
     border-bottom: 1px solid #f0f0f0;
   }
@@ -81,6 +81,7 @@
   .actions {
     display: flex;
     gap: 10px;
+    justify-content: center;
 
     button {
       padding: 6px 15px;
@@ -115,8 +116,16 @@
   font-size: 0.8rem;
   font-weight: bold;
 
-  &.available { background-color: #e6f4ea; color: #1e8e3e; }
-  &.rented { background-color: #fce8e6; color: #d93025; }
-  &.maintenance { background-color: #fef7e0; color: #f9ab00; }
+  &.available {
+    background-color: #e6f4ea;
+    color: #1e8e3e;
+  }
+  &.rented {
+    background-color: #fce8e6;
+    color: #d93025;
+  }
+  &.maintenance {
+    background-color: #fef7e0;
+    color: #f9ab00;
+  }
 }
-

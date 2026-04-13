@@ -1,0 +1,68 @@
+<div class="profile-page">
+  <div class="container">
+    <div class="profile-grid">
+      <aside class="user-card">
+        <div class="avatar-section">
+          <div class="avatar-circle">{{ user()!.ime[0] }}</div>
+          <h2>{{ user()?.ime }}</h2>
+          <span class="role-badge">{{ user()?.rolq }}</span>
+        </div>
+
+        <div class="user-details">
+          <div class="detail-item">
+            <label>Имейл</label>
+            <p>{{ user()?.email }}</p>
+          </div>
+          <div class="detail-item">
+            <label>Телефон</label>
+            <p>{{ user()?.telefon }}</p>
+          </div>
+          <div class="detail-item">
+            <label>Адрес</label>
+            <p>
+              {{
+                user()?.address?.street +
+                  ', ' +
+                  user()?.address?.city +
+                  ', ' +
+                  user()?.address?.country
+              }}
+            </p>
+          </div>
+        </div>
+
+      </aside>
+
+      <main class="history-card">
+        <div class="card-header">
+          <h2>История на наемите</h2>
+        </div>
+
+        <div class="rental-list">
+          @if (rentals().length > 0) {
+            @for (rental of rentals(); track rental.Id) {
+              <div class="rental-item">
+                <div class="rental-info">
+                  <h3>{{ rental.car.marka_name + ' ' + rental.car.kolamodel + ' ' + rental.car.godina }}</h3>
+                  <p class="dates">📅 {{ rental.dataZaemane | date : 'longDate'}} — {{ rental.dataVrushtane | date : 'longDate' }}</p>
+                </div>
+
+                <div class="rental-meta">
+                  <span class="price">{{
+                    rental.broiDni * rental.car.cena_za_den | currency: 'EUR'
+                  }}</span>
+                  <span class="days">брой дни: {{ rental.broiDni }}</span>
+                </div>
+              </div>
+            }
+
+          } @else {
+            <div class="no-data">
+              <p>Все още нямате записани наеми.</p>
+            </div>
+          }
+        </div>
+      </main>
+    </div>
+  </div>
+</div>

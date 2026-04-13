@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CarsService } from '../../../adminServices/cars-service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cars-dashboard-component',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, CurrencyPipe],
   templateUrl: './cars-dashboard-component.html',
   styleUrl: './cars-dashboard-component.css',
 })

@@ -1,0 +1,67 @@
+<div class="edit-rental-wrapper">
+  <div class="card">
+    <h2>Редактиране на наем</h2>
+
+    <form [formGroup]="editRentalForm" class="edit-rent-form" (ngSubmit)="onSubmit()">
+      <div class="form-group dropdown-container full-width">
+        <label>Клиент (Търсене по имейл)</label>
+        <input
+          type="text"
+          formControlName="clientSearch"
+          placeholder="Въведете имейл..."
+          autocomplete="off"
+          (focus)="isClientDropdownOpen.set(true)"
+          (blur)="hideClientDropdown()"
+        />
+
+        @if (isClientDropdownOpen() && filteredClients().length > 0) {
+          <ul class="dropdown-results">
+            @for (client of filteredClients(); track client.klient_ID) {
+              <li (mousedown)="selectClient(client)">
+                <strong>{{ client.ime }}</strong> - {{ client.email }}
+              </li>
+            }
+          </ul>
+        }
+      </div>
+
+      <div class="form-group dropdown-container full-width">
+        <label>Автомобил (Търсене по модел)</label>
+        <input
+          type="text"
+          formControlName="carSearch"
+          placeholder="Марка или модел..."
+          autocomplete="off"
+          (focus)="isCarDropdownOpen.set(true)"
+          (blur)="hideCarDropdown()"
+        />
+
+        @if (isCarDropdownOpen() && filteredCars().length > 0) {
+          <ul class="dropdown-results">
+            @for (car of filteredCars(); track car.avtomobil_id) {
+              <li (mousedown)="selectCar(car)">
+                {{ car.marka_name }} {{ car.kolamodel }} ({{ car.godina }})
+              </li>
+            }
+          </ul>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Дата на заемане</label>
+        <input type="date" formControlName="dataZaemane" />
+      </div>
+
+      <div class="form-group">
+        <label>Дата на връщане</label>
+        <input type="date" formControlName="dataVrushtane" />
+      </div>
+
+      <div class="submit-btn-wrapper actions-wrapper">
+        <button type="submit" class="btn-submit" [disabled]="editRentalForm.invalid">
+          Запази промените
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

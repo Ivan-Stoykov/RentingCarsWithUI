@@ -17,7 +17,7 @@
       @if(user().rolq === "admin"){
         <a routerLink="/admin" class="btn login-btn">Dashboard</a>
       }
-      <a [routerLink]="`/user/${user().klient_ID}`" class="btn login-btn">{{user().ime + " - " + user().email}}</a>
+      <a [routerLink]="`/user`" class="btn login-btn">{{user().ime + " - " + user().email}}</a>
       <a class="btn register-btn"><button (click)="LogOut()">Logout</button></a>
     } @else {
       <a routerLink="/login" class="btn login-btn">Log In</a>

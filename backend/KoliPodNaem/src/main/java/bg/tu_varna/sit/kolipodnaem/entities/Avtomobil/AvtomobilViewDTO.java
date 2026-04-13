@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class AvtomobilViewDTO {
+    private int avtomobil_id;
     private String marka_name;
     private String kolamodel;
     private String vid;

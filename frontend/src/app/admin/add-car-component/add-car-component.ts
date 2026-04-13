@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CarService, PostCar } from '../../cars-component/cars-service';
+import { CarsService } from '../../adminServices/cars-service';
 
 @Component({
   selector: 'app-add-car-component',
@@ -9,7 +9,7 @@ import { CarService, PostCar } from '../../cars-component/cars-service';
   styleUrl: './add-car-component.css',
 })
 export class AddCarComponent {
-  private carService = inject(CarService);
+  private carService = inject(CarsService);
   addCar: FormGroup;
   constructor(private fb: FormBuilder) {
     this.addCar = this.fb.group({

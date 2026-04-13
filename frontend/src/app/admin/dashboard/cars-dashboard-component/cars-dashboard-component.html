@@ -1,39 +1,43 @@
 <div class="content-header">
-          <h2>Управление: <span>Автомобили</span></h2>
-          
-          <div class="search-box">
-            <input type="text" placeholder="Модел (Напр. Golf)" [formControl]="marka">
-            <button type="button" class="btn-search" (click)="filter()">Търси</button>
-          </div>
-          
-            <a routerLink="/admin/cars/add">Нов</a>
-        </div>
+  <h2>Управление: <span>Автомобили</span></h2>
 
-        <div class="table-responsive">
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>АВТОМОБИЛ</th>
-                <th>ТИП</th>
-                <th>ЦВЯТ</th>
-                <th>ЦЕНА ЗА ДЕН</th>
-                <th>ДЕЙСТВИЯ</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for(car of cars(); track car.avtomobil_id){
-              <tr>
-                <td>{{car.avtomobil_id}}</td>
-                <td>{{car.marka_name +" "+ car.kolamodel +" (" + car.godina + ")"}}</td>
-                <td>{{car.vid}}</td>
-                <td>{{car.cvqt}}</td>
-                <td>{{car.cena_za_den}}</td>
-                <td class="actions">
-                  <button class="btn-edit" [routerLink]="`/admin/cars/${car.avtomobil_id}`">Редакция</button>
-                  <button class="btn-delete" (click)="deleteCar(car.avtomobil_id)">Изтрий</button>
-                </td>
-              </tr>}
-            </tbody>
-          </table>
-        </div>
+  <div class="header-actions">
+    <button class="btn-primary-add" routerLink="add">+ Добави нов</button>
+    <div class="search-box">
+      <input type="text" placeholder="Модел (Напр. Golf)" [formControl]="marka" />
+      <button type="button" class="btn-search" (click)="filter()">Търси</button>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>АВТОМОБИЛ</th>
+        <th>ТИП</th>
+        <th>ЦВЯТ</th>
+        <th>ЦЕНА ЗА ДЕН</th>
+        <th>ДЕЙСТВИЯ</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (car of cars(); track car.avtomobil_id) {
+        <tr>
+          <td>{{ car.avtomobil_id }}</td>
+          <td>{{ car.marka_name + ' ' + car.kolamodel + ' (' + car.godina + ')' }}</td>
+          <td>{{ car.vid }}</td>
+          <td>{{ car.cvqt }}</td>
+          <td>{{ car.cena_za_den | currency:'EUR' }}</td>
+          <td class="actions">
+            <button class="btn-edit" [routerLink]="`/admin/cars/${car.avtomobil_id}`">
+              Редакция
+            </button>
+            <button class="btn-delete" (click)="deleteCar(car.avtomobil_id)">Изтрий</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

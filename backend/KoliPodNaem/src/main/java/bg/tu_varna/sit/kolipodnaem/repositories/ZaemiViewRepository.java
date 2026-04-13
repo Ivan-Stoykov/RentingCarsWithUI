@@ -5,26 +5,36 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.List;
 
 public interface ZaemiViewRepository extends JpaRepository<ZaemiView, Integer> {
-    @Procedure(procedureName = "ZAEMANE_INS")
-    public void ZAEMANE_INS(@Param("V_ID") Integer id,
-                           @Param("V_Klient") int klientId,
-                           @Param("V_Avtomobil") int avtomobilId,
-                           @Param("V_Slujitel") int slujitelId,
-                           @Param("V_dataZaemane") LocalDateTime zaemane,
-                           @Param("V_BroiDni") int broiDni,
-                           @Param("V_dataVrushtane") LocalDateTime vrushtane);
+    @Procedure(procedureName = "newZaem")
+    public void newZaem(
+            @Param("p_avtomobil_id") int avtomobilId,
+            @Param("p_klient_id") int klientId,
+            @Param("p_zaemane") LocalDate zaemane,
+            @Param("p_vrushtane") LocalDate vrushtane,
+            @Param("p_broiDni") int broiDni
+    );
 
-    @Procedure(procedureName = "ZAEMANEPODNAEM_UPD")
-    public void ZAEMANEPODNAEM_UPD(@Param("V_ID") Integer id,
-                            @Param("V_Klient") int klientId,
-                            @Param("V_Avtomobil") int avtomobilId,
-                            @Param("V_Slujitel") int slujitelId,
-                            @Param("V_dataZaemane") LocalDateTime zaemane,
-                            @Param("V_BroiDni") int broiDni,
-                            @Param("V_dataVrushtane") LocalDateTime vrushtane);
-    @Procedure(procedureName = "ZAEMANEPODNAEM_DEL")
-    public void ZAEMANEPODNAEM_DEL(@Param("V_ID") Integer id);
+    @Procedure(procedureName = "updateZaem")
+    public void updateZaem(
+            @Param("p_id") int p_id,
+            @Param("p_avtomobil_id") int avtomobilId,
+            @Param("p_klient_id") int klientId,
+            @Param("p_zaemane") LocalDate zaemane,
+            @Param("p_vrushtane") LocalDate vrushtane,
+            @Param("p_broiDni") int broiDni
+    );
+
+    @Procedure(procedureName = "fetchRent")
+    public ZaemiView fetchRent(@Param("p_id") Integer id);
+
+
+    @Procedure(procedureName = "clientRents")
+    public List<ZaemiView> clientRents(@Param("p_id") Integer id);
+
+    @Procedure(procedureName = "deleteRent")
+    public void deleteRent(@Param("p_id") Integer id);
 }

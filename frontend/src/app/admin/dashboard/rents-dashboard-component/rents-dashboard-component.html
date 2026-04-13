@@ -1,10 +1,5 @@
 <div class="content-header">
           <h2>Управление: <span>Потребители</span></h2>
-          
-          <!-- <div class="search-box">
-            <input type="text" placeholder="Име (Напр. Иван Иванов)">
-            <button type="button" class="btn-search" (click)="filter()">Търси</button>
-          </div> -->
         </div>
 
         <div class="table-responsive">
@@ -17,6 +12,7 @@
                 <th>ДАТА ЗАЕМАНЕ</th>
                 <th>ДАТА ВРЪЩАНЕ</th>
                 <th>БРОЙ ДНИ</th>
+                <th>ОБЩА СТОЙНОСТ</th>
                 <th>ДЕЙСТВИЯ</th>
               </tr>
             </thead>
@@ -29,6 +25,7 @@
                 <td>{{rent.dataZaemane | date:'longDate'}}</td>
                 <td>{{rent.dataVrushtane | date:'longDate'}}</td>
                 <td>{{rent.broiDni}}</td>
+                <td>{{rent.broiDni * rent.car.cena_za_den | currency:'EUR'}}</td>
                 <td class="actions">
                   <button class="btn-edit" [routerLink]="`/admin/rents/${rent.Id}`" >Редакция</button>
                   <button class="btn-delete" (click)="deleteRent(rent.Id)">Изтрий</button>

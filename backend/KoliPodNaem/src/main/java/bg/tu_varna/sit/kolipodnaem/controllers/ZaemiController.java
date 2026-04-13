@@ -3,6 +3,7 @@ package bg.tu_varna.sit.kolipodnaem.controllers;
 import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilViewDTO;
 import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemanePodNaemDTO;
 import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemanePodNaemPostDTO;
+import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemanePodNaemUpdateDTO;
 import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemiView;
 import bg.tu_varna.sit.kolipodnaem.repositories.*;
 import jakarta.transaction.Transactional;
@@ -24,11 +25,14 @@ public class ZaemiController {
     public List<ZaemanePodNaemDTO> findAll() {
         return zaemiViewRepository.findAll().stream().map(zaem -> new ZaemanePodNaemDTO(
                 zaem.getZaem_id(),
+                zaem.getKlient_ID(),
                 zaem.getKlient(),
+                zaem.getEmail(),
                 zaem.getDatazaemane(),
                 zaem.getDatavrushtane(),
                 zaem.getBroidni(),
                 new AvtomobilViewDTO(
+                        zaem.getAvtomobil_id(),
                         zaem.getMarka_name(),
                         zaem.getKolamodel(),
                         zaem.getVid(),
@@ -43,26 +47,75 @@ public class ZaemiController {
 
     }
 
+    @Transactional
     @GetMapping("/{id}")
-    public ResponseEntity<ZaemiView> getById(@PathVariable int id) {
-        ZaemiView zaem = zaemiViewRepository.findById(id).orElse(null);
+    public ResponseEntity<ZaemanePodNaemDTO> getById(@PathVariable int id) {
+        ZaemiView zaem = zaemiViewRepository.fetchRent(id);
 
-        return ResponseEntity.ok(zaem);
+        return ResponseEntity.ok(new ZaemanePodNaemDTO(
+                zaem.getZaem_id(),
+                zaem.getKlient_ID(),
+                zaem.getKlient(),
+                zaem.getEmail(),
+                zaem.getDatazaemane(),
+                zaem.getDatavrushtane(),
+                zaem.getBroidni(),
+                new AvtomobilViewDTO(
+                        zaem.getAvtomobil_id(),
+                        zaem.getMarka_name(),
+                        zaem.getKolamodel(),
+                        zaem.getVid(),
+                        zaem.getGodina(),
+                        zaem.getCvqt(),
+                        zaem.getIme_extra(),
+                        zaem.getCena_za_den(),
+                        zaem.getIzminatikilometri(),
+                        zaem.getImg_url()
+                )
+        ));
+    }
+
+    @Transactional
+    @GetMapping("/{id}/rents")
+    public List<ZaemanePodNaemDTO> getClientRents(@PathVariable int id){
+        return zaemiViewRepository.clientRents(id).stream().map(zaem -> new ZaemanePodNaemDTO(
+                zaem.getZaem_id(),
+                zaem.getKlient_ID(),
+                zaem.getKlient(),
+                zaem.getEmail(),
+                zaem.getDatazaemane(),
+                zaem.getDatavrushtane(),
+                zaem.getBroidni(),
+                new AvtomobilViewDTO(
+                        zaem.getAvtomobil_id(),
+                        zaem.getMarka_name(),
+                        zaem.getKolamodel(),
+                        zaem.getVid(),
+                        zaem.getGodina(),
+                        zaem.getCvqt(),
+                        zaem.getIme_extra(),
+                        zaem.getCena_za_den(),
+                        zaem.getIzminatikilometri(),
+                        zaem.getImg_url()
+                )
+        )).toList();
     }
 
     @Transactional
     @PostMapping
     public void PostZaem(@RequestBody ZaemanePodNaemPostDTO zaemDTO) {
-        zaemiViewRepository.ZAEMANE_INS(null, zaemDTO.getKlient_id(), zaemDTO.getAvtomobil_id(), zaemDTO.getSlujitel_id(), zaemDTO.getZaemane(), zaemDTO.getBroiDni(), zaemDTO.getVrushtane());
+        zaemiViewRepository.newZaem(zaemDTO.getAvtomobil_id(), zaemDTO.getKlient_id(),  zaemDTO.getZaemane(), zaemDTO.getVrushtane(), zaemDTO.getBroiDni());
     }
 
-    @PatchMapping("/{id}")
-    public void UpdateZaem(@PathVariable int id, @RequestBody ZaemanePodNaemPostDTO zaemDTO) {
-        zaemiViewRepository.ZAEMANEPODNAEM_UPD(id, zaemDTO.getKlient_id(), zaemDTO.getAvtomobil_id(), zaemDTO.getSlujitel_id(), zaemDTO.getZaemane(), zaemDTO.getBroiDni(), zaemDTO.getVrushtane());
+    @Transactional
+    @PutMapping("/{id}")
+    public void UpdateZaem(@PathVariable int id, @RequestBody ZaemanePodNaemUpdateDTO zaemDTO) {
+        zaemiViewRepository.updateZaem(zaemDTO.getId(), zaemDTO.getAvtomobil_id(), zaemDTO.getKlient_ID(),  zaemDTO.getDataZaemane(), zaemDTO.getDataVrushtane(), zaemDTO.getBroiDni());
     }
 
+    @Transactional
     @DeleteMapping("/{id}")
     public void DeleteZaem(@PathVariable int id) {
-        zaemiViewRepository.ZAEMANEPODNAEM_DEL(id);
+        zaemiViewRepository.deleteRent(id);
     }
 }

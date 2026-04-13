@@ -19,7 +19,10 @@
 
     <div class="form-group">
       <label>Роля</label>
-      <input type="text" formControlName="rolq" />
+      <select formControlName="rolq">
+        <option value="user">Потребител</option>
+        <option value="admin">Администратор</option>
+      </select>
     </div>
     <div class="address full-width" formGroupName="address">
       <div class="form-group full-width">
