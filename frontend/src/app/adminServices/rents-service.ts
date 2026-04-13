@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Car } from '../cars-component/cars-service';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 export interface Rent {
   Id: number;
