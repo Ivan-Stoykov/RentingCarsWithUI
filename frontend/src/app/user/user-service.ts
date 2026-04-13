@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 export interface User {
   klient_ID: number;
@@ -51,7 +52,7 @@ export class UserService {
   private user = signal<User>(this.startUser);
 
   public loginUser(email: string, password: string) {
-    this.http.post<User>('http://localhost:8081/klient/login', { email, password }).subscribe({
+    this.http.post<User>(`http://${environment.apiUrl}/klient/login`, { email, password }).subscribe({
       next: (resData) => {
         console.log(resData);
         localStorage.setItem('User', JSON.stringify(resData));
@@ -63,7 +64,7 @@ export class UserService {
   }
 
   public registerUser(user: registerUser) {
-    this.http.post<User>('http://localhost:8081/klient/register', { user }).subscribe({
+    this.http.post<User>(`http://${environment.apiUrl}/klient/register`, { user }).subscribe({
       next: (resData) => {
         console.log(resData);
         localStorage.setItem('User', JSON.stringify(resData));
@@ -88,6 +89,6 @@ export class UserService {
 
   public fetchRents(klient_ID: number) : Observable<any>
   {
-    return this.http.get(`http://localhost:8081/zaemi/${klient_ID}/rents`);
+    return this.http.get(`http://${environment.apiUrl}/zaemi/${klient_ID}/rents`);
   }
 }

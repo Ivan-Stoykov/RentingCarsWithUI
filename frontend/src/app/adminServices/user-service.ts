@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { User } from '../user/user-service';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class UserService {
 
   getAllUsers(ime: string) {
     console.log(ime);
-    let url = 'http://localhost:8081/klient?';
+    let url = `http://${environment.apiUrl}/klient?`;
     if (ime != '') url = url + '&name=' + ime;
     console.log(url);
 
@@ -33,13 +34,13 @@ export class UserService {
 
 
   fetchUser(id: number): Observable<User> {
-    return this.http.get<User>(`http://localhost:8081/klient/${id}`);
+    return this.http.get<User>(`http://${environment.apiUrl}/klient/${id}`);
   }
 
   
   updateUser(userData: User)
   {
-    this.http.put(`http://localhost:8081/klient/${userData.klient_ID}`, userData).subscribe({
+    this.http.put(`http://${environment.apiUrl}/klient/${userData.klient_ID}`, userData).subscribe({
       next: (resData) => {
         console.log(resData);
         this.getAllUsers('');
@@ -49,7 +50,7 @@ export class UserService {
   }
 
   deleteUser(id: number) {
-    this.http.delete(`http://localhost:8081/klient/${id}`).subscribe({
+    this.http.delete(`http://${environment.apiUrl}/klient/${id}`).subscribe({
       next: (resData) => {
         console.log(resData);
         this.getAllUsers('');

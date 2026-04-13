@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 export interface Car {
   avtomobil_id: number;
@@ -47,7 +48,7 @@ export class CarService {
     dataVrushtane: string,
   ) {
     console.log(avtomobil);
-    let url = 'http://localhost:8081/avtomobil?';
+    let url = `http://${environment.apiUrl}/avtomobil?`;
     if (avtomobil != '') url = url + '&avtomobil=' + avtomobil;
     if (vid != '') url = url + '&vid=' + vid;
     if (cvqt != '') url = url + '&cvqt=' + cvqt;
@@ -78,7 +79,7 @@ export class CarService {
   }
 
   getBrands() {
-    this.http.get<string[]>('http://localhost:8081/marka/list').subscribe({
+    this.http.get<string[]>(`http://${environment.apiUrl}/marka/list`).subscribe({
       next: (brands) => {
         this.allBrands.set(brands);
       },
@@ -87,7 +88,7 @@ export class CarService {
   }
 
   getColors() {
-    this.http.get<string[]>('http://localhost:8081/cvqt/list').subscribe({
+    this.http.get<string[]>(`http://${environment.apiUrl}/cvqt/list`).subscribe({
       next: (colors) => {
         this.allColors.set(colors);
       },
@@ -96,7 +97,7 @@ export class CarService {
   }
 
   getTypes() {
-    this.http.get<string[]>('http://localhost:8081/vid/list').subscribe({
+    this.http.get<string[]>(`http://${environment.apiUrl}/vid/list`).subscribe({
       next: (types) => {
         this.allTypes.set(types);
       },
@@ -105,7 +106,7 @@ export class CarService {
   }
 
   getModels() {
-    this.http.get<CarModel[]>('http://localhost:8081/model').subscribe({
+    this.http.get<CarModel[]>(`http://${environment.apiUrl}/model`).subscribe({
       next: (models) => {
         this.allModels.set(models);
       },
@@ -114,20 +115,18 @@ export class CarService {
   }
 
   getLatestCars(): Observable<Car[]> {
-    return this.http.get<Car[]>('http://localhost:8081/avtomobil/latest');
+    return this.http.get<Car[]>(`http://${environment.apiUrl}/avtomobil/latest`);
   }
 
   fetchCar(id: number): Observable<Car> {
-        return this.http.get<Car>(`http://localhost:8081/avtomobil/${id}`);
+        return this.http.get<Car>(`http://${environment.apiUrl}/avtomobil/${id}`);
       }
 
   checkAvailability(carId: number, start: string, end: string): Observable<boolean> {
-    // Връща true (свободен) или false (зает)
-    return this.http.get<boolean>(`http://localhost:8081/avtomobil/${carId}/availability?start=${start}&end=${end}`);
+    return this.http.get<boolean>(`http://${environment.apiUrl}/avtomobil/${carId}/availability?start=${start}&end=${end}`);
   }
 
   rentCar(avtomobil_id: number, klient_id: number, zaemane: string, vrushtane: string, broiDni: number): Observable<any> {
-    // Праща заявка за наемане
-    return this.http.post(`http://localhost:8081/zaemi`, { avtomobil_id, klient_id, zaemane, vrushtane, broiDni });
+    return this.http.post(`http://${environment.apiUrl}/zaemi`, { avtomobil_id, klient_id, zaemane, vrushtane, broiDni });
   }
 }

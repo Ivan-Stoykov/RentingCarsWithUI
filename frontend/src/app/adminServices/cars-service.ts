@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Car } from '../cars-component/cars-service';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 
 export interface PostCar {
@@ -29,7 +30,7 @@ export class CarsService {
 
   getAllCars(avtomobil: string) {
       console.log(avtomobil);
-      let url = 'http://localhost:8081/avtomobil?';
+      let url = `http://${environment.apiUrl}/avtomobil?`;
       if (avtomobil != '') url = url + '&avtomobil=' + avtomobil;
       console.log(url);
   
@@ -46,7 +47,7 @@ export class CarsService {
 
       addCar(car: PostCar) {
     console.log(car);
-    this.http.post('http://localhost:8081/avtomobil', car).subscribe({
+    this.http.post(`http://${environment.apiUrl}/avtomobil`, car).subscribe({
       next: (resData) => {
         console.log(resData);
       },
@@ -54,7 +55,7 @@ export class CarsService {
   }
   
     deleteCar(id: number) {
-      this.http.delete(`http://localhost:8081/avtomobil/${id}`).subscribe({
+      this.http.delete(`http://${environment.apiUrl}/avtomobil/${id}`).subscribe({
         next: (resData) => {
           console.log(resData);
           this.getAllCars('');
@@ -63,12 +64,12 @@ export class CarsService {
     }
 
     fetchCar(id: number): Observable<Car> {
-        return this.http.get<Car>(`http://localhost:8081/avtomobil/${id}`);
+        return this.http.get<Car>(`http://${environment.apiUrl}/avtomobil/${id}`);
       }
     
       updateCar(carData: Car)
       {
-        this.http.put(`http://localhost:8081/avtomobil/${carData.avtomobil_id}`, carData).subscribe({
+        this.http.put(`http://${environment.apiUrl}/avtomobil/${carData.avtomobil_id}`, carData).subscribe({
           next: (resData) => {
             console.log(resData);
             this.getAllCars('');

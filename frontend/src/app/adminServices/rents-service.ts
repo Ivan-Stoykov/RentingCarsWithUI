@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Car } from '../cars-component/cars-service';
+import { environment } from '../../environments/environment.development';
 
 export interface Rent {
   Id: number;
@@ -26,7 +27,7 @@ export class RentsService {
   private rents = signal<Rent[]>([]);
 
   getAllRents() {
-    let url = 'http://localhost:8081/zaemi';
+    let url = `http://${environment.apiUrl}/zaemi`;
     console.log(url);
 
     this.http.get<Rent[]>(url).subscribe({
@@ -42,7 +43,7 @@ export class RentsService {
   }
 
   deleteRent(id: number) {
-    this.http.delete(`http://localhost:8081/zaemi/${id}`).subscribe({
+    this.http.delete(`http://${environment.apiUrl}/zaemi/${id}`).subscribe({
       next: (resData) => {
         console.log(resData);
         this.getAllRents();
@@ -51,7 +52,7 @@ export class RentsService {
   }
 
   fetchRent(id: number): Observable<Rent> {
-    return this.http.get<Rent>(`http://localhost:8081/zaemi/${id}`);
+    return this.http.get<Rent>(`http://${environment.apiUrl}/zaemi/${id}`);
   }
 
   updateRent(rentData: {
@@ -64,7 +65,7 @@ export class RentsService {
   }) {
     {
       console.log('Изпращане на данни за обновяване:', rentData);
-      this.http.put(`http://localhost:8081/zaemi/${rentData.Id}`, rentData).subscribe({
+      this.http.put(`http://${environment.apiUrl}/zaemi/${rentData.Id}`, rentData).subscribe({
         next: (resData) => {
           console.log(resData);
           this.getAllRents();
