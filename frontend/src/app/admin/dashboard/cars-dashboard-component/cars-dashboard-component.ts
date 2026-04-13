@@ -13,11 +13,11 @@ import { CurrencyPipe } from '@angular/common';
 export class CarsDashboardComponent {
   private carService = inject(CarsService);
   cars = this.carService.getCars;
-  marka = new FormControl();
+  marka = new FormControl('');
 
 
   filter(): void{
-    this.carService.getAllCars(this.marka.value)
+    this.carService.getAllCars(this.marka.value!)
     console.log(this.marka.value)
   }
 

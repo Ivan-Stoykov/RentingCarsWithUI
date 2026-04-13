@@ -12,10 +12,10 @@ import { UserService } from '../../../adminServices/user-service';
 export class UsersDashboardComponent {
   private userService = inject(UserService);
   users = this.userService.getUsers;
-  ime = new FormControl();
+  ime = new FormControl('');
 
   filter(): void{
-    this.userService.getAllUsers(this.ime.value)
+    this.userService.getAllUsers(this.ime.value!)
     console.log(this.ime.value)
     console.log(this.users())
   }
