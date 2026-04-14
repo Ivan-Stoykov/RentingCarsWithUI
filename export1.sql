@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
 -- Host: localhost    Database: cars
 -- ------------------------------------------------------
--- Server version	8.0.44
+-- Server version	8.0.43
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -103,7 +103,7 @@ CREATE TABLE `durjavi` (
   `durjava_ID` int NOT NULL AUTO_INCREMENT,
   `durjava` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`durjava_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,7 @@ CREATE TABLE `durjavi` (
 
 LOCK TABLES `durjavi` WRITE;
 /*!40000 ALTER TABLE `durjavi` DISABLE KEYS */;
-INSERT INTO `durjavi` VALUES (1,'Bulgaria');
+INSERT INTO `durjavi` VALUES (1,'Bulgaria'),(2,'durjava'),(3,'aaaaaa'),(4,'bbb');
 /*!40000 ALTER TABLE `durjavi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,7 +154,7 @@ CREATE TABLE `gradove` (
   PRIMARY KEY (`GRAD_ID`),
   KEY `durjava_ID` (`durjava_ID`),
   CONSTRAINT `gradove_ibfk_1` FOREIGN KEY (`durjava_ID`) REFERENCES `durjavi` (`durjava_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +163,7 @@ CREATE TABLE `gradove` (
 
 LOCK TABLES `gradove` WRITE;
 /*!40000 ALTER TABLE `gradove` DISABLE KEYS */;
-INSERT INTO `gradove` VALUES (1,'VARNA',1),(2,'SOFIQ',1),(3,'PLOVDIV',1);
+INSERT INTO `gradove` VALUES (1,'VARNA',1),(2,'SOFIQ',1),(3,'PLOVDIV',1),(4,'grad',2),(5,'aaaaaaaa',3),(6,'aaa',4);
 /*!40000 ALTER TABLE `gradove` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +188,7 @@ CREATE TABLE `klient` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `GRAD_ID` (`GRAD_ID`),
   CONSTRAINT `klient_ibfk_1` FOREIGN KEY (`GRAD_ID`) REFERENCES `gradove` (`GRAD_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -913,7 +913,7 @@ SELECT durjava_id INTO v_durjavaId
     LIMIT 1;
     
     if v_klientId IS NULL THEN
-		INSERT INTO klient(ime, grad_id, ulica, telefon, email, password) VALUES (p_ime, v_gradId, p_ulica, p_telefon, p_email, p_password);
+		INSERT INTO klient(ime, grad_id, ulica, telefon, email, password, rolq) VALUES (p_ime, v_gradId, p_ulica, p_telefon, p_email, p_password, 'user');
 	else
     SIGNAL SQLSTATE '45001' SET MESSAGE_TEXT = 'Sushtestvuva takuv email';
     end if;
@@ -1194,4 +1194,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-13  4:52:09
+-- Dump completed on 2026-04-14 17:51:04

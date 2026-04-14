@@ -12,5 +12,5 @@ public class RegisterDTO {
     private String email;
     private String password;
     private String telefon;
-    private AddressDTO adress;
+    private AddressDTO address;
 }

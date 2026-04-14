@@ -27,7 +27,7 @@ public class KlientController {
     public List<KlientDTO> getKlients(@RequestParam(required = false) String name){
         return klientRepository.getClients(name).stream().map(
                 klient -> new KlientDTO(
-                        klient.getKlient_ID(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad(), klient.getDurjava()), klient.getRolq()
+                       klient.getKlient_ID(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad(), klient.getDurjava()), klient.getRolq()
                 )
         ).toList();
     }
@@ -55,11 +55,11 @@ public class KlientController {
     }
 
 
-    @Transactional(Transactional.TxType.SUPPORTS)
+    @Transactional()
     @PostMapping("/register")
     public ResponseEntity<Object> register(@RequestBody RegisterDTO registerDTO){
         try{
-            KlientView klient = klientRepository.register(registerDTO.getIme(), registerDTO.getEmail(), registerDTO.getPassword(), registerDTO.getTelefon(),registerDTO.getAdress().getStreet(), registerDTO.getAdress().getCity(), registerDTO.getAdress().getCountry() );
+            KlientView klient = klientRepository.register(registerDTO.getIme(), registerDTO.getEmail(), registerDTO.getPassword(), registerDTO.getTelefon(),registerDTO.getAddress().getStreet(), registerDTO.getAddress().getCity(), registerDTO.getAddress().getCountry() );
             if(klient == null) return ResponseEntity.notFound().build();
             KlientDTO dto = new KlientDTO(
                     klient.getKlient_ID(), klient.getIme(), klient.getTelefon(), klient.getEmail(), new AddressDTO(klient.getUlica(), klient.getGrad(), klient.getDurjava()), klient.getRolq()

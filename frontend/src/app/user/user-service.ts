@@ -64,7 +64,7 @@ export class UserService {
   }
 
   public registerUser(user: registerUser) {
-    this.http.post<User>(`http://${environment.apiUrl}/klient/register`, { user }).subscribe({
+    this.http.post<User>(`http://${environment.apiUrl}/klient/register`,  user ).subscribe({
       next: (resData) => {
         console.log(resData);
         localStorage.setItem('User', JSON.stringify(resData));
