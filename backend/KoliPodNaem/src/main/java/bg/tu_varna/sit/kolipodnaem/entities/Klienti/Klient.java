@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.kolipodnaem.entities.Klienti;
 
 import bg.tu_varna.sit.kolipodnaem.entities.Gradove.Gradove;
-import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemanePodNaem;
+import bg.tu_varna.sit.kolipodnaem.entities.zaqvki.Zaqvki;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,5 +42,5 @@ public class Klient {
     private Gradove grad;
 
     @OneToMany(mappedBy = "klient")
-    private List<ZaemanePodNaem> zaemane;
+    private List<Zaqvki> zaemane;
 }

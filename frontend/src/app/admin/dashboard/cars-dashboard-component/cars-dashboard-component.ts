@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { CarsService } from '../../../adminServices/cars-service';
+import { CarsService } from '../../adminServices/cars-service';
 import { CurrencyPipe } from '@angular/common';
 
 @Component({

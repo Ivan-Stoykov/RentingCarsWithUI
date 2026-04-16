@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.kolipodnaem.entities.zaemi;
+package bg.tu_varna.sit.kolipodnaem.entities.zaqvki;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,12 +10,12 @@ import org.hibernate.annotations.Immutable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "zaemi")
+@Table(name = "zaqvkiview")
 @Getter
 @Setter
 @NoArgsConstructor
 @Immutable
-public class ZaemiView {
+public class ZaqvkiView {
     @Id
     private int zaem_id;
 

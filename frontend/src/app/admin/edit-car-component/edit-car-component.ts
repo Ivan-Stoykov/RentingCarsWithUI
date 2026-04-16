@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CarsService } from '../../adminServices/cars-service';
+import { CarsService } from '../adminServices/cars-service';
 
 @Component({
   selector: 'app-edit-car-component',

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CarsService } from '../../adminServices/cars-service';
+import { CarsService } from '../adminServices/cars-service';
 
 @Component({
   selector: 'app-add-car-component',

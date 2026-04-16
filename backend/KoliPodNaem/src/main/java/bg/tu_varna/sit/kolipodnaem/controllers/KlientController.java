@@ -1,14 +1,10 @@
 package bg.tu_varna.sit.kolipodnaem.controllers;
 
-import bg.tu_varna.sit.kolipodnaem.entities.Gradove.Gradove;
 import bg.tu_varna.sit.kolipodnaem.entities.Klienti.*;
-import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemiView;
-import bg.tu_varna.sit.kolipodnaem.repositories.GradoveRepository;
 import bg.tu_varna.sit.kolipodnaem.repositories.KlientRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,6 @@
 package bg.tu_varna.sit.kolipodnaem.repositories;
 
-import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemiView;
+import bg.tu_varna.sit.kolipodnaem.entities.zaqvki.ZaqvkiView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface ZaemiViewRepository extends JpaRepository<ZaemiView, Integer> {
+public interface ZaqvkiViewRepository extends JpaRepository<ZaqvkiView, Integer> {
     @Procedure(procedureName = "newZaem")
     public void newZaem(
             @Param("p_avtomobil_id") int avtomobilId,
@@ -29,11 +29,11 @@ public interface ZaemiViewRepository extends JpaRepository<ZaemiView, Integer> {
     );
 
     @Procedure(procedureName = "fetchRent")
-    public ZaemiView fetchRent(@Param("p_id") Integer id);
+    public ZaqvkiView fetchRent(@Param("p_id") Integer id);
 
 
     @Procedure(procedureName = "clientRents")
-    public List<ZaemiView> clientRents(@Param("p_id") Integer id);
+    public List<ZaqvkiView> clientRents(@Param("p_id") Integer id);
 
     @Procedure(procedureName = "deleteRent")
     public void deleteRent(@Param("p_id") Integer id);

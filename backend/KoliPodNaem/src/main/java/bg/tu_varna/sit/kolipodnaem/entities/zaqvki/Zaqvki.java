@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.kolipodnaem.entities.zaemi;
+package bg.tu_varna.sit.kolipodnaem.entities.zaqvki;
 
 import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.Avtomobil;
 import bg.tu_varna.sit.kolipodnaem.entities.Klienti.Klient;
@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "zaemanepodnaem")
-public class ZaemanePodNaem {
+@Table(name = "zaqvki")
+public class Zaqvki {
     @Id
     @Column(name = "ZAEM_ID")
     private int zaem_ID;

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RentsService } from '../../../adminServices/rents-service';
+import { RentsService } from '../../adminServices/rents-service';
 import { FormControl } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CurrencyPipe, DatePipe } from '@angular/common';

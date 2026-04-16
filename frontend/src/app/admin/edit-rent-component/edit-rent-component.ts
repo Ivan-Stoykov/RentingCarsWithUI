@@ -1,9 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RentsService } from '../../adminServices/rents-service';
-import { CarsService } from '../../adminServices/cars-service';
-import { UserService } from '../../adminServices/user-service';
+import { RentsService } from '../adminServices/rents-service';
+import { CarsService } from '../adminServices/cars-service';
+import { UserService } from '../adminServices/user-service';
 import { debounceTime, startWith } from 'rxjs';
 import { User } from '../../user/user-service';
 import { Car } from '../../cars-component/cars-service';

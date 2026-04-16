@@ -1,14 +1,13 @@
-package bg.tu_varna.sit.kolipodnaem.entities.zaemi;
+package bg.tu_varna.sit.kolipodnaem.entities.zaqvki;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class ZaemanePodNaemUpdateDTO {
+public class ZaqvkiUpdateDTO {
     private int Id;
     private int avtomobil_id;
     private int klient_ID;

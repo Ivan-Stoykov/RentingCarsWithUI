@@ -2,7 +2,7 @@ package bg.tu_varna.sit.kolipodnaem.entities.Avtomobil;
 
 import bg.tu_varna.sit.kolipodnaem.entities.Cvqt.Cvqt;
 import bg.tu_varna.sit.kolipodnaem.entities.Specifications.Specification;
-import bg.tu_varna.sit.kolipodnaem.entities.zaemi.ZaemanePodNaem;
+import bg.tu_varna.sit.kolipodnaem.entities.zaqvki.Zaqvki;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -28,5 +28,5 @@ public class Avtomobil {
     private Specification specification;
 
     @OneToMany(mappedBy = "avtomobil")
-    private List<ZaemanePodNaem> zaemane;
+    private List<Zaqvki> zaemane;
 }

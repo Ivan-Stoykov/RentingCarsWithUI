@@ -13,6 +13,7 @@ import { RentsDashboardComponent } from './admin/dashboard/rents-dashboard-compo
 import { CarDetailsComponent } from './pages/car-details-component/car-details-component';
 import { UserProfileComponent } from './pages/user-profile-component/user-profile-component';
 import { EditRentComponent } from './admin/edit-rent-component/edit-rent-component';
+import { OtdavaneDashboardComponent } from './admin/dashboard/otdavane-dashboard-component/otdavane-dashboard-component';
 
 export const routes: Routes = [
   { path: '', component: HomePage },
@@ -32,7 +33,8 @@ export const routes: Routes = [
       { path: 'clients', component:UsersDashboardComponent},
       { path: 'clients/:userId', component:EditUserComponent},
       { path: 'rents', component:RentsDashboardComponent},
-      { path: 'rents/:rentId', component:EditRentComponent}
+      { path: 'rents/:rentId', component:EditRentComponent},
+      { path: 'otdavane', component:OtdavaneDashboardComponent},
     ],
   },
 ];

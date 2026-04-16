@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from "@angular/router";
-import { UserService } from '../../../adminServices/user-service';
+import { UserService } from '../../adminServices/user-service';
 
 @Component({
   selector: 'app-users-dashboard-component',

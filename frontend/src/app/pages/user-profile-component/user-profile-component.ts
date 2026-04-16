@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { User, UserService } from '../../user/user-service';
 import { CommonModule } from '@angular/common';
-import { Rent } from '../../adminServices/rents-service';
+import { Rent } from '../../admin/adminServices/rents-service';
 import { Router } from '@angular/router';
 
 @Component({

@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.kolipodnaem.entities.zaemi;
+package bg.tu_varna.sit.kolipodnaem.entities.zaqvki;
 
 import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilViewDTO;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class ZaemanePodNaemDTO {
+public class ZaqvkiDTO {
     private int Id;
     private int klient_ID;
     private String klient;
