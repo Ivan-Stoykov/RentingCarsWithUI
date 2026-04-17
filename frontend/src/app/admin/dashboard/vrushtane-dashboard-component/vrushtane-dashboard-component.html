@@ -1,1 +1,39 @@
-<p>vrushtane-dashboard-component works!</p>
+<div class="content-header">
+  <h2>Управление: <span>Отдаване</span></h2>
+
+  <div class="header-actions">
+    <div class="search-box">
+      <input type="text" placeholder="Модел (Напр. Golf)" [formControl]="klient" />
+      <button type="button" class="btn-search" (click)="filter()">Търси</button>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>КЛИЕНТ</th>
+        <th>АВТОМОБИЛ</th>
+        <th>ДАТА Взимане</th>
+        <th>ДЕЙСТВИЯ</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (otdavane of otdavaniq(); track otdavane.Id) {
+        <tr>
+          <td>{{ otdavane.Id }}</td>
+          <td>{{ otdavane.klient }}</td>
+          <td>{{ otdavane.car.marka_name + ' ' + otdavane.car.kolamodel + ' (' + otdavane.car.godina + ')' }}</td>
+          <td>{{ otdavane.dataZaemane | date: "longDate" }}</td>
+          <td class="actions">
+            <button class="btn-edit" [routerLink]="`/admin/vrushtane/${otdavane.Id}`">
+              Върни
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

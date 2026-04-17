@@ -15,6 +15,6 @@ public class ZaqvkiDTO {
     private String email;
     private LocalDateTime dataZaemane;
     private LocalDateTime dataVrushtane;
-    private int broiDni;
+    private Integer broiDni;
     private AvtomobilViewDTO car;
 }

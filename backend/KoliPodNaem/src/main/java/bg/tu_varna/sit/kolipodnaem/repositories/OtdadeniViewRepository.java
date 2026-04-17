@@ -13,6 +13,9 @@ public interface OtdadeniViewRepository extends JpaRepository<OtdadeniView, Inte
     @Procedure(name = "fetchZaOtdavane")
     public List<OtdadeniView> fetchZaOtdavane();
 
+    @Procedure(name = "fetchOtdadeni")
+    public List<OtdadeniView> fetchOtdadeni();
+
     @Procedure(name = "otdavane")
     public void otdavane(@Param("p_id") Integer id, @Param("p_dataotdavane") LocalDateTime dataOtdavane);
 

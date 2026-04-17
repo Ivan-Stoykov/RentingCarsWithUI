@@ -1,0 +1,23 @@
+<div class="add-car-container">
+  <h2>Предаване на автомобил</h2>
+
+  <form [formGroup]="giveCar" class="add-car-form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Клиент</label>
+      <input type="text" formControlName="klient" />
+    </div>
+
+    <div class="form-group">
+      <label>Автомобил</label>
+      <input type="text" formControlName="car" />
+    </div>
+
+    <div class="form-group full-width">
+      <label>Дата предаване</label>
+      <input type="date" formControlName="dataPredavane" />
+    </div>
+    <div class="submit-btn-wrapper">
+      <button type="submit" class="btn-submit">Запази потребител</button>
+    </div>
+  </form>
+</div>

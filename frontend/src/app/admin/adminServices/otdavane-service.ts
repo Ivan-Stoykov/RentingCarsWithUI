@@ -12,11 +12,11 @@ import { Observable } from 'rxjs';
 export class OtdavaneService {
   private otdavaniq = signal<Rent[]>([]);
   private zaOtdavane = signal<Rent[]>([]);
+  private otdadeni = signal<Rent[]>([]);
   private http = inject(HttpClient);
 
   constructor() {
     this.fetchAllOtdavaniq();
-    this.fetchZaOtdavane();
   }
 
   get getOtdavaniq(){
@@ -25,9 +25,12 @@ export class OtdavaneService {
   get getZaOtdavane(){
     return this.zaOtdavane.asReadonly();
   }
+  get getOtdadeni(){
+    return this.otdadeni.asReadonly();
+  }
 
   otdavane(zaem_id:number, data:Date){
-    this.http.post(`http://${environment.apiUrl}/otdavane`, {zaem_id, data}).subscribe({
+    this.http.post(`http://${environment.apiUrl}/otdavaniq/otdavane`, {zaem_id, data}).subscribe({
       next:(resData)=>{
         console.log(resData);
       }
@@ -35,7 +38,7 @@ export class OtdavaneService {
   }
 
   vrushtane(zaem_id:number, data:Date){
-    this.http.post(`http://${environment.apiUrl}/vrushtane`, {zaem_id, data}).subscribe({
+    this.http.post(`http://${environment.apiUrl}/otdavaniq/vrushtane`, {zaem_id, data}).subscribe({
       next:(resData)=>{
         console.log(resData);
       }
@@ -62,6 +65,18 @@ export class OtdavaneService {
     this.http.get<Rent[]>(url).subscribe({
       next: (otdavaniq) => {
         this.zaOtdavane.set(otdavaniq);
+        console.log(otdavaniq);
+      },
+    });
+  }
+
+  fetchOtdadeni() {
+    let url = `http://${environment.apiUrl}/otdavaniq/otdadeni`;
+    console.log(url);
+
+    this.http.get<Rent[]>(url).subscribe({
+      next: (otdavaniq) => {
+        this.otdadeni.set(otdavaniq);
         console.log(otdavaniq);
       },
     });

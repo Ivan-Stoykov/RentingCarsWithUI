@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `cars` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `cars`;
 -- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
 -- Host: localhost    Database: cars
@@ -272,54 +274,63 @@ INSERT INTO `marka` VALUES (1,'VOLKSWAGEN'),(2,'MERCEDES'),(3,'BMW'),(4,'AUDI'),
 UNLOCK TABLES;
 
 --
--- Table structure for table `pozicii`
+-- Table structure for table `otdadeni`
 --
 
-DROP TABLE IF EXISTS `pozicii`;
+DROP TABLE IF EXISTS `otdadeni`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pozicii` (
-  `poziciq_id` int NOT NULL,
-  `poziciq` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`poziciq_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `otdadeni` (
+  `ZAEM_ID` int NOT NULL AUTO_INCREMENT,
+  `KLIENT_ID` int DEFAULT NULL,
+  `AVTOMOBIL_ID` int DEFAULT NULL,
+  `DATAZAEMANE` datetime DEFAULT NULL,
+  `BROIDNI` int DEFAULT NULL,
+  `DATAVRUSHTANE` datetime DEFAULT NULL,
+  `isDeleted` tinyint DEFAULT '0',
+  PRIMARY KEY (`ZAEM_ID`),
+  KEY `AVTOMOBIL_ID` (`AVTOMOBIL_ID`),
+  KEY `KLIENT_ID` (`KLIENT_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pozicii`
+-- Dumping data for table `otdadeni`
 --
 
-LOCK TABLES `pozicii` WRITE;
-/*!40000 ALTER TABLE `pozicii` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pozicii` ENABLE KEYS */;
+LOCK TABLES `otdadeni` WRITE;
+/*!40000 ALTER TABLE `otdadeni` DISABLE KEYS */;
+INSERT INTO `otdadeni` VALUES (1,1,3,'2026-04-01 00:00:00',4,'2026-04-04 00:00:00',0);
+/*!40000 ALTER TABLE `otdadeni` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `slujitel`
+-- Temporary view structure for view `otdadeniview`
 --
 
-DROP TABLE IF EXISTS `slujitel`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
+DROP TABLE IF EXISTS `otdadeniview`;
+/*!50001 DROP VIEW IF EXISTS `otdadeniview`*/;
+SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `slujitel` (
-  `slujitel_id` int NOT NULL,
-  `ime` varchar(255) DEFAULT NULL,
-  `telefon` varchar(255) DEFAULT NULL,
-  `poziciq_id` int DEFAULT NULL,
-  PRIMARY KEY (`slujitel_id`),
-  KEY `FKf9j7k7jjdwkf37lyyovp3ukjc` (`poziciq_id`),
-  CONSTRAINT `FKf9j7k7jjdwkf37lyyovp3ukjc` FOREIGN KEY (`poziciq_id`) REFERENCES `pozicii` (`poziciq_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `slujitel`
---
-
-LOCK TABLES `slujitel` WRITE;
-/*!40000 ALTER TABLE `slujitel` DISABLE KEYS */;
-/*!40000 ALTER TABLE `slujitel` ENABLE KEYS */;
-UNLOCK TABLES;
+/*!50001 CREATE VIEW `otdadeniview` AS SELECT 
+ 1 AS `zaem_id`,
+ 1 AS `marka_name`,
+ 1 AS `kolamodel`,
+ 1 AS `vid`,
+ 1 AS `godina`,
+ 1 AS `cvqt`,
+ 1 AS `ime_extra`,
+ 1 AS `cena_za_den`,
+ 1 AS `datazaemane`,
+ 1 AS `broidni`,
+ 1 AS `datavrushtane`,
+ 1 AS `izminatikilometri`,
+ 1 AS `img_url`,
+ 1 AS `avtomobil_id`,
+ 1 AS `klient`,
+ 1 AS `email`,
+ 1 AS `klient_ID`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `specifikacii`
@@ -380,13 +391,13 @@ INSERT INTO `vid` VALUES (1,'SEDAN'),(2,'SUV'),(3,'HATCHBACK'),(4,'COUPE'),(5,'C
 UNLOCK TABLES;
 
 --
--- Table structure for table `zaemanepodnaem`
+-- Table structure for table `zaqvki`
 --
 
-DROP TABLE IF EXISTS `zaemanepodnaem`;
+DROP TABLE IF EXISTS `zaqvki`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `zaemanepodnaem` (
+CREATE TABLE `zaqvki` (
   `ZAEM_ID` int NOT NULL AUTO_INCREMENT,
   `KLIENT_ID` int DEFAULT NULL,
   `AVTOMOBIL_ID` int DEFAULT NULL,
@@ -397,30 +408,30 @@ CREATE TABLE `zaemanepodnaem` (
   PRIMARY KEY (`ZAEM_ID`),
   KEY `AVTOMOBIL_ID` (`AVTOMOBIL_ID`),
   KEY `KLIENT_ID` (`KLIENT_ID`),
-  CONSTRAINT `zaemanepodnaem_ibfk_1` FOREIGN KEY (`AVTOMOBIL_ID`) REFERENCES `avtomobil` (`AVTOMOBIL_ID`),
-  CONSTRAINT `zaemanepodnaem_ibfk_2` FOREIGN KEY (`KLIENT_ID`) REFERENCES `klient` (`KLIENT_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `zaqvki_ibfk_1` FOREIGN KEY (`AVTOMOBIL_ID`) REFERENCES `avtomobil` (`AVTOMOBIL_ID`),
+  CONSTRAINT `zaqvki_ibfk_2` FOREIGN KEY (`KLIENT_ID`) REFERENCES `klient` (`KLIENT_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `zaemanepodnaem`
+-- Dumping data for table `zaqvki`
 --
 
-LOCK TABLES `zaemanepodnaem` WRITE;
-/*!40000 ALTER TABLE `zaemanepodnaem` DISABLE KEYS */;
-INSERT INTO `zaemanepodnaem` VALUES (1,1,1,'2025-10-01 00:00:00',10,'2025-10-11 00:00:00',1),(2,2,2,'2025-10-11 00:00:00',10,'2025-10-21 00:00:00',0),(3,10,20,'2025-05-15 00:00:00',10,'2025-05-25 00:00:00',0),(4,1,3,'2025-01-03 00:00:00',1,'2025-01-04 00:00:00',1),(5,2,4,'2025-01-07 00:00:00',3,'2025-05-10 00:00:00',0),(6,3,5,'2025-01-13 00:00:00',5,'2025-01-18 00:00:00',0),(7,3,6,'2025-02-02 00:00:00',7,'2025-02-09 00:00:00',0),(8,4,7,'2025-02-11 00:00:00',9,'2025-02-20 00:00:00',0),(9,4,8,'2025-02-22 00:00:00',10,'2025-03-04 00:00:00',0),(10,5,9,'2025-03-07 00:00:00',11,'2025-03-18 00:00:00',0),(11,5,10,'2025-03-20 00:00:00',7,'2025-03-27 00:00:00',0),(12,6,11,'2025-04-02 00:00:00',5,'2025-04-07 00:00:00',0),(13,6,12,'2025-04-10 00:00:00',3,'2025-04-13 00:00:00',0),(14,7,13,'2025-04-14 00:00:00',1,'2025-04-15 00:00:00',0),(15,7,14,'2025-06-03 00:00:00',15,'2025-06-18 00:00:00',0),(16,8,15,'2025-05-04 00:00:00',2,'2025-05-06 00:00:00',0),(17,8,16,'2025-05-08 00:00:00',4,'2025-05-12 00:00:00',0),(18,9,17,'2025-06-20 00:00:00',6,'2025-06-26 00:00:00',0),(19,9,18,'2025-07-01 00:00:00',8,'2025-07-09 00:00:00',0),(20,10,19,'2025-09-14 00:00:00',7,'2025-05-21 00:00:00',0),(22,9,11,'2026-03-03 00:00:00',5,'2026-03-08 00:00:00',0),(25,1,3,'2026-04-01 00:00:00',5,'2026-04-05 00:00:00',0),(26,1,3,'2026-04-16 00:00:00',5,'2026-04-20 00:00:00',0),(27,1,3,'2026-04-22 00:00:00',3,'2026-04-24 00:00:00',0);
-/*!40000 ALTER TABLE `zaemanepodnaem` ENABLE KEYS */;
+LOCK TABLES `zaqvki` WRITE;
+/*!40000 ALTER TABLE `zaqvki` DISABLE KEYS */;
+INSERT INTO `zaqvki` VALUES (1,1,3,'2026-04-01 00:00:00',4,'2026-04-04 00:00:00',1);
+/*!40000 ALTER TABLE `zaqvki` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Temporary view structure for view `zaemi`
+-- Temporary view structure for view `zaqvkiview`
 --
 
-DROP TABLE IF EXISTS `zaemi`;
-/*!50001 DROP VIEW IF EXISTS `zaemi`*/;
+DROP TABLE IF EXISTS `zaqvkiview`;
+/*!50001 DROP VIEW IF EXISTS `zaqvkiview`*/;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `zaemi` AS SELECT 
+/*!50001 CREATE VIEW `zaqvkiview` AS SELECT 
  1 AS `zaem_id`,
  1 AS `marka_name`,
  1 AS `kolamodel`,
@@ -567,7 +578,7 @@ BEGIN
     DECLARE v_count INT;
     
     SELECT COUNT(*) INTO v_count
-    FROM zaemanepodnaem
+    FROM zaqvki
     WHERE avtomobil_id = p_avtomobil_id
       AND datazaemane < p_data_vrushtane
       AND datavrushtane > p_data_zaemane;
@@ -601,7 +612,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `clientRents`(p_id INT)
 BEGIN
-SELECT * from zaemi z LEFT JOIN zaemanepodnaem za on z.zaem_id = za.zaem_id WHERE za.klient_id = p_id ORDER BY z.datazaemane DESC;
+SELECT * from zaqvkiview z LEFT JOIN zaqvki za on z.zaem_id = za.zaem_id WHERE za.klient_id = p_id ORDER BY z.datazaemane DESC;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -658,7 +669,8 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteRent`(p_id INT)
 BEGIN
-update zaemanepodnaem set isDeleted = true where zaem_id = p_id;
+update zaqvki set isDeleted = true where zaem_id = p_id;
+update otdadeni set isDeleted = true where zaem_id = p_id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -703,6 +715,25 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `fetchOtdadeni` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchOtdadeni`()
+BEGIN
+SELECT * FROM otdadeniview WHERE DATAZAEMANE IS NOT NULL AND DATAVRUSHTANE IS NULL;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `fetchRent` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -715,7 +746,26 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchRent`(p_id INT)
 BEGIN
-SELECT * from zaemi where zaem_id = p_id;
+SELECT * from zaqvkiview where zaem_id = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `fetchZaOtdavane` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchZaOtdavane`()
+BEGIN
+SELECT * from zaqvkiView JOIN zaqvki WHERE isDeleted = false;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -764,7 +814,7 @@ BEGIN
           OR p_dataVrushtane IS NULL 
           OR NOT EXISTS (
               SELECT 1 
-              FROM zaemanepodnaem z 
+              FROM zaqvki z 
               WHERE z.avtomobil_id = a.avtomobil_id
                 AND z.datazaemane < p_dataVrushtane
                 AND z.datavrushtane > p_dataZaemane
@@ -863,8 +913,30 @@ IN p_vrushtane DATE,
 IN p_broiDni INT
 )
 BEGIN
-INSERT INTO zaemanepodnaem (klient_id, avtomobil_id, datazaemane, datavrushtane, broidni, isDeleted) VALUES
+INSERT INTO zaqvki (klient_id, avtomobil_id, datazaemane, datavrushtane, broidni, isDeleted) VALUES
  (p_klient_id, p_avtomobil_id, p_zaemane, p_vrushtane, p_broiDni, false);
+ INSERT INTO otdadeni (klient_id, avtomobil_id, datazaemane, datavrushtane, broidni, isDeleted) VALUES
+ (p_klient_id, p_avtomobil_id, null, null, null, false);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `otdavane` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `otdavane`(p_id INT, p_otdavane DATETIME)
+BEGIN
+UPDATE otdadeni SET DATAZAEMANE = p_otdavane WHERE otdadeni.zaem_id = p_id;
+UPDATE zaqvki SET isDeleted = true where zaem_id = p_id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1122,8 +1194,29 @@ IN p_vrushtane DATE,
 IN p_broiDni INT
 )
 BEGIN
-UPDATE zaemanepodnaem SET klient_id = p_klient_id, avtomobil_id = p_avtomobil_id, datazaemane = p_zaemane,
+UPDATE zaqvki SET klient_id = p_klient_id, avtomobil_id = p_avtomobil_id, datazaemane = p_zaemane,
  datavrushtane = p_vrushtane, broidni = p_broiDni WHERE ZAEM_ID = p_id;
+ 
+ UPDATE otdadeni SET klient_id = p_klient_id, avtomobil_id = p_avtomobil_id WHERE ZAEM_ID = p_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `vrushtane` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `vrushtane`(p_id INT, p_vrushtane DATETIME)
+BEGIN
+UPDATE otdadeni SET DATAVRUSHTANE = p_vrushtane, BROIDNI = DATEDIFF(datavrushtane, datazaemane) + 1 WHERE otdadeni.zaem_id = p_id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1168,10 +1261,10 @@ DELIMITER ;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
--- Final view structure for view `zaemi`
+-- Final view structure for view `otdadeniview`
 --
 
-/*!50001 DROP VIEW IF EXISTS `zaemi`*/;
+/*!50001 DROP VIEW IF EXISTS `otdadeniview`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
@@ -1180,7 +1273,25 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `zaemi` AS select `z`.`ZAEM_ID` AS `zaem_id`,`m`.`marka_name` AS `marka_name`,`k`.`kolamodel` AS `kolamodel`,`v`.`vid` AS `vid`,`s`.`godina` AS `godina`,`c`.`cvqt` AS `cvqt`,`e`.`ime_extra` AS `ime_extra`,`s`.`cena_za_den` AS `cena_za_den`,`z`.`DATAZAEMANE` AS `datazaemane`,`z`.`BROIDNI` AS `broidni`,`z`.`DATAVRUSHTANE` AS `datavrushtane`,`a`.`IZMINATIKILOMETRI` AS `izminatikilometri`,`a`.`img_url` AS `img_url`,`a`.`AVTOMOBIL_ID` AS `avtomobil_id`,`kl`.`ime` AS `klient`,`kl`.`email` AS `email`,`kl`.`KLIENT_ID` AS `klient_ID` from ((((((((`zaemanepodnaem` `z` join `klient` `kl` on((`z`.`KLIENT_ID` = `kl`.`KLIENT_ID`))) join `avtomobil` `a` on((`a`.`AVTOMOBIL_ID` = `z`.`AVTOMOBIL_ID`))) join `specifikacii` `s` on((`a`.`spec_id` = `s`.`spec_ID`))) join `ekstri` `e` on((`e`.`extra_Id` = `s`.`ekstri_id`))) join `vid` `v` on((`s`.`vid_id` = `v`.`VID_ID`))) join `kolamodel` `k` on((`k`.`MODEL_ID` = `s`.`model_id`))) join `marka` `m` on((`m`.`MARKA_ID` = `k`.`MARKA_ID`))) join `cvqt` `c` on((`c`.`CVQT_ID` = `a`.`CVQT_ID`))) where (`z`.`isDeleted` = false) order by `z`.`DATAZAEMANE` desc */;
+/*!50001 VIEW `otdadeniview` AS select `o`.`ZAEM_ID` AS `zaem_id`,`m`.`marka_name` AS `marka_name`,`k`.`kolamodel` AS `kolamodel`,`v`.`vid` AS `vid`,`s`.`godina` AS `godina`,`c`.`cvqt` AS `cvqt`,`e`.`ime_extra` AS `ime_extra`,`s`.`cena_za_den` AS `cena_za_den`,`o`.`DATAZAEMANE` AS `datazaemane`,`o`.`BROIDNI` AS `broidni`,`o`.`DATAVRUSHTANE` AS `datavrushtane`,`a`.`IZMINATIKILOMETRI` AS `izminatikilometri`,`a`.`img_url` AS `img_url`,`a`.`AVTOMOBIL_ID` AS `avtomobil_id`,`kl`.`ime` AS `klient`,`kl`.`email` AS `email`,`kl`.`KLIENT_ID` AS `klient_ID` from ((((((((`otdadeni` `o` join `klient` `kl` on((`o`.`KLIENT_ID` = `kl`.`KLIENT_ID`))) join `avtomobil` `a` on((`a`.`AVTOMOBIL_ID` = `o`.`AVTOMOBIL_ID`))) join `specifikacii` `s` on((`a`.`spec_id` = `s`.`spec_ID`))) join `ekstri` `e` on((`e`.`extra_Id` = `s`.`ekstri_id`))) join `vid` `v` on((`s`.`vid_id` = `v`.`VID_ID`))) join `kolamodel` `k` on((`k`.`MODEL_ID` = `s`.`model_id`))) join `marka` `m` on((`m`.`MARKA_ID` = `k`.`MARKA_ID`))) join `cvqt` `c` on((`c`.`CVQT_ID` = `a`.`CVQT_ID`))) where (`o`.`isDeleted` = false) order by `o`.`DATAZAEMANE` desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `zaqvkiview`
+--
+
+/*!50001 DROP VIEW IF EXISTS `zaqvkiview`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `zaqvkiview` AS select `z`.`ZAEM_ID` AS `zaem_id`,`m`.`marka_name` AS `marka_name`,`k`.`kolamodel` AS `kolamodel`,`v`.`vid` AS `vid`,`s`.`godina` AS `godina`,`c`.`cvqt` AS `cvqt`,`e`.`ime_extra` AS `ime_extra`,`s`.`cena_za_den` AS `cena_za_den`,`z`.`DATAZAEMANE` AS `datazaemane`,`z`.`BROIDNI` AS `broidni`,`z`.`DATAVRUSHTANE` AS `datavrushtane`,`a`.`IZMINATIKILOMETRI` AS `izminatikilometri`,`a`.`img_url` AS `img_url`,`a`.`AVTOMOBIL_ID` AS `avtomobil_id`,`kl`.`ime` AS `klient`,`kl`.`email` AS `email`,`kl`.`KLIENT_ID` AS `klient_ID` from ((((((((`zaqvki` `z` join `klient` `kl` on((`z`.`KLIENT_ID` = `kl`.`KLIENT_ID`))) join `avtomobil` `a` on((`a`.`AVTOMOBIL_ID` = `z`.`AVTOMOBIL_ID`))) join `specifikacii` `s` on((`a`.`spec_id` = `s`.`spec_ID`))) join `ekstri` `e` on((`e`.`extra_Id` = `s`.`ekstri_id`))) join `vid` `v` on((`s`.`vid_id` = `v`.`VID_ID`))) join `kolamodel` `k` on((`k`.`MODEL_ID` = `s`.`model_id`))) join `marka` `m` on((`m`.`MARKA_ID` = `k`.`MARKA_ID`))) join `cvqt` `c` on((`c`.`CVQT_ID` = `a`.`CVQT_ID`))) where (`z`.`isDeleted` = false) order by `z`.`DATAZAEMANE` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1194,4 +1305,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-14 17:51:04
+-- Dump completed on 2026-04-17 16:36:17

@@ -27,13 +27,13 @@
           <td>{{ otdavane.Id }}</td>
           <td>{{ otdavane.klient }}</td>
           <td>{{ otdavane.car.marka_name + ' ' + otdavane.car.kolamodel + ' (' + otdavane.car.godina + ')' }}</td>
-          <td>{{ otdavane.dataZaemane }}</td>
-          <td>{{ otdavane.dataVrushtane }}</td>
+          <td>{{ otdavane.dataZaemane | date: "longDate" }}</td>
+          <td>{{ otdavane.dataVrushtane | date: "longDate" }}</td>
           <td class="actions">
             <button class="btn-edit" [routerLink]="`/admin/otdavane/${otdavane.Id}`">
-              Редакция
+              Приеми
             </button>
-            <button class="btn-delete" (click)="deleteOtdavane(otdavane.Id)">Изтрий</button>
+            <button class="btn-delete" (click)="deleteOtdavane(otdavane.Id)">Откажи</button>
           </td>
         </tr>
       }

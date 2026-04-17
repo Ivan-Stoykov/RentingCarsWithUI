@@ -46,8 +46,80 @@ public class OtdadeniController {
 
     @Transactional
     @GetMapping("/zaOtdavane")
-    public List<OtdadeniView> getZaOtdavane() {
-        return otdadeniViewRepository.fetchZaOtdavane();
+    public List<ZaqvkiDTO> getZaOtdavane() {
+        return otdadeniViewRepository.fetchZaOtdavane().stream().map(zaem -> new ZaqvkiDTO(
+                zaem.getZaem_id(),
+                zaem.getKlient_ID(),
+                zaem.getKlient(),
+                zaem.getEmail(),
+                zaem.getDatazaemane(),
+                zaem.getDatavrushtane(),
+                zaem.getBroidni(),
+                new AvtomobilViewDTO(
+                        zaem.getAvtomobil_id(),
+                        zaem.getMarka_name(),
+                        zaem.getKolamodel(),
+                        zaem.getVid(),
+                        zaem.getGodina(),
+                        zaem.getCvqt(),
+                        zaem.getIme_extra(),
+                        zaem.getCena_za_den(),
+                        zaem.getIzminatikilometri(),
+                        zaem.getImg_url()
+                )
+        )).toList();
+    }
+
+    @Transactional
+    @GetMapping("/otdadeni")
+    public List<ZaqvkiDTO> getOtdadeni() {
+        return otdadeniViewRepository.fetchOtdadeni().stream().map(zaem -> new ZaqvkiDTO(
+                zaem.getZaem_id(),
+                zaem.getKlient_ID(),
+                zaem.getKlient(),
+                zaem.getEmail(),
+                zaem.getDatazaemane(),
+                zaem.getDatavrushtane(),
+                zaem.getBroidni(),
+                new AvtomobilViewDTO(
+                        zaem.getAvtomobil_id(),
+                        zaem.getMarka_name(),
+                        zaem.getKolamodel(),
+                        zaem.getVid(),
+                        zaem.getGodina(),
+                        zaem.getCvqt(),
+                        zaem.getIme_extra(),
+                        zaem.getCena_za_den(),
+                        zaem.getIzminatikilometri(),
+                        zaem.getImg_url()
+                )
+        )).toList();
+    }
+
+    @Transactional
+    @GetMapping("{id}")
+    public ZaqvkiDTO getOtdavane(@PathVariable int id) {
+        OtdadeniView zaem = otdadeniViewRepository.getReferenceById(id);
+        return new ZaqvkiDTO(
+                zaem.getZaem_id(),
+                zaem.getKlient_ID(),
+                zaem.getKlient(),
+                zaem.getEmail(),
+                zaem.getDatazaemane(),
+                zaem.getDatavrushtane(),
+                zaem.getBroidni(),
+                new AvtomobilViewDTO(
+                        zaem.getAvtomobil_id(),
+                        zaem.getMarka_name(),
+                        zaem.getKolamodel(),
+                        zaem.getVid(),
+                        zaem.getGodina(),
+                        zaem.getCvqt(),
+                        zaem.getIme_extra(),
+                        zaem.getCena_za_den(),
+                        zaem.getIzminatikilometri(),
+                        zaem.getImg_url()
+                ));
     }
 
     @Transactional

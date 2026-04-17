@@ -14,6 +14,9 @@ import { CarDetailsComponent } from './pages/car-details-component/car-details-c
 import { UserProfileComponent } from './pages/user-profile-component/user-profile-component';
 import { EditRentComponent } from './admin/edit-rent-component/edit-rent-component';
 import { OtdavaneDashboardComponent } from './admin/dashboard/otdavane-dashboard-component/otdavane-dashboard-component';
+import { GiveCarComponent } from './admin/give-car-component/give-car-component';
+import { VrushtaneDashboardComponent } from './admin/dashboard/vrushtane-dashboard-component/vrushtane-dashboard-component';
+import { ReturnCarComponent } from './admin/return-car-component/return-car-component';
 
 export const routes: Routes = [
   { path: '', component: HomePage },
@@ -35,6 +38,9 @@ export const routes: Routes = [
       { path: 'rents', component:RentsDashboardComponent},
       { path: 'rents/:rentId', component:EditRentComponent},
       { path: 'otdavane', component:OtdavaneDashboardComponent},
+      { path: 'otdavane/:otdavaneId', component:GiveCarComponent},
+      { path: 'vrushtane', component:VrushtaneDashboardComponent},
+      { path: 'vrushtane/:otdavaneId', component:ReturnCarComponent},
     ],
   },
 ];
