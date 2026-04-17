@@ -55,4 +55,6 @@ public class OtdadeniView {
     private int avtomobil_id;
     @Column(name = "email")
     private String email;
+    @Column(name = "PRICE")
+    private Double price;
 }

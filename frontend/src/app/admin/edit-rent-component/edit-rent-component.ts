@@ -8,6 +8,7 @@ import { debounceTime, startWith } from 'rxjs';
 import { User } from '../../user/user-service';
 import { Car } from '../../cars-component/cars-service';
 import { formatDate } from '@angular/common';
+import { OtdavaneService } from '../adminServices/otdavane-service';
 
 @Component({
   selector: 'app-edit-rent-component',
@@ -20,6 +21,7 @@ export class EditRentComponent {
   private route = inject(ActivatedRoute);
   private carsService = inject(CarsService);
   private rentsService = inject(RentsService);
+  private otdadeniService = inject(OtdavaneService);
   private userService = inject(UserService);
   router = inject(Router);
 
@@ -118,20 +120,26 @@ export class EditRentComponent {
       });
   }
 
- selectClient(client: any) {
-    this.editRentalForm.patchValue({
-      clientSearch: client.email,
-      clientId: client.id
-    }, { emitEvent: false }); 
+  selectClient(client: any) {
+    this.editRentalForm.patchValue(
+      {
+        clientSearch: client.email,
+        clientId: client.id,
+      },
+      { emitEvent: false },
+    );
 
     this.isClientDropdownOpen.set(false);
   }
 
   selectCar(car: any) {
-    this.editRentalForm.patchValue({
-      carSearch: `${car.marka_name} ${car.kolamodel}`,
-      carId: car.avtomobil_id
-    }, { emitEvent: false });
+    this.editRentalForm.patchValue(
+      {
+        carSearch: `${car.marka_name} ${car.kolamodel}`,
+        carId: car.avtomobil_id,
+      },
+      { emitEvent: false },
+    );
 
     this.isCarDropdownOpen.set(false);
   }
@@ -147,17 +155,24 @@ export class EditRentComponent {
   onSubmit() {
     if (this.editRentalForm.valid) {
       console.log('Обновяване на наем:', this.editRentalForm.value);
-      this.rentsService.updateRent({
+      const broiDni = Math.ceil(
+        (new Date(this.editRentalForm.value.dataVrushtane).getTime() -
+          new Date(this.editRentalForm.value.dataZaemane).getTime()) /
+          (1000 * 3600 * 24) +
+          1,
+      );
+      this.otdadeniService.updateOtdavane({
         Id: Number(this.route.snapshot.paramMap.get('rentId')),
         avtomobil_id: this.editRentalForm.value.avtomobil_id,
         klient_ID: this.editRentalForm.value.klient_ID,
         dataZaemane: this.editRentalForm.value.dataZaemane,
         dataVrushtane: this.editRentalForm.value.dataVrushtane,
-        broiDni: Math.ceil(
-          (new Date(this.editRentalForm.value.dataVrushtane).getTime() -
-            new Date(this.editRentalForm.value.dataZaemane).getTime()) /
-            (1000 * 3600 * 24) + 1,
-        ),
+        broiDni: broiDni,
+        price:
+          this.carsService
+            .getCars()
+            .find((c) => c.avtomobil_id === this.editRentalForm.value.avtomobil_id)?.cena_za_den ||
+          0 * broiDni,
       });
 
       this.router.navigate(['/admin/rents']);

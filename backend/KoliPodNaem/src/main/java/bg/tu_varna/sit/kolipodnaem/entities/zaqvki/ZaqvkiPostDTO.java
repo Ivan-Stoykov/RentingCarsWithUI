@@ -13,4 +13,5 @@ public class ZaqvkiPostDTO {
     private LocalDate zaemane;
     private LocalDate vrushtane;
     private int broiDni;
+    private Double price;
 }

@@ -16,6 +16,7 @@ export class UserProfileComponent {
 
   user = this.userService.getUser();;
   rentals = signal<Rent[]>([]);
+  pendingRents = signal<Rent[]>([]);
 
   ngOnInit(): void {
     if (this.user().klient_ID === 0) {
@@ -23,6 +24,7 @@ export class UserProfileComponent {
       return;
     }
     this.loadRentalHistory();
+    this.loadPendingRents();
   }
 
   private loadRentalHistory() {
@@ -31,6 +33,16 @@ export class UserProfileComponent {
       next: (resData) => {
         console.log('История на наеми:', resData);
         this.rentals.set(resData);
+      },
+      error: (err) => console.error('Грешка при зареждане на историята на наеми:', err),
+    });
+  }
+
+  private loadPendingRents() {
+    this.userService.fetchPendingRents(this.user().klient_ID).subscribe({
+      next: (resData) => {
+        console.log('Чакащи потвърждение:', resData);
+        this.pendingRents.set(resData);
       },
       error: (err) => console.error('Грешка при зареждане на историята на наеми:', err),
     });

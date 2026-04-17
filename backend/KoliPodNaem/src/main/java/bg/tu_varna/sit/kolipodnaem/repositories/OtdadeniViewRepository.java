@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,4 +22,17 @@ public interface OtdadeniViewRepository extends JpaRepository<OtdadeniView, Inte
 
     @Procedure(name = "vrushtane")
     public void vrushtane(@Param("p_id") Integer id, @Param("p_datavrushtane") LocalDateTime dataVrushtane);
+
+    @Procedure(procedureName = "updateZaem")
+    public void updateZaem(
+            @Param("p_id") int p_id,
+            @Param("p_avtomobil_id") int avtomobilId,
+            @Param("p_klient_id") int klientId,
+            @Param("p_zaemane") LocalDate zaemane,
+            @Param("p_vrushtane") LocalDate vrushtane,
+            @Param("p_broiDni") int broiDni
+    );
+
+    @Procedure(procedureName = "deleteOtdavane")
+    public void deleteRent(@Param("p_id") Integer id);
 }

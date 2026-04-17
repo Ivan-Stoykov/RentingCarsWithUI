@@ -126,7 +126,7 @@ export class CarService {
     return this.http.get<boolean>(`http://${environment.apiUrl}/avtomobil/${carId}/availability?start=${start}&end=${end}`);
   }
 
-  rentCar(avtomobil_id: number, klient_id: number, zaemane: string, vrushtane: string, broiDni: number): Observable<any> {
-    return this.http.post(`http://${environment.apiUrl}/zaemi`, { avtomobil_id, klient_id, zaemane, vrushtane, broiDni });
+  rentCar(avtomobil_id: number, klient_id: number, zaemane: string, vrushtane: string, broiDni: number, price: number): Observable<any> {
+    return this.http.post(`http://${environment.apiUrl}/zaemi`, { avtomobil_id, klient_id, zaemane, vrushtane, broiDni, price });
   }
 }

@@ -36,7 +36,7 @@ public class ZaqvkiView {
     @Column(name = "datazaemane")
     private LocalDateTime datazaemane;
     @Column(name = "broidni")
-    private int broidni;
+    private Integer broidni;
     @Column(name = "datavrushtane")
     private LocalDateTime datavrushtane;
     @Column(name = "klient")
@@ -51,4 +51,6 @@ public class ZaqvkiView {
     private int avtomobil_id;
     @Column(name = "email")
     private String email;
+    @Column(name = "PRICE")
+    private Double price;
 }

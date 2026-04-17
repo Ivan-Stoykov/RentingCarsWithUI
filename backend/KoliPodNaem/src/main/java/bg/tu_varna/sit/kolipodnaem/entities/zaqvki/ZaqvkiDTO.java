@@ -16,5 +16,6 @@ public class ZaqvkiDTO {
     private LocalDateTime dataZaemane;
     private LocalDateTime dataVrushtane;
     private Integer broiDni;
+    private Double price;
     private AvtomobilViewDTO car;
 }

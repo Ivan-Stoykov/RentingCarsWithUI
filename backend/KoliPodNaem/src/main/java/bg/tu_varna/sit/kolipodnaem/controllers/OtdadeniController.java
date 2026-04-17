@@ -4,6 +4,7 @@ import bg.tu_varna.sit.kolipodnaem.entities.Avtomobil.AvtomobilViewDTO;
 import bg.tu_varna.sit.kolipodnaem.entities.otdadeni.OtdadeniView;
 import bg.tu_varna.sit.kolipodnaem.entities.otdadeni.OtdavaneDTO;
 import bg.tu_varna.sit.kolipodnaem.entities.zaqvki.ZaqvkiDTO;
+import bg.tu_varna.sit.kolipodnaem.entities.zaqvki.ZaqvkiUpdateDTO;
 import bg.tu_varna.sit.kolipodnaem.repositories.OtdadeniViewRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ public class OtdadeniController {
                 zaem.getDatazaemane(),
                 zaem.getDatavrushtane(),
                 zaem.getBroidni(),
+                zaem.getPrice(),
                 new AvtomobilViewDTO(
                         zaem.getAvtomobil_id(),
                         zaem.getMarka_name(),
@@ -55,6 +57,7 @@ public class OtdadeniController {
                 zaem.getDatazaemane(),
                 zaem.getDatavrushtane(),
                 zaem.getBroidni(),
+                zaem.getPrice(),
                 new AvtomobilViewDTO(
                         zaem.getAvtomobil_id(),
                         zaem.getMarka_name(),
@@ -81,6 +84,7 @@ public class OtdadeniController {
                 zaem.getDatazaemane(),
                 zaem.getDatavrushtane(),
                 zaem.getBroidni(),
+                zaem.getPrice(),
                 new AvtomobilViewDTO(
                         zaem.getAvtomobil_id(),
                         zaem.getMarka_name(),
@@ -108,6 +112,7 @@ public class OtdadeniController {
                 zaem.getDatazaemane(),
                 zaem.getDatavrushtane(),
                 zaem.getBroidni(),
+                zaem.getPrice(),
                 new AvtomobilViewDTO(
                         zaem.getAvtomobil_id(),
                         zaem.getMarka_name(),
@@ -135,4 +140,16 @@ public class OtdadeniController {
         otdadeniViewRepository.vrushtane(vrushtane.getZaem_id(), vrushtane.getData());
 
     }
+    @Transactional
+    @PutMapping("/{id}")
+    public void UpdateZaem(@PathVariable int id, @RequestBody ZaqvkiUpdateDTO zaemDTO) {
+        otdadeniViewRepository.updateZaem(zaemDTO.getId(), zaemDTO.getAvtomobil_id(), zaemDTO.getKlient_ID(),  zaemDTO.getDataZaemane(), zaemDTO.getDataVrushtane(), zaemDTO.getBroiDni());
+    }
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public void deleteZaem(@PathVariable int id) {
+        otdadeniViewRepository.deleteRent(id);
+    }
+
 }

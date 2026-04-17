@@ -12,6 +12,7 @@ export interface Rent {
   dataZaemane: string;
   broiDni: number;
   dataVrushtane: string;
+  price: number;
   car: Car;
 }
 
@@ -53,24 +54,5 @@ export class RentsService {
 
   fetchRent(id: number): Observable<Rent> {
     return this.http.get<Rent>(`http://${environment.apiUrl}/zaemi/${id}`);
-  }
-
-  updateRent(rentData: {
-    Id: number;
-    avtomobil_id: number;
-    klient_ID: number;
-    dataZaemane: string;
-    dataVrushtane: string;
-    broiDni: number;
-  }) {
-    {
-      console.log('Изпращане на данни за обновяване:', rentData);
-      this.http.put(`http://${environment.apiUrl}/zaemi/${rentData.Id}`, rentData).subscribe({
-        next: (resData) => {
-          console.log(resData);
-          this.getAllRents();
-        },
-      });
-    }
   }
 }

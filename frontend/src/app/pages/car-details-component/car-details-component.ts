@@ -109,6 +109,7 @@ export class CarDetailsComponent {
             new Date(this.rentalForm.value.startDate).getTime()) /
             (1000 * 60 * 60 * 24),
         ) + 1,
+        this.totalPrice()
       ).subscribe({
         next: (res) => {
           console.log('Резервацията е успешна:', res);

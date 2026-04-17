@@ -21,9 +21,10 @@ public class ZaqvkiController {
     private final ZaqvkiViewRepository zaqvkiViewRepository;
 
 
+    @Transactional
     @GetMapping
     public List<ZaqvkiDTO> findAll() {
-        return zaqvkiViewRepository.findAll().stream().map(zaem -> new ZaqvkiDTO(
+        return zaqvkiViewRepository.allRents().stream().map(zaem -> new ZaqvkiDTO(
                 zaem.getZaem_id(),
                 zaem.getKlient_ID(),
                 zaem.getKlient(),
@@ -31,6 +32,7 @@ public class ZaqvkiController {
                 zaem.getDatazaemane(),
                 zaem.getDatavrushtane(),
                 zaem.getBroidni(),
+                zaem.getPrice(),
                 new AvtomobilViewDTO(
                         zaem.getAvtomobil_id(),
                         zaem.getMarka_name(),
@@ -60,6 +62,7 @@ public class ZaqvkiController {
                 zaem.getDatazaemane(),
                 zaem.getDatavrushtane(),
                 zaem.getBroidni(),
+                zaem.getPrice(),
                 new AvtomobilViewDTO(
                         zaem.getAvtomobil_id(),
                         zaem.getMarka_name(),
@@ -86,6 +89,34 @@ public class ZaqvkiController {
                 zaem.getDatazaemane(),
                 zaem.getDatavrushtane(),
                 zaem.getBroidni(),
+                zaem.getPrice(),
+                new AvtomobilViewDTO(
+                        zaem.getAvtomobil_id(),
+                        zaem.getMarka_name(),
+                        zaem.getKolamodel(),
+                        zaem.getVid(),
+                        zaem.getGodina(),
+                        zaem.getCvqt(),
+                        zaem.getIme_extra(),
+                        zaem.getCena_za_den(),
+                        zaem.getIzminatikilometri(),
+                        zaem.getImg_url()
+                )
+        )).toList();
+    }
+
+    @Transactional
+    @GetMapping("/{id}/pending")
+    public List<ZaqvkiDTO> getClientPendingRents(@PathVariable int id){
+        return zaqvkiViewRepository.clientPendingRents(id).stream().map(zaem -> new ZaqvkiDTO(
+                zaem.getZaem_id(),
+                zaem.getKlient_ID(),
+                zaem.getKlient(),
+                zaem.getEmail(),
+                zaem.getDatazaemane(),
+                zaem.getDatavrushtane(),
+                zaem.getBroidni(),
+                zaem.getPrice(),
                 new AvtomobilViewDTO(
                         zaem.getAvtomobil_id(),
                         zaem.getMarka_name(),
@@ -104,14 +135,10 @@ public class ZaqvkiController {
     @Transactional
     @PostMapping
     public void PostZaem(@RequestBody ZaqvkiPostDTO zaemDTO) {
-        zaqvkiViewRepository.newZaem(zaemDTO.getAvtomobil_id(), zaemDTO.getKlient_id(),  zaemDTO.getZaemane(), zaemDTO.getVrushtane(), zaemDTO.getBroiDni());
+        zaqvkiViewRepository.newZaem(zaemDTO.getAvtomobil_id(), zaemDTO.getKlient_id(),  zaemDTO.getZaemane(), zaemDTO.getVrushtane(), zaemDTO.getBroiDni(), zaemDTO.getPrice());
     }
 
-    @Transactional
-    @PutMapping("/{id}")
-    public void UpdateZaem(@PathVariable int id, @RequestBody ZaqvkiUpdateDTO zaemDTO) {
-        zaqvkiViewRepository.updateZaem(zaemDTO.getId(), zaemDTO.getAvtomobil_id(), zaemDTO.getKlient_ID(),  zaemDTO.getDataZaemane(), zaemDTO.getDataVrushtane(), zaemDTO.getBroiDni());
-    }
+
 
     @Transactional
     @DeleteMapping("/{id}")

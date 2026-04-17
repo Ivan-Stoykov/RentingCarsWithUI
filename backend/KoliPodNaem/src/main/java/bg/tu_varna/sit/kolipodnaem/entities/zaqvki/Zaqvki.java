@@ -28,6 +28,9 @@ public class Zaqvki {
     @Column(name = "BROIDNI")
     private int broidni;
 
+    @Column(name = "price")
+    private Double price;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "avtomobil_id")
     private Avtomobil avtomobil;

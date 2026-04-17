@@ -91,4 +91,9 @@ export class UserService {
   {
     return this.http.get(`http://${environment.apiUrl}/zaemi/${klient_ID}/rents`);
   }
+
+  public fetchPendingRents(klient_ID: number) : Observable<any>
+  {
+    return this.http.get(`http://${environment.apiUrl}/zaemi/${klient_ID}/pending`);
+  }
 }

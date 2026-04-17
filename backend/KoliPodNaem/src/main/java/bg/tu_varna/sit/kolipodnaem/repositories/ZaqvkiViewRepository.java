@@ -15,26 +15,25 @@ public interface ZaqvkiViewRepository extends JpaRepository<ZaqvkiView, Integer>
             @Param("p_klient_id") int klientId,
             @Param("p_zaemane") LocalDate zaemane,
             @Param("p_vrushtane") LocalDate vrushtane,
-            @Param("p_broiDni") int broiDni
+            @Param("p_broiDni") int broiDni,
+            @Param("p_price") Double price
     );
 
-    @Procedure(procedureName = "updateZaem")
-    public void updateZaem(
-            @Param("p_id") int p_id,
-            @Param("p_avtomobil_id") int avtomobilId,
-            @Param("p_klient_id") int klientId,
-            @Param("p_zaemane") LocalDate zaemane,
-            @Param("p_vrushtane") LocalDate vrushtane,
-            @Param("p_broiDni") int broiDni
-    );
+
 
     @Procedure(procedureName = "fetchRent")
     public ZaqvkiView fetchRent(@Param("p_id") Integer id);
+
+    @Procedure(procedureName = "fetchZaemi")
+    public List<ZaqvkiView> allRents();
 
 
     @Procedure(procedureName = "clientRents")
     public List<ZaqvkiView> clientRents(@Param("p_id") Integer id);
 
-    @Procedure(procedureName = "deleteRent")
+    @Procedure(procedureName = "clientPendingRents")
+    public List<ZaqvkiView> clientPendingRents(@Param("p_id") Integer id);
+
+    @Procedure(procedureName = "deleteZaqvka")
     public void deleteRent(@Param("p_id") Integer id);
 }

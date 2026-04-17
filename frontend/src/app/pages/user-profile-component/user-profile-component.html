@@ -33,7 +33,37 @@
 
       </aside>
 
+      
       <main class="history-card">
+
+        <div class="card-header">
+          <h2>Чакащи потвърждение / Връщане</h2>
+        </div>
+
+        <div class="rental-list">
+          @if (pendingRents().length > 0) {
+            @for (rental of pendingRents(); track rental.Id) {
+              <div class="rental-item">
+                <div class="rental-info">
+                  <h3>{{ rental.car.marka_name + ' ' + rental.car.kolamodel + ' ' + rental.car.godina }}</h3>
+                  <p class="dates">📅 {{ rental.dataZaemane | date : 'longDate'}} — {{ rental.dataVrushtane | date : 'longDate' }}</p>
+                </div>
+
+                <div class="rental-meta">
+                  <span class="price">{{
+                    rental.price| currency: 'EUR'
+                  }}</span>
+                  <span class="days">брой дни: {{ rental.broiDni }}</span>
+                </div>
+              </div>
+            }
+
+          } @else {
+            <div class="no-data">
+              <p>Все още нямате записани заявки.</p>
+            </div>
+          }
+        </div>
         <div class="card-header">
           <h2>История на наемите</h2>
         </div>
@@ -49,7 +79,7 @@
 
                 <div class="rental-meta">
                   <span class="price">{{
-                    rental.broiDni * rental.car.cena_za_den | currency: 'EUR'
+                    rental.price | currency: 'EUR'
                   }}</span>
                   <span class="days">брой дни: {{ rental.broiDni }}</span>
                 </div>

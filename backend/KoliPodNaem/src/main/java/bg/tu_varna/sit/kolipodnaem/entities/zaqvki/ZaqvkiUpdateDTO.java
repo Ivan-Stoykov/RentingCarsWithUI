@@ -14,4 +14,5 @@ public class ZaqvkiUpdateDTO {
     private LocalDate dataZaemane;
     private LocalDate dataVrushtane;
     private int broiDni;
+    private Double price;
 }

@@ -25,7 +25,7 @@
                 <td>{{rent.dataZaemane | date:'longDate'}}</td>
                 <td>{{rent.dataVrushtane | date:'longDate'}}</td>
                 <td>{{rent.broiDni}}</td>
-                <td>{{rent.broiDni * rent.car.cena_za_den | currency:'EUR'}}</td>
+                <td>{{rent.price| currency:'EUR'}}</td>
                 <td class="actions">
                   <button class="btn-edit" [routerLink]="`/admin/rents/${rent.Id}`" >Редакция</button>
                   <button class="btn-delete" (click)="deleteRent(rent.Id)">Изтрий</button>
