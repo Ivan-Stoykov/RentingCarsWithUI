@@ -290,7 +290,7 @@ CREATE TABLE `otdadeni` (
   PRIMARY KEY (`ZAEM_ID`),
   KEY `AVTOMOBIL_ID` (`AVTOMOBIL_ID`),
   KEY `KLIENT_ID` (`KLIENT_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -299,7 +299,7 @@ CREATE TABLE `otdadeni` (
 
 LOCK TABLES `otdadeni` WRITE;
 /*!40000 ALTER TABLE `otdadeni` DISABLE KEYS */;
-INSERT INTO `otdadeni` VALUES (1,1,21,'2026-04-01 00:00:00',3,'2026-04-03 00:00:00',1,164.967),(2,1,15,'2026-04-01 00:00:00',2,'2026-04-02 00:00:00',0,99.98),(3,1,16,'2026-04-01 00:00:00',4,'2026-04-04 00:00:00',0,241.95600000000002);
+INSERT INTO `otdadeni` VALUES (1,1,21,'2026-04-01 00:00:00',3,'2026-04-03 00:00:00',1,164.967),(2,1,15,'2026-04-01 00:00:00',2,'2026-04-02 00:00:00',0,99.98),(3,1,16,'2026-04-01 00:00:00',4,'2026-04-04 00:00:00',0,241.95600000000002),(4,1,1,'2026-04-01 00:00:00',NULL,NULL,0,NULL),(5,1,9,NULL,NULL,NULL,0,NULL),(6,7,5,'2026-04-09 00:00:00',2,'2026-04-10 00:00:00',0,59.98),(7,7,14,'2026-04-22 00:00:00',NULL,NULL,0,NULL);
 /*!40000 ALTER TABLE `otdadeni` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,7 +411,7 @@ CREATE TABLE `zaqvki` (
   KEY `KLIENT_ID` (`KLIENT_ID`),
   CONSTRAINT `zaqvki_ibfk_1` FOREIGN KEY (`AVTOMOBIL_ID`) REFERENCES `avtomobil` (`AVTOMOBIL_ID`),
   CONSTRAINT `zaqvki_ibfk_2` FOREIGN KEY (`KLIENT_ID`) REFERENCES `klient` (`KLIENT_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -420,7 +420,7 @@ CREATE TABLE `zaqvki` (
 
 LOCK TABLES `zaqvki` WRITE;
 /*!40000 ALTER TABLE `zaqvki` DISABLE KEYS */;
-INSERT INTO `zaqvki` VALUES (1,1,21,'2026-04-01 00:00:00',2,'2026-04-02 00:00:00',1,99.98),(2,1,15,'2026-04-01 00:00:00',2,'2026-04-02 00:00:00',1,99.98),(3,1,16,'2026-04-01 00:00:00',3,'2026-04-03 00:00:00',1,164.97);
+INSERT INTO `zaqvki` VALUES (1,1,21,'2026-04-01 00:00:00',2,'2026-04-02 00:00:00',1,99.98),(2,1,15,'2026-04-01 00:00:00',2,'2026-04-02 00:00:00',1,99.98),(3,1,16,'2026-04-01 00:00:00',3,'2026-04-03 00:00:00',1,164.97),(4,1,1,'2026-04-01 00:00:00',3,'2026-04-03 00:00:00',1,50.97),(5,1,9,'2026-04-10 00:00:00',2,'2026-04-11 00:00:00',0,129.98),(6,7,5,'2026-04-09 00:00:00',2,'2026-04-10 00:00:00',1,59.98),(7,7,14,'2026-04-22 00:00:00',2,'2026-04-23 00:00:00',1,139.98);
 /*!40000 ALTER TABLE `zaqvki` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -577,16 +577,21 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `checkAvailability`(
     OUT p_is_free BOOLEAN
 )
 BEGIN
-    DECLARE v_count INT;
+    DECLARE v_count_z INT;
+    DECLARE v_count_o INT;
     
-    SELECT COUNT(*) INTO v_count
+    SELECT COUNT(*) INTO v_count_z
     FROM zaqvki
     WHERE avtomobil_id = p_avtomobil_id
       AND datazaemane < p_data_vrushtane
-      AND datavrushtane > p_data_zaemane;
+      AND (datavrushtane > p_data_zaemane);
+      
+      SELECT COUNT(*) INTO v_count_o
+      FROM otdadeni
+      WHERE avtomobil_id = p_avtomobil_id
+      AND datavrushtane IS NULL;
 
-    -- Задаваме стойност на изходящия параметър
-    IF v_count > 0 THEN
+    IF v_count_z > 0 OR v_count_o > 0 THEN
         SET p_is_free = FALSE;
     ELSE
         SET p_is_free = TRUE;
@@ -787,9 +792,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchOtdadeni`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchOtdadeni`(
+IN p_email VARCHAR(255))
 BEGIN
-SELECT * FROM otdadeniview WHERE DATAZAEMANE IS NOT NULL AND DATAVRUSHTANE IS NULL;
+SELECT * FROM otdadeniview WHERE DATAZAEMANE IS NOT NULL AND DATAVRUSHTANE IS NULL AND (email LIKE CONCAT('%', p_email, '%') OR p_email IS NULL);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -825,9 +831,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchZaemi`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchZaemi`(
+IN p_email VARCHAR(255))
 BEGIN
-SELECT * FROM otdadeniVIEW WHERE DATAVRUSHTANE IS NOT NULL AND DATAZAEMANE IS NOT NULL;
+SELECT * FROM otdadeniVIEW WHERE DATAVRUSHTANE IS NOT NULL AND DATAZAEMANE IS NOT NULL AND (email LIKE CONCAT('%', p_email, '%') OR p_email IS NULL);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -844,9 +851,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchZaOtdavane`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `fetchZaOtdavane`(
+IN p_email varchar(255))
 BEGIN
-SELECT * from zaqvkiView z LEFT JOIN zaqvki za on z.zaem_id = za.zaem_id WHERE isDeleted = false;
+SELECT * from zaqvkiView z LEFT JOIN zaqvki za on z.zaem_id = za.zaem_id WHERE isDeleted = false AND (z.email LIKE CONCAT('%', p_email, '%') OR p_email IS NULL);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -900,6 +908,8 @@ BEGIN
                 AND z.datazaemane < p_dataVrushtane
                 AND z.datavrushtane > p_dataZaemane
           )
+          OR NOT EXISTS(
+          SELECT 1 FROM otdadeni o where o.avtomobil_id = a.avtomobil_id AND isDeleted = false)
       ) order by a.avtomobil_id;
 END ;;
 DELIMITER ;
@@ -969,7 +979,7 @@ SELECT
     FROM
         ((`klient` `k`
         JOIN `gradove` `g` ON ((`k`.`GRAD_ID` = `g`.`GRAD_ID`)))
-        JOIN `durjavi` `d` ON ((`d`.`durjava_ID` = `g`.`durjava_ID`))) WHERE k.email = p_email AND k.password = p_password;
+        JOIN `durjavi` `d` ON ((`d`.`durjava_ID` = `g`.`durjava_ID`))) WHERE k.email = p_email AND k.password = p_password AND IsDeleted = false;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1433,4 +1443,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-17 21:42:09
+-- Dump completed on 2026-04-19  3:11:19
