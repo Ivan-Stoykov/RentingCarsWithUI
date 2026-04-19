@@ -1,13 +1,20 @@
 <div class="content-header">
           <h2>Управление: <span>Наеми</span></h2>
+          <div class="header-actions">
+          <div class="search-box">
+            <input type="text" placeholder="user@example.com" [formControl]="klient" />
+            <button type="button" class="btn-search" (click)="filter()">Търси</button>
+          </div>
         </div>
-
+        </div>
+        
         <div class="table-responsive">
           <table class="admin-table">
             <thead>
               <tr>
                 <th>ID</th>
                 <th>ИМЕНА</th>
+                <th>ИМЕЙЛ</th>
                 <th>КОЛА</th>
                 <th>ДАТА ЗАЕМАНЕ</th>
                 <th>ДАТА ВРЪЩАНЕ</th>
@@ -21,6 +28,7 @@
               <tr>
                 <td>{{rent.Id}}</td>
                 <td>{{rent.klient}}</td>
+                <td>{{rent.email}}</td>
                 <td>{{rent.car.marka_name + " " + rent.car.kolamodel + " (" + rent.car.godina + ")"}}</td>
                 <td>{{rent.dataZaemane | date:'longDate'}}</td>
                 <td>{{rent.dataVrushtane | date:'longDate'}}</td>

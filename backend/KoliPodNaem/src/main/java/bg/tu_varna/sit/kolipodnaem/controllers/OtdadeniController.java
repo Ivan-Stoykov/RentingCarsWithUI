@@ -48,8 +48,8 @@ public class OtdadeniController {
 
     @Transactional
     @GetMapping("/zaOtdavane")
-    public List<ZaqvkiDTO> getZaOtdavane() {
-        return otdadeniViewRepository.fetchZaOtdavane().stream().map(zaem -> new ZaqvkiDTO(
+    public List<ZaqvkiDTO> getZaOtdavane(@RequestParam(required = false) String email) {
+        return otdadeniViewRepository.fetchZaOtdavane(email).stream().map(zaem -> new ZaqvkiDTO(
                 zaem.getZaem_id(),
                 zaem.getKlient_ID(),
                 zaem.getKlient(),
@@ -75,8 +75,8 @@ public class OtdadeniController {
 
     @Transactional
     @GetMapping("/otdadeni")
-    public List<ZaqvkiDTO> getOtdadeni() {
-        return otdadeniViewRepository.fetchOtdadeni().stream().map(zaem -> new ZaqvkiDTO(
+    public List<ZaqvkiDTO> getOtdadeni(@RequestParam(required = false) String email) {
+        return otdadeniViewRepository.fetchOtdadeni(email).stream().map(zaem -> new ZaqvkiDTO(
                 zaem.getZaem_id(),
                 zaem.getKlient_ID(),
                 zaem.getKlient(),

@@ -16,12 +16,11 @@ export class VrushtaneDashboardComponent implements OnInit {
   klient = new FormControl('');
 
   ngOnInit(): void {
-    this.otdavaneService.fetchOtdadeni();
+    this.otdavaneService.fetchOtdadeni('');
   }
 
   filter(): void{
-    //this.carService.getAllCars(this.klient.value!)
-    //console.log(this.marka.value)
+    this.otdavaneService.fetchOtdadeni(this.klient.value!)
   }
 
   deleteOtdavane(id: number): void {

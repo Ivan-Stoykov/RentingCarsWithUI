@@ -16,12 +16,11 @@ export class OtdavaneDashboardComponent implements OnInit {
   klient = new FormControl('');
 
   ngOnInit(): void {
-    this.otdavaneService.fetchZaOtdavane();
+    this.otdavaneService.fetchZaOtdavane('');
   }
 
   filter(): void{
-    //this.carService.getAllCars(this.klient.value!)
-    //console.log(this.marka.value)
+    this.otdavaneService.fetchZaOtdavane(this.klient.value!);
   }
 
   deleteOtdavane(id: number): void {

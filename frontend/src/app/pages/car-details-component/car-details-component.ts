@@ -25,7 +25,7 @@ export class CarDetailsComponent {
   rentalForm: FormGroup;
 
   totalPrice = signal<number>(0);
-  isAvailable = signal<boolean>(false);
+  isAvailable = signal<boolean | null>(null);
   isChecking = signal<boolean>(false);
 
   constructor() {
@@ -113,7 +113,7 @@ export class CarDetailsComponent {
       ).subscribe({
         next: (res) => {
           console.log('Резервацията е успешна:', res);
-          this.message.set({type: 'success', text: 'Успешно наехте колата!'});
+          this.message.set({type: 'success', text: 'Успешно подадохте заявка за наемане!'});
         },
         error: (err) => {
           console.error('Грешка при резервация:', err);

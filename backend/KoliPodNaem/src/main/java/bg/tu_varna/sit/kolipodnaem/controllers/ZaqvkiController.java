@@ -23,8 +23,8 @@ public class ZaqvkiController {
 
     @Transactional
     @GetMapping
-    public List<ZaqvkiDTO> findAll() {
-        return zaqvkiViewRepository.allRents().stream().map(zaem -> new ZaqvkiDTO(
+    public List<ZaqvkiDTO> findAll(@RequestParam(required = false) String email) {
+        return zaqvkiViewRepository.allRents(email).stream().map(zaem -> new ZaqvkiDTO(
                 zaem.getZaem_id(),
                 zaem.getKlient_ID(),
                 zaem.getKlient(),

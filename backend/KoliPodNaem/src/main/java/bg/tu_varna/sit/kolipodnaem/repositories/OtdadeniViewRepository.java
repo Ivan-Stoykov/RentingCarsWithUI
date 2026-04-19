@@ -12,10 +12,10 @@ import java.util.List;
 public interface OtdadeniViewRepository extends JpaRepository<OtdadeniView, Integer>{
 
     @Procedure(name = "fetchZaOtdavane")
-    public List<OtdadeniView> fetchZaOtdavane();
+    public List<OtdadeniView> fetchZaOtdavane(String email);
 
     @Procedure(name = "fetchOtdadeni")
-    public List<OtdadeniView> fetchOtdadeni();
+    public List<OtdadeniView> fetchOtdadeni(String email);
 
     @Procedure(name = "otdavane")
     public void otdavane(@Param("p_id") Integer id, @Param("p_dataotdavane") LocalDateTime dataOtdavane);

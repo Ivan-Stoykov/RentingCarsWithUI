@@ -21,14 +21,15 @@ export interface Rent {
 })
 export class RentsService {
   constructor() {
-    this.getAllRents();
+    this.getAllRents('');
   }
 
   private http = inject(HttpClient);
   private rents = signal<Rent[]>([]);
 
-  getAllRents() {
+  getAllRents(email: string) {
     let url = `http://${environment.apiUrl}/zaemi`;
+    if (email != '') url = url + '?email=' + email;
     console.log(url);
 
     this.http.get<Rent[]>(url).subscribe({
@@ -47,7 +48,7 @@ export class RentsService {
     this.http.delete(`http://${environment.apiUrl}/zaemi/${id}`).subscribe({
       next: (resData) => {
         console.log(resData);
-        this.getAllRents();
+        this.getAllRents('');
       },
     });
   }

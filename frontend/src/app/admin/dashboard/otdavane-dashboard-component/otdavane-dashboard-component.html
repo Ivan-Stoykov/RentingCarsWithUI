@@ -3,7 +3,7 @@
 
   <div class="header-actions">
     <div class="search-box">
-      <input type="text" placeholder="Модел (Напр. Golf)" [formControl]="klient" />
+      <input type="text" placeholder="user@example.com" [formControl]="klient" />
       <button type="button" class="btn-search" (click)="filter()">Търси</button>
     </div>
   </div>
@@ -15,6 +15,7 @@
       <tr>
         <th>ID</th>
         <th>КЛИЕНТ</th>
+        <th>ИМЕЙЛ</th>
         <th>АВТОМОБИЛ</th>
         <th>ДАТА ЗАЕМАНЕ</th>
         <th>ДАТА ВРЪЩАНЕ</th>
@@ -26,6 +27,7 @@
         <tr>
           <td>{{ otdavane.Id }}</td>
           <td>{{ otdavane.klient }}</td>
+          <td>{{ otdavane.email }}</td>
           <td>{{ otdavane.car.marka_name + ' ' + otdavane.car.kolamodel + ' (' + otdavane.car.godina + ')' }}</td>
           <td>{{ otdavane.dataZaemane | date: "longDate" }}</td>
           <td>{{ otdavane.dataVrushtane | date: "longDate" }}</td>

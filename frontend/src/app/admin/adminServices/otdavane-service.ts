@@ -23,8 +23,8 @@ export class OtdavaneService {
     this.http.post(`http://${environment.apiUrl}/otdavaniq/otdavane`, { zaem_id, data }).subscribe({
       next: (resData) => {
         console.log(resData);
-        this.fetchOtdadeni();
-        this.fetchZaOtdavane();
+        this.fetchOtdadeni('');
+        this.fetchZaOtdavane('');
       },
     });
   }
@@ -35,14 +35,15 @@ export class OtdavaneService {
       .subscribe({
         next: (resData) => {
           console.log(resData);
-          this.fetchOtdadeni();
-          this.fetchZaOtdavane();
+          this.fetchOtdadeni('');
+          this.fetchZaOtdavane('');
         },
       });
   }
 
-  fetchZaOtdavane() {
+  fetchZaOtdavane(email: string) {
     let url = `http://${environment.apiUrl}/otdavaniq/zaOtdavane`;
+     if (email != '') url = url + '?email=' + email;
     console.log(url);
 
     this.http.get<Rent[]>(url).subscribe({
@@ -53,8 +54,9 @@ export class OtdavaneService {
     });
   }
 
-  fetchOtdadeni() {
+  fetchOtdadeni(email: string) {
     let url = `http://${environment.apiUrl}/otdavaniq/otdadeni`;
+    if (email != '') url = url + '?email=' + email;
     console.log(url);
 
     this.http.get<Rent[]>(url).subscribe({
@@ -69,8 +71,8 @@ export class OtdavaneService {
     this.http.delete(`http://${environment.apiUrl}/otdavaniq/${id}`).subscribe({
       next: (resData) => {
         console.log(resData);
-        this.fetchOtdadeni();
-        this.fetchZaOtdavane();
+        this.fetchOtdadeni('');
+        this.fetchZaOtdavane('');
       },
     });
   }
@@ -93,8 +95,8 @@ export class OtdavaneService {
       this.http.put(`http://${environment.apiUrl}/otdavaniq/${rentData.Id}`, rentData).subscribe({
         next: (resData) => {
           console.log(resData);
-          this.fetchOtdadeni();
-          this.fetchZaOtdavane();
+          this.fetchOtdadeni('');
+          this.fetchZaOtdavane('');
         },
       });
     }

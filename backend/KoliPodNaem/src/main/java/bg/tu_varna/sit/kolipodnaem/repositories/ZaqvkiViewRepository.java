@@ -25,7 +25,7 @@ public interface ZaqvkiViewRepository extends JpaRepository<ZaqvkiView, Integer>
     public ZaqvkiView fetchRent(@Param("p_id") Integer id);
 
     @Procedure(procedureName = "fetchZaemi")
-    public List<ZaqvkiView> allRents();
+    public List<ZaqvkiView> allRents(@Param("p_email") String email);
 
 
     @Procedure(procedureName = "clientRents")
