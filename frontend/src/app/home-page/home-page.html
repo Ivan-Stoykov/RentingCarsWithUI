@@ -16,7 +16,9 @@
         </div>
         <button class="btn-primary">Търси автомобили</button>
       </form>
-    </div>
+      @if(validDates()){
+      <p style="color: red;"> Грешно въведени данни</p>
+          }    </div>
   </section>
 
   <section class="featured-section">

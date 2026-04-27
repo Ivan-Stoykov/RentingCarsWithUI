@@ -62,7 +62,7 @@
             </div>
 
             <button type="submit" class="btn-rent" [disabled]="isAvailable() == false || user().klient_ID == 0">
-              {{isAvailable() === false ? 'Наета' : 'Наеми'}}
+              {{buttonMessage()}}
             </button>
             @if (user().klient_ID == 0) {
                 <p class="warning">Моля, влезте в профила си, за да наемете този автомобил.</p>

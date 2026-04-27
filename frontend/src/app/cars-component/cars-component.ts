@@ -20,6 +20,8 @@ export class CarsComponent implements OnInit {
   allTypes = this.carService.getTypes();
   carModels = this.carService.getModels();
   allModels = this.carModels().map(m => m.model);
+
+  validDates = signal<boolean | null>(null);
   
   cars = this.carService.getCars;
   
@@ -40,8 +42,20 @@ export class CarsComponent implements OnInit {
   
   ngOnInit(): void {
     this.setupBrandListener();
+    this.setupDateListener();
   }
   
+  private setupDateListener(): void {
+    this.filterForm.get('dataVrushtane')?.valueChanges.subscribe((date) => {
+      const dataZaemane = this.filterForm.get('dataZaemane')?.value;
+      if(dataZaemane != ''){
+        const zaemane = new Date(dataZaemane);
+        const vrushtane = new Date(date);
+        if(zaemane.getDate() <= vrushtane.getDate()) this.validDates.set(true)
+          else this.validDates.set(false);
+      }
+    })
+  }
   
 
   private setupBrandListener(): void {

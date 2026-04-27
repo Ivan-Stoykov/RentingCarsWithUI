@@ -2,6 +2,9 @@
   <aside class="sidebar">
     <h3>Филтри</h3>
     <form [formGroup]="filterForm" (ngSubmit)="onFind()">
+      @if(validDates() == false){
+        <p style="color: red;">Грешно въведени дати</p>
+      }
       <div class="form-group">
         <label>Дата заемане</label>
         <input type="date" formControlName="dataZaemane"/>

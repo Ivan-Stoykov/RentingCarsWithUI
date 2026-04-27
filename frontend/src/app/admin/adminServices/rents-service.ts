@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { DestroyRef, inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Car } from '../../cars-component/cars-service';
 import { environment } from '../../../environments/environment';
@@ -25,6 +25,7 @@ export class RentsService {
   }
 
   private http = inject(HttpClient);
+  private destroy = inject(DestroyRef);
   private rents = signal<Rent[]>([]);
 
   getAllRents(email: string) {
@@ -32,12 +33,16 @@ export class RentsService {
     if (email != '') url = url + '?email=' + email;
     console.log(url);
 
-    this.http.get<Rent[]>(url).subscribe({
+    const subscribtion = this.http.get<Rent[]>(url).subscribe({
       next: (rents) => {
         this.rents.set(rents);
         console.log(rents);
       },
     });
+    this.destroy.onDestroy(()=>{
+      subscribtion.unsubscribe();
+    })
+    
   }
 
   get getRents() {

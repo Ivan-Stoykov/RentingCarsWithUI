@@ -56,6 +56,9 @@
         <label>Дата на връщане</label>
         <input type="date" formControlName="dataVrushtane" />
       </div>
+      @if(validDates()){
+      <p style="color: red;"> Грешно въведени дати</p>
+    }
 
       <div class="submit-btn-wrapper actions-wrapper">
         <button type="submit" class="btn-submit" [disabled]="editRentalForm.invalid">

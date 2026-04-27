@@ -18,6 +18,7 @@ export class CarDetailsComponent {
   private fb = inject(FormBuilder);
   private carService = inject(CarService);
   private userService = inject(UserService);
+  buttonMessage = signal<string>('Наеми');
   user = this.userService.getUser();
   message = signal<{type: string; text: string}>({type: '', text: ''});
 
@@ -64,12 +65,23 @@ export class CarDetailsComponent {
             'до',
             form.endDate,
           );
-          return this.carService.checkAvailability(carId, form.startDate, form.endDate);
+          const zaemane = new Date(form.startDate);
+          const vrushtane = new Date(form.endDate);
+          if(zaemane <= vrushtane){
+            return this.carService.checkAvailability(carId, form.startDate, form.endDate);
+          }
+          return of(false);
         }),
       )
       .subscribe({
         next: (available: boolean) => {
           this.isAvailable.set(available);
+          const zaemane = new Date(this.rentalForm.get('startDate')?.value);
+          const vrushtane = new Date(this.rentalForm.get('endDate')?.value);
+
+          if(available) this.buttonMessage.set('Наеми');
+          else if(zaemane > vrushtane) this.buttonMessage.set('Грешни дати');
+          else this.buttonMessage.set('Наета');
           this.isChecking.set(false);
         },
         error: (err) => {

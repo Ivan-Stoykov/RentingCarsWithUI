@@ -12,6 +12,7 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class HomePage implements OnInit {
   latestCars = signal<Car[]>([]);
+  validDates = signal<boolean | null>(null);
   form: FormGroup;
 
   constructor(private carService: CarService, private fb:FormBuilder, private router: Router) {
@@ -24,6 +25,19 @@ export class HomePage implements OnInit {
     this.carService.getLatestCars().subscribe({
       next: (resData) => this.latestCars.set(resData),
     });
+    this.setupDateListener();
+  }
+
+    private setupDateListener(): void {
+    this.form.get('dataVrushtane')?.valueChanges.subscribe((date) => {
+      const dataZaemane = this.form.get('dataZaemane')?.value;
+      if(dataZaemane != ''){
+        const zaemane = new Date(dataZaemane);
+        const vrushtane = new Date(date);
+        if(zaemane.getDate() > vrushtane.getDate()) this.validDates.set(true)
+          else this.validDates.set(false);
+      }
+    })
   }
 
   onFind(){

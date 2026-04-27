@@ -23,6 +23,7 @@ export class EditRentComponent {
   private rentsService = inject(RentsService);
   private otdadeniService = inject(OtdavaneService);
   private userService = inject(UserService);
+  validDates = signal<boolean | null>(null);
   router = inject(Router);
 
   editRentalForm: FormGroup;
@@ -49,7 +50,7 @@ export class EditRentComponent {
 
   ngOnInit(): void {
     this.loadInitialData();
-
+    this.setupDateListener();
     this.setupSearchListeners();
 
     this.filteredClients.set([]);
@@ -150,6 +151,18 @@ export class EditRentComponent {
 
   hideCarDropdown() {
     setTimeout(() => this.isCarDropdownOpen.set(false), 200);
+  }
+
+  private setupDateListener(): void {
+    this.editRentalForm.get('dataVrushtane')?.valueChanges.subscribe((date) => {
+      const dataZaemane = this.editRentalForm.get('dataZaemane')?.value;
+      if(dataZaemane != ''){
+        const zaemane = new Date(dataZaemane);
+        const vrushtane = new Date(date);
+        if(zaemane.getDate() > vrushtane.getDate()) this.validDates.set(true)
+          else this.validDates.set(false);
+      }
+    })
   }
 
   onSubmit() {
