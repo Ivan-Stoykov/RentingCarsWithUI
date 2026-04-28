@@ -52,6 +52,7 @@ export class CarsService {
         console.log(resData);
       },
     });
+    this.getAllCars('');
   }
   
     deleteCar(id: number) {

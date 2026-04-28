@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CarsService } from '../adminServices/cars-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-car-component',
@@ -9,6 +10,7 @@ import { CarsService } from '../adminServices/cars-service';
   styleUrl: './add-car-component.css',
 })
 export class AddCarComponent {
+  private router = inject(Router);
   private carService = inject(CarsService);
   addCar: FormGroup;
   constructor(private fb: FormBuilder) {
@@ -27,5 +29,6 @@ export class AddCarComponent {
 
   onSubmit() {
     this.carService.addCar(this.addCar.value);
+    this.router.navigate(['/admin/cars']);
   }
 }
